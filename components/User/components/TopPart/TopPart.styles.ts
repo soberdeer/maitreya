@@ -2,7 +2,7 @@ import { createUseStyles } from 'react-jss';
 
 type Props = { longName: boolean };
 
-export default createUseStyles({
+export default createUseStyles(() => ({
   root: {
     display: 'flex',
     justifyContent: 'flex-start',
@@ -38,4 +38,4 @@ export default createUseStyles({
       hyphens: 'auto',
     },
   },
-});
+}));

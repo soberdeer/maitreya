@@ -17,8 +17,6 @@ export default function fetchChildPage(forceSlug?: string) {
       };
     }
 
-
-
     const base = await getEntries<BaseProps>('main');
 
     const scheme =
