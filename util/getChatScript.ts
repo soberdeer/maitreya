@@ -19,13 +19,13 @@ export default async function getChatScript({
   req: NextApiRequest;
   res: NextApiResponse;
   domain: string;
-  userId?: string;
-  userFullName?: string;
+  userId?: string | null;
+  userFullName?: string | null;
   isMaster: boolean;
   secretKey: string;
-  avatar?: string;
-  color?: string;
-}): string {
+  avatar?: string | null;
+  color?: string | null;
+}): Promise<string> {
   await NextCors(req, res, {
     methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
     origin: '*',

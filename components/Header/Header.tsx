@@ -29,7 +29,7 @@ export interface HeaderProps extends React.HTMLProps<HTMLElement> {
   isGuest: boolean;
   menu?: { href?: string; children?: string }[];
   vk_url?: string;
-  logo: Asset;
+  logo?: Asset;
 }
 
 export default function Header({ className, children, isGuest, menu, vk_url, logo }: HeaderProps) {
@@ -107,7 +107,7 @@ export default function Header({ className, children, isGuest, menu, vk_url, log
               onClick={() =>
                 openModal({
                   children: (
-                    <MobileModal anchors={[...menu, ...anchors]} vkUrl={vk_url} isGuest={isGuest} />
+                    <MobileModal anchors={[...(menu || []), ...anchors]} vkUrl={vk_url} isGuest={isGuest} />
                   ),
                   fullScreen: width < 720,
                 })

@@ -3,7 +3,7 @@ import { SCHEME_MAP } from './constants';
 import { ArticleProps, BaseProps, FetchType } from './types';
 import { getEntries, getEntry } from '../contentful/client';
 import checkAvailable from './checkAvailable';
-import checkUser from './checkUser';
+import checkUser, { UserReturn } from './checkUser';
 import { Entry } from 'contentful';
 
 export default function fetchChildPage(forceSlug?: string) {
@@ -30,15 +30,19 @@ export default function fetchChildPage(forceSlug?: string) {
       };
     }
 
-    const { user, userId, redirect } = await checkUser(context);
+    const checkResult = await checkUser(context);
 
-    if (redirect) {
-      return { redirect };
+    if (checkResult.redirect) {
+      return { redirect: checkResult.redirect };
     }
 
     const data = await getEntry<FetchType>((childSlug as string) || '');
 
-    const available = checkAvailable(data, user, userId === 'guest') as Entry<ArticleProps> | null;
+    const available = checkAvailable(
+      data,
+      (checkResult as UserReturn).user,
+      (checkResult as UserReturn).userId === 'guest'
+    ) as Entry<ArticleProps> | null;
 
     if (!available) {
       return {

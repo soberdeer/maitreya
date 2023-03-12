@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React, { SVGProps, useContext } from 'react';
 import AnimatedIcon from '../AnimatedIcon/AnimatedIcon';
 import PaletteContext from '../contexts/PaletteContext';
 
-export interface LevelsIconProps extends SVGSVGElement {
+export interface LevelsIconProps extends SVGProps<SVGSVGElement> {
   size?: number;
   tooltip?: string;
 }
@@ -11,7 +11,6 @@ export default function VkIcon({ size = 26, tooltip, ...others }: LevelsIconProp
   const { palette } = useContext(PaletteContext);
   return (
     <div style={{ width: size }}>
-      {/*<AnimatedIcon width={size} tooltip={tooltip}>*/}
       <div
         style={{
           height: '100%',
@@ -36,7 +35,6 @@ export default function VkIcon({ size = 26, tooltip, ...others }: LevelsIconProp
           />
         </svg>
       </div>
-      {/*</AnimatedIcon>*/}
     </div>
   );
 }

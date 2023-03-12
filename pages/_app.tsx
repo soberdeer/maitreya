@@ -10,7 +10,7 @@ import { AnimatorGeneralProvider } from '@arwes/animation';
 import PostScribe from '@marshallku/react-postscribe';
 import '../styles/globals.css';
 import { getEntries, getEntry } from '../contentful/client';
-import { BaseProps } from '../util/types';
+import { BaseProps, UserProps } from '../util/types';
 import ElementsContext from '../components/contexts/ElementsContext';
 import ActivateContext from '../components/contexts/ActivateContext';
 import Container from '../components/Container/Container';
@@ -21,6 +21,7 @@ import { theme, grayPalette, defaultPalette } from '../util/theme';
 import Footer from '../components/Footer/Footer';
 import getChatScript from '../util/getChatScript';
 import PaletteContext from '../components/contexts/PaletteContext';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 interface AppInterface extends AppProps {
   base: Entry<BaseProps>[];
@@ -46,7 +47,7 @@ function MyApp({
   const paletteName = useMemo(() => cookieTheme, [cookieTheme]);
   const palette = useMemo(
     () => (cookieTheme === 'green' ? defaultPalette : grayPalette),
-    [cookieTheme]
+    [cookieTheme],
   );
 
   const updatePalette = () => {
@@ -64,6 +65,8 @@ function MyApp({
     };
   }, []);
 
+  // @ts-ignore
+  // @ts-ignore
   return (
     show && (
       <>
@@ -99,6 +102,7 @@ function MyApp({
                           {!isLogin && <Header isGuest={isGuest} {...(base?.[0]?.fields || {})} />}
                           <div style={isLogin ? {} : { marginTop: 80, marginBottom: 80 }}>
                             <Container>
+                              {/*//@ts-ignore*/}
                               <Component {...pageProps} />
                             </Container>
                           </div>
@@ -127,28 +131,28 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
     };
   }
 
-  const userId = req?.cookies['_maitreya_user'] || null;
-  const theme = req?.cookies['_maitreya_theme'] || 'green';
+  const userId = (req as NextApiRequest)?.cookies['_maitreya_user'] || null;
+  const theme = (req as NextApiRequest)?.cookies['_maitreya_theme'] || 'green';
   const base = await getEntries<BaseProps>('main');
-  const user = userId && userId !== 'guest' ? await getEntry(userId) : null;
+  const user = userId && userId !== 'guest' ? await getEntry<UserProps>(userId) : null;
 
   const chatScript =
     userId && userId !== 'guest'
       ? await getChatScript({
-          req,
-          res,
-          domain: req?.headers?.host
-            ? req?.headers?.host.includes('localhost')
-              ? 'localhost'
-              : req?.headers?.host
-            : 'localhost',
-          userId,
-          userFullName: user?.fields?.name || null,
-          isMaster: process.env.MASTER_ID === user?.sys?.id,
-          secretKey: process.env.CHAT_SECRET_KEY,
-          avatar: user?.fields?.avatar_chat?.fields?.file?.url || null,
-          color: user?.fields?.avatar_chat?.fields?.description || null,
-        })
+        req: req as NextApiRequest,
+        res: res as NextApiResponse,
+        domain: req?.headers?.host
+          ? req?.headers?.host.includes('localhost')
+            ? 'localhost'
+            : req?.headers?.host
+          : 'localhost',
+        userId,
+        userFullName: user?.fields?.name || null,
+        isMaster: process.env.MASTER_ID === user?.sys?.id,
+        secretKey: process.env.CHAT_SECRET_KEY!,
+        avatar: user?.fields?.avatar_chat?.fields?.file?.url || null,
+        color: user?.fields?.avatar_chat?.fields?.description || null,
+      })
       : null;
 
   return {

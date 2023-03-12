@@ -47,6 +47,7 @@
     "@types/react-dom": "18.0.6",
     "@types/react-transition-group": "^4.4.5",
     "eslint": "8.23.0",
+    "eslint-config-mantine": "^2.0.0",
     "eslint-config-next": "12.2.5",
     "prettier": "^2.7.1",
     "typescript": "4.8.2"

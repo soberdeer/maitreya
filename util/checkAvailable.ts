@@ -1,6 +1,9 @@
 import { Entry } from 'contentful';
 import { FetchType, ArticleProps, RitualProps, TechnicProps, UserProps } from './types';
 
+const findAccess = (array: Entry<TechnicProps | FetchType>[], data: Entry<FetchType>) =>
+  array.find((entry) => entry.sys.id === data.sys.id);
+
 const checkIntersect = (data: Entry<FetchType>, user: Entry<UserProps>) => {
   if (Object.keys(user).length === 0) {
     return false;
@@ -12,13 +15,13 @@ const checkIntersect = (data: Entry<FetchType>, user: Entry<UserProps>) => {
 };
 
 const checkItem = (data: Entry<FetchType>, user: Entry<UserProps>) => {
-  return user?.fields?.personal_access.find(
-    (entry: Entry<FetchType>) => entry.sys.id === data.sys.id
+  return (
+    findAccess(user?.fields?.technics, data) || findAccess(user?.fields?.personal_access, data)
   );
 };
 
 export const checkReferences = (
-  data?: Entry<FetchType>[],
+  data?: Entry<FetchType>[] | null,
   user?: Entry<UserProps>,
   isGuest?: boolean
 ) => {
@@ -46,10 +49,14 @@ export const checkReferences = (
 };
 
 export default function checkAvailable(
-  data: Entry<FetchType>,
+  data?: Entry<FetchType> | null,
   user: Entry<UserProps>,
   isGuest: boolean
 ) {
+  if (!data) {
+    return null;
+  }
+
   if (user?.sys?.id === process.env.MASTER_ID) {
     return data;
   }

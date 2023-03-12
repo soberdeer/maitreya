@@ -3,15 +3,15 @@ import { Entry } from 'contentful';
 import { UserProps } from './types';
 import { getEntry } from '../contentful/client';
 
-type ReturnType =
-  | {
-      user: Entry<UserProps>;
-      userId: string;
-      redirect: null;
-    }
-  | { redirect?: Record<string, any> };
+export type UserReturn = {
+  user: Entry<UserProps> | null;
+  userId: string;
+  redirect: null;
+}
 
-export default async function checkUser(context: GetServerSidePropsContext): ReturnType {
+export type Redirect = { redirect?: Record<string, any> };
+
+export default async function checkUser(context: GetServerSidePropsContext): Promise<UserReturn | Redirect> {
   const { req, res } = context;
   const userId = req?.cookies['_maitreya_user'] || null;
 

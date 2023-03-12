@@ -9,7 +9,7 @@ import LogoutButton from '../LogoutButton/LogoutButton';
 import useStyles from './Header.styles';
 
 export interface MobileModalProps extends React.HTMLProps<HTMLDivElement> {
-  anchors: { href: string; children: string }[];
+  anchors: { href?: string; children?: string }[];
   isGuest: boolean;
   vkUrl?: string;
 }

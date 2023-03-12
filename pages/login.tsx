@@ -25,7 +25,7 @@ export default function LoginPage() {
 
     setLoading(false);
     if (user) {
-      document.cookie = `_maitreya_user=${user}`;
+      document.cookie = `_maitreya_user=${user}; max-age=18144000;`;
       router.push('/');
     } else {
       setLoginError(true);
