@@ -7,6 +7,7 @@ export default createUseStyles({
     minWidth: (props: PropsType) => props.width,
     width: (props: PropsType) => props.width,
     height: (props: PropsType) => props.height || 'auto',
+    pointerEvents: 'none',
   },
 
   wrapper: {
