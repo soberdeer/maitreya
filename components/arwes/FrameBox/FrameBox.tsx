@@ -7,7 +7,7 @@ import { AnimatorInstanceSettings } from '@arwes/animation';
 
 export interface FrameBoxProps extends ArwesFrameBoxProps, React.HTMLProps<HTMLDivElement> {
   animator?: AnimatorInstanceSettings;
-  linesWidths?: number[],
+  linesWidths?: number[];
 }
 
 export default function FrameBox({ className, children, ...others }: FrameBoxProps) {

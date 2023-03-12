@@ -7,11 +7,13 @@ export type UserReturn = {
   user: Entry<UserProps> | null;
   userId: string;
   redirect: null;
-}
+};
 
 export type Redirect = { redirect?: Record<string, any> };
 
-export default async function checkUser(context: GetServerSidePropsContext): Promise<UserReturn | Redirect> {
+export default async function checkUser(
+  context: GetServerSidePropsContext
+): Promise<UserReturn | Redirect> {
   const { req, res } = context;
   const userId = req?.cookies['_maitreya_user'] || null;
 

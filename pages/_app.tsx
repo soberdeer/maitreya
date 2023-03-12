@@ -47,7 +47,7 @@ function MyApp({
   const paletteName = useMemo(() => cookieTheme, [cookieTheme]);
   const palette = useMemo(
     () => (cookieTheme === 'green' ? defaultPalette : grayPalette),
-    [cookieTheme],
+    [cookieTheme]
   );
 
   const updatePalette = () => {
@@ -139,20 +139,20 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
   const chatScript =
     userId && userId !== 'guest'
       ? await getChatScript({
-        req: req as NextApiRequest,
-        res: res as NextApiResponse,
-        domain: req?.headers?.host
-          ? req?.headers?.host.includes('localhost')
-            ? 'localhost'
-            : req?.headers?.host
-          : 'localhost',
-        userId,
-        userFullName: user?.fields?.name || null,
-        isMaster: process.env.MASTER_ID === user?.sys?.id,
-        secretKey: process.env.CHAT_SECRET_KEY!,
-        avatar: user?.fields?.avatar_chat?.fields?.file?.url || null,
-        color: user?.fields?.avatar_chat?.fields?.description || null,
-      })
+          req: req as NextApiRequest,
+          res: res as NextApiResponse,
+          domain: req?.headers?.host
+            ? req?.headers?.host.includes('localhost')
+              ? 'localhost'
+              : req?.headers?.host
+            : 'localhost',
+          userId,
+          userFullName: user?.fields?.name || null,
+          isMaster: process.env.MASTER_ID === user?.sys?.id,
+          secretKey: process.env.CHAT_SECRET_KEY!,
+          avatar: user?.fields?.avatar_chat?.fields?.file?.url || null,
+          color: user?.fields?.avatar_chat?.fields?.description || null,
+        })
       : null;
 
   return {

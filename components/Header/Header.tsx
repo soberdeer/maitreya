@@ -107,7 +107,11 @@ export default function Header({ className, children, isGuest, menu, vk_url, log
               onClick={() =>
                 openModal({
                   children: (
-                    <MobileModal anchors={[...(menu || []), ...anchors]} vkUrl={vk_url} isGuest={isGuest} />
+                    <MobileModal
+                      anchors={[...(menu || []), ...anchors]}
+                      vkUrl={vk_url}
+                      isGuest={isGuest}
+                    />
                   ),
                   fullScreen: width < 720,
                 })
