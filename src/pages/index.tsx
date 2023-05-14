@@ -1,17 +1,24 @@
 import { Animator } from '@arwes/react';
-// import { FrameWrapper } from '@src/components/FrameWrapper';
 import checkUser from '@src/util/checkUser';
 import { getEntries } from '@src/contentful';
 import { GetServerSidePropsContext } from 'next';
 import { TypeMain_page, TypeMain_pageSkeleton } from '@src/util/types';
 import { Error } from '@src/components/Error';
+import { MainPage } from '@src/components/MainPage';
 
 export default function Index({ data }: { data?: TypeMain_page }) {
-  console.log(data);
-  // const { classes } = useStyles();
+  if (!data) {
+    return (
+      <Animator combine manager="stagger">
+        <Error type="notAllowed" />
+      </Animator>
+    );
+  }
   return (
     <Animator combine manager="stagger">
-      <Error type="restricted" />
+      <Animator merge duration={{ enter: 0.4, exit: 0.4 }}>
+        <MainPage data={data} />
+      </Animator>
     </Animator>
   );
 }

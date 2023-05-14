@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import App, { AppContext, AppProps } from 'next/app';
 import Head from 'next/head';
-import { Container, MantineProvider } from '@mantine/core';
+import { Box, Container, MantineProvider } from '@mantine/core';
 import { Roboto } from 'next/font/google';
 import {
   type AnimatorGeneralProviderSettings,
@@ -13,12 +13,13 @@ import { NextApiRequest, NextApiResponse, NextPage } from 'next';
 import { getEntries, getEntry } from '@src/contentful';
 import getChatScript from '@src/util/getChatScript';
 import { TypeElementsFields, TypeMain, TypeMainSkeleton, TypeUsersSkeleton } from '@src/util/types';
-import { mantineColors } from '@src/util/mantineColors';
+import { mantineTheme } from '@src/util/mantineTheme';
 import { Background } from '@src/components/Background';
 import { Header } from '@src/components/Header';
 import { ElementsProvider } from '@src/hooks/use-elements';
 import { AnimateProvider } from '@src/hooks/use-animate';
 import { useRouter } from 'next/router';
+import { Meta } from '@src/components/Meta';
 
 const roboto = Roboto({
   subsets: ['latin', 'cyrillic', 'cyrillic-ext'],
@@ -79,33 +80,25 @@ export function MaitreyaApp({
           <MantineProvider
             withGlobalStyles
             withNormalizeCSS
-            theme={{
-              colorScheme: 'dark',
-              colors: mantineColors,
-              primaryColor: 'maitreya',
-            }}
+            theme={mantineTheme}
           >
             <GlobalStyles />
             <AnimatorGeneralProvider {...animatorsSettings} disabled={!animate}>
               <Head>
-                <title>Page title</title>
-                <meta
-                  name="viewport"
-                  content="minimum-scale=1, initial-scale=1, width=device-width"
-                />
+                <Meta />
               </Head>
               <Animator combine manager="stagger">
                 <Header
                   menu={base?.fields.menu as { href: string; children: string; icon: string }[]}
                   vkUrl={base?.fields.vk_url}
                 />
-                <main className={roboto.className}>
+                <Box component="main" className={roboto.className} sx={{ paddingTop: 100, paddingBottom: 50 }}>
                   <Background />
                   <Container sx={{ zIndex: 1 }}>
                     {/*@ts-ignore*/}
                     <Component {...pageProps} />
                   </Container>
-                </main>
+                </Box>
               </Animator>
             </AnimatorGeneralProvider>
           </MantineProvider>

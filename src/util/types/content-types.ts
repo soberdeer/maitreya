@@ -15,10 +15,7 @@ export interface TypeArticlesFields {
 }
 
 export type TypeArticlesSkeleton = EntrySkeletonType<TypeArticlesFields, 'articles'>;
-export type TypeArticles = Entry<
-  TypeArticlesSkeleton,
-  'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'
->;
+export type TypeArticles = Entry<TypeArticlesSkeleton, 'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'>;
 
 export interface TypeBlockFields {
   id: EntryFieldTypes.Symbol;
@@ -27,10 +24,7 @@ export interface TypeBlockFields {
 }
 
 export type TypeBlockSkeleton = EntrySkeletonType<TypeBlockFields, 'block'>;
-export type TypeBlock = Entry<
-  TypeBlockSkeleton,
-  'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'
->;
+export type TypeBlock = Entry<TypeBlockSkeleton, 'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'>;
 
 export interface TypeCombatFields {
   name: EntryFieldTypes.Symbol;
@@ -56,10 +50,7 @@ export interface TypeCombatFields {
 }
 
 export type TypeCombatSkeleton = EntrySkeletonType<TypeCombatFields, 'combat'>;
-export type TypeCombat = Entry<
-  TypeCombatSkeleton,
-  'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'
->;
+export type TypeCombat = Entry<TypeCombatSkeleton, 'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'>;
 
 export interface TypeElementsFields {
   name?: EntryFieldTypes.Symbol;
@@ -70,10 +61,7 @@ export interface TypeElementsFields {
 }
 
 export type TypeElementsSkeleton = EntrySkeletonType<TypeElementsFields, 'elements'>;
-export type TypeElements = Entry<
-  TypeElementsSkeleton,
-  'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'
->;
+export type TypeElements = Entry<TypeElementsSkeleton, 'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'>;
 
 export interface TypeHouseFields {
   name?: EntryFieldTypes.Symbol;
@@ -84,10 +72,7 @@ export interface TypeHouseFields {
 }
 
 export type TypeHouseSkeleton = EntrySkeletonType<TypeHouseFields, 'house'>;
-export type TypeHouse = Entry<
-  TypeHouseSkeleton,
-  'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'
->;
+export type TypeHouse = Entry<TypeHouseSkeleton, 'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'>;
 
 export interface TypeMain_pageFields {
   name: EntryFieldTypes.Symbol;
@@ -96,10 +81,7 @@ export interface TypeMain_pageFields {
 }
 
 export type TypeMain_pageSkeleton = EntrySkeletonType<TypeMain_pageFields, 'main_page'>;
-export type TypeMain_page = Entry<
-  TypeMain_pageSkeleton,
-  'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'
->;
+export type TypeMain_page = Entry<TypeMain_pageSkeleton, 'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'>;
 
 export interface TypeMainFields {
   id: EntryFieldTypes.Symbol;
@@ -110,10 +92,7 @@ export interface TypeMainFields {
 }
 
 export type TypeMainSkeleton = EntrySkeletonType<TypeMainFields, 'main'>;
-export type TypeMain = Entry<
-  TypeMainSkeleton,
-  'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'
->;
+export type TypeMain = Entry<TypeMainSkeleton, 'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'>;
 
 export interface TypePageFields {
   name?: EntryFieldTypes.Symbol;
@@ -122,10 +101,7 @@ export interface TypePageFields {
 }
 
 export type TypePageSkeleton = EntrySkeletonType<TypePageFields, 'page'>;
-export type TypePage = Entry<
-  TypePageSkeleton,
-  'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'
->;
+export type TypePage = Entry<TypePageSkeleton, 'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'>;
 
 export interface TypePostFields {
   name?: EntryFieldTypes.Symbol;
@@ -134,10 +110,7 @@ export interface TypePostFields {
 }
 
 export type TypePostSkeleton = EntrySkeletonType<TypePostFields, 'post'>;
-export type TypePost = Entry<
-  TypePostSkeleton,
-  'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'
->;
+export type TypePost = Entry<TypePostSkeleton, 'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'>;
 
 export interface TypeRitualsFields {
   name: EntryFieldTypes.Symbol;
@@ -155,10 +128,7 @@ export interface TypeRitualsFields {
 }
 
 export type TypeRitualsSkeleton = EntrySkeletonType<TypeRitualsFields, 'rituals'>;
-export type TypeRituals = Entry<
-  TypeRitualsSkeleton,
-  'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'
->;
+export type TypeRituals = Entry<TypeRitualsSkeleton, 'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'>;
 
 export interface TypeStandsFields {
   name?: EntryFieldTypes.Symbol;
@@ -172,10 +142,7 @@ export interface TypeStandsFields {
 }
 
 export type TypeStandsSkeleton = EntrySkeletonType<TypeStandsFields, 'stands'>;
-export type TypeStands = Entry<
-  TypeStandsSkeleton,
-  'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'
->;
+export type TypeStands = Entry<TypeStandsSkeleton, 'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'>;
 
 export interface TypeUsersFields {
   name?: EntryFieldTypes.Symbol;
@@ -219,13 +186,12 @@ export interface TypeUsersFields {
 }
 
 export type TypeUsersSkeleton = EntrySkeletonType<TypeUsersFields, 'users'>;
-export type TypeUsers = Entry<
-  TypeUsersSkeleton,
-  'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'
->;
+export type TypeUsers = Entry<TypeUsersSkeleton, 'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'>;
 
 export type TypeFetchSkeleton =
   | TypeRitualsSkeleton
   | TypeArticlesSkeleton
   | TypeStandsSkeleton
   | TypeCombatSkeleton;
+
+export type TypeFetch = TypeRituals | TypeArticles | TypeStands | TypeCombat;

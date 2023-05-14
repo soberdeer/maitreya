@@ -24,11 +24,10 @@ export const GlobalStyles = () => (
         transition: 'color 100ms ease, text-shadow 100ms ease, background-color 100ms ease',
         padding: 0,
         margin: 0,
-        color: '#00e6e6',
       },
 
       html: {
-        backgroundColor: '#c3c3c3',
+        backgroundColor: 'black',
         // '@media (prefers-color-scheme: dark)': {
         colorScheme: 'dark',
         // },
@@ -36,10 +35,7 @@ export const GlobalStyles = () => (
 
       body: {
         ...theme.fn.fontStyles(),
-
-        '@media (prefers-color-scheme: dark)': {
-          color: '#33ffff',
-        },
+        color: '#00e6e6',
 
         '&::-webkit-scrollbar': {
           display: 'none',
@@ -53,6 +49,29 @@ export const GlobalStyles = () => (
       'h1, h2, h3, h4, h5, h6': {
         fontFamily: '"Arounder", sans-serif',
         letterSpacing: '.1em',
+        fontWeight: 'bold',
+        lineHeight: 1.3,
+        color: '#ffa76c',
+        textShadow: '0 0 2px #ffa76c',
+      },
+
+      h1: {
+        fontSize: '1.75rem',
+      },
+      h2: {
+        fontSize: '1.625rem',
+      },
+      h3: {
+        fontSize: '1.5rem',
+      },
+      h4: {
+        fontSize: '1.375rem',
+      },
+      h5: {
+        fontSize: '1.25rem',
+      },
+      h6: {
+        fontSize: '1.125rem',
       },
 
       input: {

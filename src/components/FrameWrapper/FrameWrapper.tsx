@@ -5,22 +5,30 @@ import {
   Animator,
   aa,
   Animated,
+  AnimatedProps,
 } from '@arwes/react';
 import useStyles from './FrameWrapper.styles';
 
+interface FrameWrapperProps extends AnimatedProps {
+  color?: string;
+}
+
 export function FrameWrapper({
+  className,
   children,
   color = 'default',
-}: {
-  children?: React.ReactNode;
-  color?: string;
-}) {
+  ...rest
+}: FrameWrapperProps) {
   const { classes, cx } = useStyles();
   const svgRef = useRef<SVGSVGElement | null>(null);
   const { onRender } = useFrameSVGAssemblingAnimation(svgRef);
 
   return (
-    <Animated as="main" className={classes.content} animated={[aa('y', 24, 0)]}>
+    <Animated
+      className={cx(classes.content, className)}
+      animated={[aa('y', 24, 0)]}
+      {...rest}
+    >
       <Animator merge duration={{ enter: 0.4, exit: 0.4 }}>
         <FrameSVGLines
           className={cx(classes.root, classes[color as keyof typeof classes])}

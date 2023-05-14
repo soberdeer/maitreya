@@ -17,7 +17,7 @@ export default createStyles((theme) => ({
 
   default: {
     '& path[data-name="decoration"]': { color: theme.colors.maitreya[3] },
-    '& path[data-name="shape"]': { color: theme.fn.rgba(theme.colors.maitreya[9], 0.3) },
+    '& path[data-name="shape"]': { color: theme.fn.rgba(theme.fn.darken(theme.colors.maitreya[9], 0.8), 0.7) },
   },
 
   red: {
