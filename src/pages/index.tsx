@@ -17,8 +17,6 @@ export default function Index({ data }: { data?: TypeMain_page }) {
 }
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  context.res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=59');
-
   const { redirect } = await checkUser(context);
 
   if (redirect) {

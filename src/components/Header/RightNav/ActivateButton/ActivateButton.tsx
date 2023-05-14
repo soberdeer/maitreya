@@ -13,8 +13,8 @@ export function ActivateButton({ className, animated, ...rest }: AnimatedProps) 
     <Animated className={cx(classes.root, className)} {...rest}>
       <Tooltip label={animate ? 'Выключить анимацию' : 'Включить анимацию'}>
         <UnstyledButton style={{ height: '100%' }} onClick={() => toggleAnimate()}>
-          <Center sx={{ height: 56 }}>
-            <svg viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" height={26} width={26}>
+          <Center sx={{ height: '100%' }}>
+            <svg viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" height={24} width={24}>
               <path
                 d="M23.11,17.57,25.67,7.33,31.17,22H38.5"
                 className={cx(classes.line, classes.iconLine)}
