@@ -12,6 +12,7 @@ import {
   TypeFetchSkeleton,
   TypeRitualsSkeleton,
 } from '@src/util/types';
+import { getCache, setCache } from './cache';
 
 const check = () =>
   process.env.CONTENTFUL_DELIVERY_TOKEN &&
@@ -33,9 +34,20 @@ export async function getEntries<T extends EntrySkeletonType>(
   content_type: string,
   include?: 0 | 1 | 2 | 3 | 4 | 10 | 5 | 6 | 7 | 8 | 9 | undefined
 ): Promise<Entry<T>[] | undefined | null> {
+  const cached = getCache<Entry<T>[] | undefined | null>(content_type);
+
+  if (cached) {
+    return cached;
+  }
+
   return index?.withoutUnresolvableLinks
     .getEntries<T>({ content_type, include: include || 10 })
-    .then((entries) => entries.items)
+    .then((entries) => {
+      if (entries.items.length > 0) {
+        setCache(content_type, entries.items);
+      }
+      return entries.items;
+    })
     .catch((err) => {
       console.log(err);
       return [];
@@ -123,13 +135,23 @@ export async function getEntry<T extends EntrySkeletonType>(
     return null;
   }
 
+  const cached = getCache<Entry<T, 'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'>>(id);
+
+  if (cached) {
+    return cached;
+  }
   // 'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'
   return index?.withoutUnresolvableLinks
     .getEntry<T>(id, {
       include: 10,
       locale: 'ru-RU',
     })
-    .then((entry) => entry)
+    .then((entry) => {
+      if (entry) {
+        setCache(id, entry);
+      }
+      return entry;
+    })
     .catch(() => null);
 }
 

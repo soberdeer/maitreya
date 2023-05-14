@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import App, { AppContext, AppProps } from 'next/app';
 import Head from 'next/head';
 import { Container, MantineProvider } from '@mantine/core';
@@ -18,6 +18,7 @@ import { Background } from '@src/components/Background';
 import { Header } from '@src/components/Header';
 import { ElementsProvider } from '@src/hooks/use-elements';
 import { AnimateProvider } from '@src/hooks/use-animate';
+import { useRouter } from 'next/router';
 
 const roboto = Roboto({
   subsets: ['latin', 'cyrillic', 'cyrillic-ext'],
@@ -48,23 +49,24 @@ export function MaitreyaApp({
   pageProps,
   isLogin,
   isGuest,
-  base,
+  base: initialBase,
   animate: animateInitial,
   chatScript,
 }: AppInterface) {
   const [animate, setAnimate] = useState(animateInitial);
-
+  const base = useMemo(() => initialBase, []);
+  const router = useRouter();
   const toggleAnimate = () => {
     document.cookie = `_maitreya_animate=${!animate}`;
     setAnimate((p) => !p);
   };
 
-  // useEffect(() => {
-  //   setShow(true);
-  //   return () => {
-  //     setShow(false);
-  //   };
-  // }, []);
+  useEffect(() => {
+    router.prefetch('/models');
+    router.prefetch('/technics');
+    router.prefetch('/articles');
+    router.prefetch('/');
+  }, []);
 
   return (
     <div style={{ height: '100vh' }}>
@@ -95,6 +97,7 @@ export function MaitreyaApp({
               <Animator combine manager="stagger">
                 <Header
                   menu={base?.fields.menu as { href: string; children: string; icon: string }[]}
+                  vkUrl={base?.fields.vk_url}
                 />
                 <main className={roboto.className}>
                   <Background />

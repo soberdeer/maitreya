@@ -2,17 +2,17 @@ import React, { useMemo } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { aa, aaVisibility, Text, AnimatedProps, Animator } from '@arwes/react';
+import { IconBlockquote } from '@tabler/icons-react';
 import { MenuItem } from '@src/components/Header/MenuItem';
 import { Menu } from '@src/components/Header/Menu';
-import { Logo } from '@src/components/Header/Logo';
 import { mapLinks } from './mapNavLinks';
 import useStyles from './LeftNav.styles';
 
-interface HeaderProps extends AnimatedProps {
+interface LeftNavProps extends AnimatedProps {
   menu: { href: string; children: string; icon: string }[];
 }
 
-export function LeftNav({ menu }: HeaderProps) {
+export function LeftNav({ menu }: LeftNavProps) {
   const { classes } = useStyles();
   const router = useRouter();
   const links = useMemo(() => mapLinks(menu), [menu]);
@@ -20,13 +20,6 @@ export function LeftNav({ menu }: HeaderProps) {
 
   return (
     <Animator combine manager="stagger">
-      <Animator>
-        <Logo animated={aaVisibility()}>
-          {/*<Animator merge>*/}
-          {/*  <LogoType className={hiddenSMDown} animated={leftItemAnimation} />*/}
-          {/*</Animator>*/}
-        </Logo>
-      </Animator>
       <Animator combine manager="stagger" duration={{ stagger: 0.03 }}>
         <Menu>
           {links.map(({ icon: Icon, link, label }, index) => (
@@ -36,7 +29,7 @@ export function LeftNav({ menu }: HeaderProps) {
                 active={router.asPath.startsWith(link) as boolean}
                 animated={leftItemAnimation}
               >
-                <Link href={link} title={label}>
+                <Link href={link} title={label} passHref shallow>
                   {Icon && <Icon stroke={1} />}
                   <Text as="span" className={classes.menuText}>
                     {label}
@@ -45,6 +38,20 @@ export function LeftNav({ menu }: HeaderProps) {
               </MenuItem>
             </Animator>
           ))}
+          <Animator>
+            <MenuItem
+              className={classes.menuItem}
+              active={router.asPath.startsWith('/restricted') as boolean}
+              animated={leftItemAnimation}
+            >
+              <Link href="/restricted" title="restricted" passHref shallow>
+                <IconBlockquote stroke={1} />
+                <Text as="span" className={classes.menuText}>
+                  Restricted
+                </Text>
+              </Link>
+            </MenuItem>
+          </Animator>
           {/*<Link href="/restricted" >*/}
           {/*  <Text as="span" className={classes.menuText}>*/}
           {/*    restricted*/}

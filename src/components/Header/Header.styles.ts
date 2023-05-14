@@ -14,7 +14,7 @@ export default createStyles((theme) => ({
   container: {
     position: 'relative',
     display: 'grid',
-    gridTemplateColumns: 'repeat(3, auto)',
+    gridTemplateColumns: '40px auto auto auto',
     padding: '0 1rem',
 
     [`@media (min-width: ${em(getBreakpointValue(theme.breakpoints.md))})`]: {
@@ -22,7 +22,7 @@ export default createStyles((theme) => ({
     },
 
     [`@media (min-width: ${em(getBreakpointValue(theme.breakpoints.xl))})`]: {
-      gridTemplateColumns: 'repeat(3, 1fr)',
+      gridTemplateColumns: '40px 1fr 1fr 1fr',
     },
   },
   frame: {

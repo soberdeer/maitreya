@@ -11,7 +11,7 @@ export default createStyles(() => ({
   },
   backgroundImage: {
     zIndex: 0,
-    filter: 'blur(10px)',
+    filter: 'hue-rotate(0deg) brightness(1) blur(10px)',
     transition: 'filter 200ms ease',
   },
 
@@ -33,6 +33,6 @@ export default createStyles(() => ({
     position: 'absolute',
     top: 0,
     left: 0,
-    transition: 'background-color 200ms ease',
+    transition: 'backgroundColor 200ms ease',
   },
 }));
