@@ -1,0 +1,42 @@
+{
+  "name": "Академия Майтрея",
+  "short_name": "Академия Майтрея",
+  "description": "1431 год от Созидания Империи. Ситуация в Галактике меняется после столкновения асперов Академии с неожиданным соперником",
+  "start_url": "/",
+  "display": "fullscreen",
+  "background_color": "#09201f",
+  "theme_color": "#09201f",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "./favicon.svg",
+      "type": "image/svg",
+      "sizes": "48x48",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./favicon.svg",
+      "type": "image/svg",
+      "sizes": "72x72",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./favicon.svg",
+      "type": "image/svg",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./favicon.svg",
+      "type": "image/svg",
+      "sizes": "196x196",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./favicon.svg",
+      "type": "image/svg",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ]
+}
