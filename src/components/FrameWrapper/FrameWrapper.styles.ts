@@ -17,11 +17,22 @@ export default createStyles((theme) => ({
 
   default: {
     '& path[data-name="decoration"]': { color: theme.colors.maitreya[3] },
-    '& path[data-name="shape"]': { color: theme.fn.rgba(theme.fn.darken(theme.colors.maitreya[9], 0.8), 0.7) },
+    '& path[data-name="shape"]': { color: theme.fn.rgba(theme.colors.maitreya[9], 0.2) },
   },
 
   red: {
     '& path[data-name="decoration"]': { color: '#FF3333' },
     '& path[data-name="shape"]': { color: theme.fn.rgba('#260D0D', 0.5) },
+  },
+
+  frame: {
+    zIndex: -1,
+    position: 'absolute',
+    inset: 0,
+    overflow: 'hidden',
+    transitionProperty:
+      'color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, outline',
+    transitionDuration: '200ms',
+    transitionTimingFunction: 'ease-out',
   },
 }));

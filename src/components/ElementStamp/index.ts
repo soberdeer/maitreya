@@ -1,0 +1,1 @@
+export { ElementStamp } from './ElementStamp';

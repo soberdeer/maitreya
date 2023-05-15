@@ -7,7 +7,7 @@ export default createStyles((theme) => ({
   // },
 
   body: {
-    backgroundColor: '#082221',
+    backgroundColor: theme.colors.maitreya[9],
     // border: '1px solid #0ff',
   },
 
@@ -15,15 +15,19 @@ export default createStyles((theme) => ({
     borderRadius: 0,
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
-    backgroundColor: '#082221',
+    backgroundColor: theme.colors.maitreya[9],
     border: `1px solid ${theme.colors.maitreya[3]}`,
     color: theme.colors.maitreya[3],
     // borderColor: theme.colors.maitreya[3],
     borderBottom: `0.0625rem solid ${theme.colors.maitreya[3]} !important`,
 
+    '&::placeholder': {
+      color: theme.colors.maitreya[4],
+    },
+
     '&:hover': {
       borderColor: theme.colors.maitreya[3],
-      backgroundColor: 'rgba(0,255,255,0.3)',
+      backgroundColor: theme.colors.maitreya[7],
       boxShadow: 'none',
     },
 
@@ -32,7 +36,7 @@ export default createStyles((theme) => ({
     },
 
     '&:focus': {
-      backgroundColor: 'rgba(0,255,255,0.1)',
+      backgroundColor: theme.colors.maitreya[8],
       boxShadow: 'none',
     },
   },

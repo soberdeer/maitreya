@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text } from '@arwes/react';
-import { Entry } from 'contentful';
+import { Asset, Entry } from 'contentful';
 import {
   Block,
   BLOCKS,
@@ -13,6 +13,7 @@ import {
 // import { Circle } from 'react-feather';
 import { TypeFetch } from '@src/util/types';
 import { Anchor } from '@src/components/Anchor';
+import { Image } from '@src/components/Image';
 import { MantineTheme } from '@mantine/core';
 import { Video } from '../Video/Video';
 
@@ -68,17 +69,17 @@ export const options = (
       if (node.data.target.fields?.file?.contentType?.includes('image')) {
         return (
           <div className={classes.imageWrapper}>
-            image
-            {/*<Image*/}
-            {/*  src={url}*/}
-            {/*  alt={title}*/}
-            {/*  className={classes.asset}*/}
-            {/*  fullImage={fullImage}*/}
-            {/*  imageWidth={node.data.target.fields.file?.details?.image?.width}*/}
-            {/*  imageHeight={node.data.target.fields.file?.details?.image?.height}*/}
-            {/*>*/}
-            {/*  {description}*/}
-            {/*</Image>*/}
+            {/* eslint-disable-next-line react/jsx-no-undef */}
+            <Image
+              image={node.data.target as Asset}
+              className={classes.asset}
+              fullImage={fullImage}
+              // fullImage={fullImage}
+              // imageWidth={node.data.target.fields.file?.details?.image?.width}
+              // imageHeight={node.data.target.fields.file?.details?.image?.height}
+            >
+              {description}
+            </Image>
           </div>
         );
       }
@@ -106,23 +107,23 @@ export const options = (
       );
     },
     [BLOCKS.LIST_ITEM]: (node: Block, children: React.ReactNode) => (
-        <li className={classes.listItem}>
-          <Text as="span">{children}</Text>
-          {/*<TextWithIcon*/}
-          {/*  icon={Circle}*/}
-          {/*  iconProps={{*/}
-          {/*    size: 7,*/}
-          {/*    fill: palette ? palette.primary.main : 'currentColor',*/}
-          {/*    stroke: palette ? palette.primary.main : 'currentColor',*/}
-          {/*  }}*/}
-          {/*  className={classes.listItemContent}*/}
-          {/*  wrapperProps={{ style: { marginTop: 8 } }}*/}
-          {/*  iconWrapperProps={{ style: { transform: 'translateY(calc(-100% + 12px))' } }}*/}
-          {/*>*/}
-          {/*  {children}*/}
-          {/*</TextWithIcon>*/}
-        </li>
-      ),
+      <li className={classes.listItem}>
+        <Text as="span">{children}</Text>
+        {/*<TextWithIcon*/}
+        {/*  icon={Circle}*/}
+        {/*  iconProps={{*/}
+        {/*    size: 7,*/}
+        {/*    fill: palette ? palette.primary.main : 'currentColor',*/}
+        {/*    stroke: palette ? palette.primary.main : 'currentColor',*/}
+        {/*  }}*/}
+        {/*  className={classes.listItemContent}*/}
+        {/*  wrapperProps={{ style: { marginTop: 8 } }}*/}
+        {/*  iconWrapperProps={{ style: { transform: 'translateY(calc(-100% + 12px))' } }}*/}
+        {/*>*/}
+        {/*  {children}*/}
+        {/*</TextWithIcon>*/}
+      </li>
+    ),
     // [BLOCKS.PARAGRAPH]: (node: Block, children: React.ReactNode) => (
     //     <Text as="p">{children}</Text>
     // ),
@@ -163,35 +164,33 @@ export const options = (
     ),
     [BLOCKS.TABLE_HEADER_CELL]: (node: TableBlock, children: React.ReactNode) => children,
     [BLOCKS.TABLE_CELL]: (node: TableBlock, children: React.ReactNode) => children,
-    [BLOCKS.TABLE]: (node: TableBlock, children: React.ReactNode) =>
-       children
-      // const withHeaders = node.content[0].content[0].nodeType === BLOCKS.TABLE_HEADER_CELL;
-      // const headers = withHeaders
-      //   ? node.content[0].content.map((item, index) => ({
-      //       id: index,
-      //       data: children[0].props.children[index],
-      //     }))
-      //   : null;
-      // const rows = withHeaders ? node.content.slice(1) : node.content;
-      // const dataset = rows.map((item, index) => ({
-      //   id: withHeaders ? index + 1 : index,
-      //   columns: item.content.map((cell, j) => {
-      //     return {
-      //       id: `${withHeaders ? index + 1 : index}_${j}`,
-      //       data: children[withHeaders ? index + 1 : index].props.children[j],
-      //     };
-      //   }),
-      // }));
-      // return (
-      //   <div className={classes.tableWrapper}>
-      //     <Table
-      //       condensed
-      //       className={classes.table}
-      //       headers={headers || []}
-      //       dataset={dataset || []}
-      //     />
-      //   </div>
-      // );
-    ,
+    [BLOCKS.TABLE]: (node: TableBlock, children: React.ReactNode) => children,
+    // const withHeaders = node.content[0].content[0].nodeType === BLOCKS.TABLE_HEADER_CELL;
+    // const headers = withHeaders
+    //   ? node.content[0].content.map((item, index) => ({
+    //       id: index,
+    //       data: children[0].props.children[index],
+    //     }))
+    //   : null;
+    // const rows = withHeaders ? node.content.slice(1) : node.content;
+    // const dataset = rows.map((item, index) => ({
+    //   id: withHeaders ? index + 1 : index,
+    //   columns: item.content.map((cell, j) => {
+    //     return {
+    //       id: `${withHeaders ? index + 1 : index}_${j}`,
+    //       data: children[withHeaders ? index + 1 : index].props.children[j],
+    //     };
+    //   }),
+    // }));
+    // return (
+    //   <div className={classes.tableWrapper}>
+    //     <Table
+    //       condensed
+    //       className={classes.table}
+    //       headers={headers || []}
+    //       dataset={dataset || []}
+    //     />
+    //   </div>
+    // );
   },
 });

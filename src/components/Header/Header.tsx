@@ -1,9 +1,10 @@
 import React from 'react';
-import { aa, aaVisibility, Animated, AnimatedProps, Animator, Illuminator } from '@arwes/react';
+import { aa, aaVisibility, Animated, AnimatedProps, Animator } from '@arwes/react';
 import { LeftNav } from '@src/components/Header/LeftNav';
 import { Logo } from '@src/components/Header/Logo';
 import { Box } from '@mantine/core';
 import { RightNav } from '@src/components/Header/RightNav';
+import { Illumination } from '@src/components/Illumination';
 import useStyles from './Header.styles';
 
 interface HeaderProps extends AnimatedProps {
@@ -17,9 +18,7 @@ export function Header({ className, menu, vkUrl }: HeaderProps) {
   return (
     <Animated as="header" className={cx(classes.root, className)}>
       <Box className={classes.container}>
-        <Box role="presentation" className={classes.frame}>
-          <Illuminator color="hsl(180 50% 50% / 10%)" size={400} />
-        </Box>
+        <Illumination />
         <Box className={classes.left}>
           <Animator>
             <Logo animated={aaVisibility()} />

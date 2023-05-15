@@ -20,6 +20,7 @@ import { ElementsProvider } from '@src/hooks/use-elements';
 import { AnimateProvider } from '@src/hooks/use-animate';
 import { useRouter } from 'next/router';
 import { Meta } from '@src/components/Meta';
+import SpotlightProvider from '@src/components/SpotlightProvider/SpotlightProvider';
 
 const roboto = Roboto({
   subsets: ['latin', 'cyrillic', 'cyrillic-ext'],
@@ -77,28 +78,30 @@ export function MaitreyaApp({
             base?.fields.elements?.map((entry) => entry?.fields as TypeElementsFields) || []
           }
         >
-          <MantineProvider
-            withGlobalStyles
-            withNormalizeCSS
-            theme={mantineTheme}
-          >
+          <MantineProvider withGlobalStyles withNormalizeCSS theme={mantineTheme}>
             <GlobalStyles />
             <AnimatorGeneralProvider {...animatorsSettings} disabled={!animate}>
               <Head>
                 <Meta />
               </Head>
               <Animator combine manager="stagger">
-                <Header
-                  menu={base?.fields.menu as { href: string; children: string; icon: string }[]}
-                  vkUrl={base?.fields.vk_url}
-                />
-                <Box component="main" className={roboto.className} sx={{ paddingTop: 100, paddingBottom: 50 }}>
-                  <Background />
-                  <Container sx={{ zIndex: 1 }}>
-                    {/*@ts-ignore*/}
-                    <Component {...pageProps} />
-                  </Container>
-                </Box>
+                <SpotlightProvider router={router}>
+                  <Header
+                    menu={base?.fields.menu as { href: string; children: string; icon: string }[]}
+                    vkUrl={base?.fields.vk_url}
+                  />
+                  <Box
+                    component="main"
+                    className={roboto.className}
+                    sx={{ height: '100vh', paddingTop: 100, paddingBottom: 50 }}
+                  >
+                    <Background />
+                    <Container sx={{ zIndex: 1, height: '100%' }}>
+                      {/*@ts-ignore*/}
+                      <Component {...pageProps} />
+                    </Container>
+                  </Box>
+                </SpotlightProvider>
               </Animator>
             </AnimatorGeneralProvider>
           </MantineProvider>

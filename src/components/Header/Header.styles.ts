@@ -15,6 +15,7 @@ export default createStyles((theme) => ({
     position: 'relative',
     display: 'grid',
     gridTemplateColumns: '40px auto auto auto',
+    backgroundColor: theme.fn.rgba(theme.colors.maitreya[9], 0.3),
     padding: '0 1rem',
 
     [`@media (min-width: ${em(getBreakpointValue(theme.breakpoints.md))})`]: {

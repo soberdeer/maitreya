@@ -14,37 +14,37 @@ export function MainPage({ data, ...rest }: MainPageProps) {
 
   return (
     // <Animator merge>
-      <Animated as="header" {...rest}>
-        {data.fields?.top_post?.fields?.content && (
-          <Animator merge duration={{ enter: 0.4, exit: 0.4 }}>
+    <Animated as="header" {...rest}>
+      {data.fields?.top_post?.fields?.content && (
+        <Animator merge duration={{ enter: 0.4, exit: 0.4 }}>
+          <FrameWrapper className={classes.frameWrapper}>
+            <Animator duration={{ delay: 0.4, stagger: 0.1 }}>
+              <RichText content={data.fields.top_post.fields.content} fullImage />
+            </Animator>
+          </FrameWrapper>
+        </Animator>
+      )}
+      {data.fields?.posts?.map((post, index) =>
+        post?.fields.content ? (
+          <Animator key={index} merge duration={{ enter: 0.4, exit: 0.4 }}>
             <FrameWrapper className={classes.frameWrapper}>
-              <Animator duration={{ delay: 0.4, stagger: 0.1 }}>
-                <RichText content={data.fields.top_post.fields.content} fullImage />
-              </Animator>
+              <div style={{ width: '100%' }}>
+                <Animator duration={{ delay: 0.4, stagger: 0.1 }}>
+                  <RichText content={post.fields.content} />
+                </Animator>
+                {post.fields.date && (
+                  <div className={classes.dateWrapper}>
+                    <Animator duration={{ delay: 0.4, stagger: 0.1 }}>
+                      <Text>{post.fields.date.split('-').reverse().join('-')}</Text>
+                    </Animator>
+                  </div>
+                )}
+              </div>
             </FrameWrapper>
           </Animator>
-        )}
-        {data.fields?.posts?.map((post, index) =>
-          post?.fields.content ? (
-            <Animator key={index} merge duration={{ enter: 0.4, exit: 0.4 }}>
-              <FrameWrapper className={classes.frameWrapper}>
-                <div style={{ width: '100%' }}>
-                  <Animator duration={{ delay: 0.4, stagger: 0.1 }}>
-                    <RichText content={post.fields.content} />
-                  </Animator>
-                  {post.fields.date && (
-                    <div className={classes.dateWrapper}>
-                      <Animator duration={{ delay: 0.4, stagger: 0.1 }}>
-                        <Text>{post.fields.date.split('-').reverse().join('-')}</Text>
-                      </Animator>
-                    </div>
-                  )}
-                </div>
-              </FrameWrapper>
-            </Animator>
-          ) : null
-        )}
-      </Animated>
+        ) : null
+      )}
+    </Animated>
     // </Animator>
   );
 }

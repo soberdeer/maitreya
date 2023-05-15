@@ -13,8 +13,8 @@ const errorTypesMap = {
 export function Error({ type }: { type?: keyof typeof errorTypesMap }) {
   const { classes } = useStyles();
   return (
-    <Container size="sm">
-      <Center sx={{ height: '100vh' }}>
+    <Center sx={{ height: '100%' }} pb={20}>
+      <Container size="sm">
         <Animator merge duration={{ enter: 0.4, exit: 0.4 }}>
           <FrameWrapper color="red">
             <Animator duration={{ delay: 0.4, stagger: 0.1 }}>
@@ -24,7 +24,7 @@ export function Error({ type }: { type?: keyof typeof errorTypesMap }) {
             </Animator>
           </FrameWrapper>
         </Animator>
-      </Center>
-    </Container>
+      </Container>
+    </Center>
   );
 }

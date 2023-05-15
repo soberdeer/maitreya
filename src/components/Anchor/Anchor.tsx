@@ -6,7 +6,7 @@ import useStyles from './Anchor.styles';
 
 interface AnchorProps extends AnimatorProps {
   href: string;
-  color: MantineColor;
+  color?: MantineColor;
   styled?: boolean;
   target?: string;
 }

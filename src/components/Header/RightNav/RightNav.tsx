@@ -1,9 +1,10 @@
 import React from 'react';
 import { aa, aaVisibility, AnimatedProps, Animator } from '@arwes/react';
-import { VkIcon } from '@src/components/Header/RightNav/VkIcon';
-import { ActivateButton } from '@src/components/Header/RightNav/ActivateButton';
-import { Menu } from '@src/components/Header/Menu';
-import { MenuItem } from '@src/components/Header/MenuItem';
+import { Menu } from '../Menu';
+import { MenuItem } from '../MenuItem';
+import { VkIcon } from './VkIcon';
+import { ActivateButton } from './ActivateButton';
+import { SearchButton } from './SearchButton';
 import useStyles from './RightNav.styles';
 
 interface RightNavProps extends AnimatedProps {
@@ -18,6 +19,11 @@ export function RightNav({ vkUrl }: RightNavProps) {
     <Animator combine manager="stagger">
       <Animator combine manager="stagger" duration={{ stagger: 0.03 }}>
         <Menu>
+          <Animator>
+            <MenuItem className={classes.menuItem} animated={rightItemAnimation}>
+              <SearchButton />
+            </MenuItem>
+          </Animator>
           <Animator>
             <MenuItem className={classes.menuItem} animated={rightItemAnimation}>
               <ActivateButton />

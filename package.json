@@ -34,6 +34,8 @@
     "next": "^13.4.2",
     "nextjs-cors": "^2.1.2",
     "node-cache": "^5.1.2",
+    "pino": "^8.14.1",
+    "pino-pretty": "^10.0.0",
     "prettier": "^2.8.8",
     "react": "^18.2.0",
     "react-blurhash": "^0.3.0",

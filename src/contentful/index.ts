@@ -13,6 +13,7 @@ import {
   TypeRitualsSkeleton,
 } from '@src/util/types';
 import { getCache, setCache } from './cache';
+import { Logger } from './logger';
 
 const check = () =>
   process.env.CONTENTFUL_DELIVERY_TOKEN &&
@@ -51,7 +52,7 @@ export async function getEntries<T extends EntrySkeletonType>(
       return entries.items;
     })
     .catch((err) => {
-      console.log(err);
+      Logger.error(err);
       return [];
     });
 }
@@ -116,7 +117,7 @@ export async function search(query: string): Promise<(TypeFetch | undefined)[]> 
   return Promise.all([searchTechnics(query), searchRituals(query), ...searchArticles(query)])
     .then((res) => res.map((r) => r?.items).flat() as TypeFetch[])
     .catch((err) => {
-      console.log(err);
+      Logger.error(err);
       return [];
     });
 }
@@ -133,7 +134,7 @@ export async function getEntry<T extends EntrySkeletonType>(
   if (cached) {
     return cached;
   }
-  // 'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'
+
   return index?.withoutUnresolvableLinks
     .getEntry<T>(id, {
       include: 10,
@@ -145,7 +146,10 @@ export async function getEntry<T extends EntrySkeletonType>(
       }
       return entry;
     })
-    .catch(() => null);
+    .catch((err) => {
+      Logger.error(err);
+      return null;
+    });
 }
 
 export default index;

@@ -25,6 +25,15 @@ export const spinBackward = keyframes({
 });
 
 export default createStyles((theme) => ({
+  root: {
+    zIndex: 1000,
+    position: 'relative',
+    display: 'block',
+    minHeight: 90,
+    transition: 'all 250ms ease-out',
+    opacity: 1,
+    backgroundColor: ''
+  },
   circle: {
     position: 'absolute',
     left: '50%',
@@ -58,7 +67,7 @@ export default createStyles((theme) => ({
     animation: `${spinBackward} 750ms infinite linear`,
   },
 
-  isSmall: {
+  small: {
     display: 'inline-block',
     minWidth: 16,
     minHeight: 16,
@@ -77,7 +86,7 @@ export default createStyles((theme) => ({
     },
   },
 
-  isFull: {
+  full: {
     position: 'absolute',
     left: 0,
     right: 0,
