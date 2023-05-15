@@ -1360,6 +1360,23 @@
     debug "^4.3.1"
     loader-utils "^2.0.0"
 
+"@vercel/postgres-kysely@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@vercel/postgres-kysely/-/postgres-kysely-0.3.0.tgz#25e537306533c1177a06cb701c29e7d688cccc51"
+  integrity sha512-HN/DEZTnb9jje8jHD2YwH/zl1MgvU2CuTb8J+NDFcg4WUNFQjHAl7KxWXcvO+/QKuhdesvpR9GHy35NbtHdr2w==
+  dependencies:
+    "@vercel/postgres" "0.3.0"
+
+"@vercel/postgres@0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@vercel/postgres/-/postgres-0.3.0.tgz#f2395ce7a3f27ecf33a03b8daadd5583d7949064"
+  integrity sha512-cOC+x6qMnN54B4y0Fh0DV5LJQp2M7puIKbehQBMutY/8/zpzh+oKaQmnZb2QHn489MGOQKyRLJLgHa2P8M085Q==
+  dependencies:
+    "@neondatabase/serverless" "0.4.3"
+    bufferutil "4.0.7"
+    utf-8-validate "6.0.3"
+    ws "8.13.0"
+
 "@vercel/postgres@^0.1.3":
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/@vercel/postgres/-/postgres-0.1.3.tgz#e1a9ca8b51409cdf535c86da66acfd344c9ffc74"

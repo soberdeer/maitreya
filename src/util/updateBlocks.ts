@@ -1,22 +1,19 @@
-import { Entry } from 'contentful';
-import {
-  TypeArticlesSkeleton,
-  TypeBlockSkeleton,
-  TypeFetchSkeleton,
-  TypeUsersSkeleton,
-} from './types';
+import { TypeArticles, TypeBlock, TypeFetch, TypeUsers } from './types';
 import { checkReferences } from './checkAvailable';
 
 export const updateBlocks = (
-  blocks: Entry<TypeBlockSkeleton, undefined, string>[] | undefined,
-  user?: Entry<TypeUsersSkeleton> | null,
-  userId?: string
+  blocks?: (TypeBlock | undefined)[] | null,
+  user?: TypeUsers | null,
+  userId?: string | null
 ) =>
   (blocks || []).reduce((previous, current) => {
+    if (!current || !current.fields) {
+      return previous;
+    }
     const clone = { ...current };
 
     const entries = checkReferences(
-      current.fields.list as Entry<TypeFetchSkeleton>[] | null | undefined,
+      current.fields.list as TypeFetch[] | null | undefined,
       user,
       userId === 'guest'
     );
@@ -32,9 +29,9 @@ export const updateBlocks = (
             fields: {
               name: entry.fields.name,
             },
-          } as Entry<TypeArticlesSkeleton, undefined, string>)
+          } as TypeArticles)
       ),
     };
 
     return [...previous, clone];
-  }, [] as Entry<TypeBlockSkeleton, undefined, string>[]);
+  }, [] as TypeBlock[]);

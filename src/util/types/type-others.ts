@@ -41,3 +41,16 @@ export type SchemeType = {
     value: any;
   };
 };
+
+export type UsersTable = {
+  name: string;
+  user_id: string;
+  added_introjects: string;
+  removed_introjects: string;
+  added_convictions: string;
+  removed_convictions: string;
+};
+
+export type Database = {
+  users: UsersTable;
+};

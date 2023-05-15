@@ -13,8 +13,8 @@ import {
 // import { Circle } from 'react-feather';
 import { TypeFetch } from '@src/util/types';
 import { Anchor } from '@src/components/Anchor';
-import { Video } from '../Video/Video';
 import { MantineTheme } from '@mantine/core';
+import { Video } from '../Video/Video';
 
 const linkMap = {
   articles: '/articles/',
@@ -105,8 +105,7 @@ export const options = (
         </div>
       );
     },
-    [BLOCKS.LIST_ITEM]: (node: Block, children: React.ReactNode) => {
-      return (
+    [BLOCKS.LIST_ITEM]: (node: Block, children: React.ReactNode) => (
         <li className={classes.listItem}>
           <Text as="span">{children}</Text>
           {/*<TextWithIcon*/}
@@ -123,8 +122,7 @@ export const options = (
           {/*  {children}*/}
           {/*</TextWithIcon>*/}
         </li>
-      );
-    },
+      ),
     // [BLOCKS.PARAGRAPH]: (node: Block, children: React.ReactNode) => (
     //     <Text as="p">{children}</Text>
     // ),
@@ -165,8 +163,8 @@ export const options = (
     ),
     [BLOCKS.TABLE_HEADER_CELL]: (node: TableBlock, children: React.ReactNode) => children,
     [BLOCKS.TABLE_CELL]: (node: TableBlock, children: React.ReactNode) => children,
-    [BLOCKS.TABLE]: (node: TableBlock, children: React.ReactNode) => {
-      return children;
+    [BLOCKS.TABLE]: (node: TableBlock, children: React.ReactNode) =>
+       children
       // const withHeaders = node.content[0].content[0].nodeType === BLOCKS.TABLE_HEADER_CELL;
       // const headers = withHeaders
       //   ? node.content[0].content.map((item, index) => ({
@@ -194,6 +192,6 @@ export const options = (
       //     />
       //   </div>
       // );
-    },
+    ,
   },
 });

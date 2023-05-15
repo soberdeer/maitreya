@@ -9,7 +9,7 @@ import {
 import {
   TypeArticlesSkeleton,
   TypeCombatSkeleton,
-  TypeFetchSkeleton,
+  TypeFetch,
   TypeRitualsSkeleton,
 } from '@src/util/types';
 import { getCache, setCache } from './cache';
@@ -33,8 +33,10 @@ const index =
 export async function getEntries<T extends EntrySkeletonType>(
   content_type: string,
   include?: 0 | 1 | 2 | 3 | 4 | 10 | 5 | 6 | 7 | 8 | 9 | undefined
-): Promise<Entry<T>[] | undefined | null> {
-  const cached = getCache<Entry<T>[] | undefined | null>(content_type);
+): Promise<Entry<T, 'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'>[] | undefined | null> {
+  const cached = getCache<Entry<T, 'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'>[] | undefined | null>(
+    content_type
+  );
 
   if (cached) {
     return cached;
@@ -110,18 +112,9 @@ function searchArticles(query: string) {
   ];
 }
 
-export async function search(
-  query: string
-): Promise<Entry<TypeFetchSkeleton, 'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'>[] | []> {
+export async function search(query: string): Promise<(TypeFetch | undefined)[]> {
   return Promise.all([searchTechnics(query), searchRituals(query), ...searchArticles(query)])
-    .then(
-      (res) =>
-        res.map((r) => r?.items).flat() as Entry<
-          TypeFetchSkeleton,
-          'WITHOUT_UNRESOLVABLE_LINKS',
-          'ru-RU'
-        >[]
-    )
+    .then((res) => res.map((r) => r?.items).flat() as TypeFetch[])
     .catch((err) => {
       console.log(err);
       return [];

@@ -25,7 +25,7 @@ export default function fetchBasePage(forceSlug?: string) {
     const { user, userId } = result as UserReturn;
 
     if (slug === 'technics') {
-      return await fetchTechnics(user, userId, context);
+      return fetchTechnics(user, userId, context);
     }
 
     const base = await getEntries<TypeMainSkeleton>('main');

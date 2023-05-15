@@ -1,9 +1,7 @@
 import type {
-  ChainModifiers,
   Entry,
   EntryFieldTypes,
   EntrySkeletonType,
-  LocaleCode,
 } from 'contentful';
 
 export interface TypeArticlesFields {
