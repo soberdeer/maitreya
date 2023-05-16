@@ -1,7 +1,9 @@
 import { createStyles } from '@mantine/core';
 
 export default createStyles(() => ({
-  root: {},
+  root: {
+    textAlign: 'left',
+  },
   asset: {
     '& picture': {
       backgroundColor: 'transparent',

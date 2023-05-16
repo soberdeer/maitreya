@@ -10,7 +10,7 @@ import {
 import { Illumination } from '@src/components/Illumination';
 import useStyles from './FrameWrapper.styles';
 
-interface FrameWrapperProps extends AnimatedProps {
+export interface FrameWrapperProps extends AnimatedProps {
   color?: string;
 }
 

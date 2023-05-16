@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { SVGProps } from 'react';
 import { Animated, Animator } from '@arwes/react';
 import useStyles from './Metal.styles';
 
@@ -21,7 +21,7 @@ export function Metal({ color }: { color: string }) {
         mask="url(#mask)"
       />
       <Animator merge duration={{ enter: 0.4, exit: 0.4 }}>
-        <Animated
+        <Animated<SVGPathElement, SVGProps<SVGPathElement>>
           animated={{
             transitions: {
               enter: {
@@ -33,7 +33,6 @@ export function Metal({ color }: { color: string }) {
             },
           }}
           as="path"
-          //@ts-ignore
           d="M457.9 61c-103.7 10.71-196.53 54.63-269.39 127.5-69.94 69.93-111.62 155.19-126.27 257.34-2.93 20.32-2.93 88.18 0 108.51 14.64 102.14 56.5 187.4 126.26 257.34q104.64 104.64 257.34 126.25c20.32 2.93 88.19 2.93 108.51 0 84.4-12.06 159.84-44.09 222.2-94.56 88.71-71.66 144.68-172.08 161.4-289 2.92-20.32 2.92-88.19 0-108.51q-21.71-153-126.26-257.34Q709.38 86.19 562.1 63.44C540.4 60.17 480 58.62 457.9 61z"
           fill="none"
           stroke={color}

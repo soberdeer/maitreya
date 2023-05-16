@@ -9,7 +9,7 @@ export interface TypeArticlesFields {
   restricted: EntryFieldTypes.Boolean;
   description?: EntryFieldTypes.RichText;
   restricted_access?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeArticlesSkeleton>>;
-  references?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<EntrySkeletonType>>;
+  references?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeArticlesSkeleton>>;
 }
 
 export type TypeArticlesSkeleton = EntrySkeletonType<TypeArticlesFields, 'articles'>;

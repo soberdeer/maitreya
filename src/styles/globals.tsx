@@ -74,6 +74,12 @@ export const GlobalStyles = () => (
         fontSize: '1.125rem',
       },
 
+      p: {
+        marginBlockStart: 0,
+        marginBlockEnd: '1rem',
+        textAlign: 'left',
+      },
+
       input: {
         colorScheme: 'dark',
       },

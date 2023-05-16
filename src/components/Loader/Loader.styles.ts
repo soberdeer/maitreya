@@ -32,7 +32,7 @@ export default createStyles((theme) => ({
     minHeight: 90,
     transition: 'all 250ms ease-out',
     opacity: 1,
-    backgroundColor: ''
+    backgroundColor: '',
   },
   circle: {
     position: 'absolute',

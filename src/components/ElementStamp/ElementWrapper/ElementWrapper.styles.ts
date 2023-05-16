@@ -1,13 +1,4 @@
-import { createStyles, keyframes } from '@mantine/core';
-
-const circle = keyframes({
-  from: {
-    strokeDashoffset: 100,
-  },
-  to: {
-    strokeDashoffset: 0,
-  },
-});
+import { createStyles } from '@mantine/core';
 
 export default createStyles(() => ({
   root: {
@@ -24,7 +15,6 @@ export default createStyles(() => ({
 
   circle: {
     strokeDasharray: 100,
-    // animation: `${circle} 500ms ease-in forwards`,
-    // animationDelay: '500ms',
+    transition: 'stroke-dashoffset 0.4s ease',
   },
 }));

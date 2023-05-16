@@ -8,6 +8,7 @@ const errorTypesMap = {
   restricted: 'Доступ запрещен Цензоратом',
   notAllowed: 'Страница не одобрена Цензоратом',
   default: 'Произошла ошибка, цензорат уже в пути',
+  notFound: 'Информация не найдена',
 };
 
 export function Error({ type }: { type?: keyof typeof errorTypesMap }) {

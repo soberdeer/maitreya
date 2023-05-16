@@ -1,5 +1,5 @@
-import React from 'react';
-import { Text } from '@arwes/react';
+import React, { SVGProps } from 'react';
+import { Animated, Text, Animator } from '@arwes/react';
 import { Asset, Entry } from 'contentful';
 import {
   Block,
@@ -8,18 +8,12 @@ import {
   INLINES,
   Table as TableBlock,
 } from '@contentful/rich-text-types';
-// import Anchor from '../Anchor/Anchor';
-// import Image from '../Image/Image';
-// import { Circle } from 'react-feather';
+import { MantineTheme, List, Center } from '@mantine/core';
 import { TypeFetch } from '@src/util/types';
 import { Anchor } from '@src/components/Anchor';
 import { Image } from '@src/components/Image';
-import { MantineTheme } from '@mantine/core';
+import { Table } from '@src/components/Table';
 import { Video } from '../Video/Video';
-
-const linkMap = {
-  articles: '/articles/',
-};
 
 export const options = (
   classes: Record<string | number | symbol, string>,
@@ -106,27 +100,48 @@ export const options = (
         </div>
       );
     },
-    [BLOCKS.LIST_ITEM]: (node: Block, children: React.ReactNode) => (
-      <li className={classes.listItem}>
-        <Text as="span">{children}</Text>
-        {/*<TextWithIcon*/}
-        {/*  icon={Circle}*/}
-        {/*  iconProps={{*/}
-        {/*    size: 7,*/}
-        {/*    fill: palette ? palette.primary.main : 'currentColor',*/}
-        {/*    stroke: palette ? palette.primary.main : 'currentColor',*/}
-        {/*  }}*/}
-        {/*  className={classes.listItemContent}*/}
-        {/*  wrapperProps={{ style: { marginTop: 8 } }}*/}
-        {/*  iconWrapperProps={{ style: { transform: 'translateY(calc(-100% + 12px))' } }}*/}
-        {/*>*/}
-        {/*  {children}*/}
-        {/*</TextWithIcon>*/}
-      </li>
+    [BLOCKS.UL_LIST]: (node: Block, children: React.ReactNode) => (
+      <List
+        withPadding
+        icon={
+          <Center sx={{ height: '100%', marginTop: 7 }}>
+            <Animator duration={{ enter: 0.4, exit: 0.4 }}>
+              <svg className={classes.circleSvg} viewBox="0 0 50 50" width={8} height={8}>
+                <Animated<SVGPathElement, SVGProps<SVGPathElement>>
+                  animated={{
+                    initialStyle: { strokeDashoffset: 100 },
+                    transitions: {
+                      entering: { strokeDashoffset: 0 },
+                      exiting: { strokeDashoffset: 100 },
+                    },
+                  }}
+                  as="path"
+                  d="M1.07 12.99A11.93 11.93 0 1013 1.06 11.93 11.93 0 001.07 12.99"
+                  fill="none"
+                  stroke={theme.colors.maitreya[3]}
+                  strokeWidth={10}
+                  // className={classes.circle}
+                  style={{ transform: 'translate(40%, 40%)' }}
+                />
+              </svg>
+            </Animator>
+          </Center>
+        }
+      >
+        {children}
+      </List>
     ),
-    // [BLOCKS.PARAGRAPH]: (node: Block, children: React.ReactNode) => (
-    //     <Text as="p">{children}</Text>
-    // ),
+    [BLOCKS.OL_LIST]: (node: Block, children: React.ReactNode) => (
+      <List type="ordered" withPadding>
+        {children}
+      </List>
+    ),
+    [BLOCKS.LIST_ITEM]: (node: Block, children: React.ReactNode) => (
+      <List.Item sx={{ color: theme.colors.maitreya[3] }}>
+        <Text as="span">{children}</Text>
+      </List.Item>
+    ),
+    [BLOCKS.PARAGRAPH]: (node: Block, children: React.ReactNode) => <Text as="p">{children}</Text>,
     [INLINES.HYPERLINK]: (node: Hyperlink, children: React.ReactNode) => (
       <Anchor href={node.data.uri} color="maitreyaSecondary">
         {children}
@@ -162,35 +177,21 @@ export const options = (
         {children}
       </Text>
     ),
-    [BLOCKS.TABLE_HEADER_CELL]: (node: TableBlock, children: React.ReactNode) => children,
-    [BLOCKS.TABLE_CELL]: (node: TableBlock, children: React.ReactNode) => children,
-    [BLOCKS.TABLE]: (node: TableBlock, children: React.ReactNode) => children,
-    // const withHeaders = node.content[0].content[0].nodeType === BLOCKS.TABLE_HEADER_CELL;
-    // const headers = withHeaders
-    //   ? node.content[0].content.map((item, index) => ({
-    //       id: index,
-    //       data: children[0].props.children[index],
-    //     }))
-    //   : null;
-    // const rows = withHeaders ? node.content.slice(1) : node.content;
-    // const dataset = rows.map((item, index) => ({
-    //   id: withHeaders ? index + 1 : index,
-    //   columns: item.content.map((cell, j) => {
-    //     return {
-    //       id: `${withHeaders ? index + 1 : index}_${j}`,
-    //       data: children[withHeaders ? index + 1 : index].props.children[j],
-    //     };
-    //   }),
-    // }));
-    // return (
-    //   <div className={classes.tableWrapper}>
-    //     <Table
-    //       condensed
-    //       className={classes.table}
-    //       headers={headers || []}
-    //       dataset={dataset || []}
-    //     />
-    //   </div>
-    // );
+    [BLOCKS.TABLE_HEADER_CELL]: () => null,
+    [BLOCKS.TABLE_CELL]: () => null,
+    [BLOCKS.TABLE]: (node: TableBlock) => {
+      const withHeaders = node.content[0].content[0].nodeType === BLOCKS.TABLE_HEADER_CELL;
+
+      const headers = withHeaders
+        ? node.content[0].content.map((item) => item.content.map((k) => k.content))
+        : null;
+      const rows = withHeaders ? node.content.slice(1) : node.content;
+      return (
+        <Table
+          headers={headers}
+          rows={rows.map((row) => row.content.map((item) => item.content.map((k) => k.content)))}
+        />
+      );
+    },
   },
 });
