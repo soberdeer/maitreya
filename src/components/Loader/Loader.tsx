@@ -1,5 +1,5 @@
 import React from 'react';
-import { aaVisibility, Animated, AnimatedProps } from '@arwes/react';
+import { aaVisibility, Animated, AnimatedProps, Animator } from '@arwes/react';
 import useStyles from './Loader.styles';
 
 interface LoaderProps extends AnimatedProps {
@@ -18,23 +18,26 @@ export function Loader({
   ...rest
 }: LoaderProps) {
   const { classes, cx } = useStyles();
+  const active = true;
 
   return (
-    <Animated
-      className={cx(classes.root, { [classes.small]: small, [classes.full]: full })}
-      animated={aaVisibility()}
-      {...rest}
-    >
-      {!small && (
+    <Animator active={active} combine>
+      <Animated
+        className={cx(classes.root, { [classes.small]: small, [classes.full]: full })}
+        animated={aaVisibility()}
+        {...rest}
+      >
+        {!small && (
+          <div
+            {...largeCircleProps}
+            className={cx(classes.circle, classes.circle1, largeCircleProps?.className)}
+          />
+        )}
         <div
           {...largeCircleProps}
-          className={cx(classes.circle, classes.circle1, largeCircleProps?.className)}
+          className={cx(classes.circle, classes.circle2, smallCircleProps?.className)}
         />
-      )}
-      <div
-        {...largeCircleProps}
-        className={cx(classes.circle, classes.circle2, smallCircleProps?.className)}
-      />
-    </Animated>
+      </Animated>
+    </Animator>
   );
 }

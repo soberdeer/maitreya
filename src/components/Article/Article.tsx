@@ -8,7 +8,7 @@ import { Anchor } from '@src/components/Anchor';
 
 export interface ArticleProps {
   description?: Document;
-  name: string;
+  name?: string;
   breadcrumbs?: { title: string; href: string }[];
   children?: React.ReactNode;
 }
@@ -35,7 +35,7 @@ export function Article({ description, name, children, breadcrumbs }: ArticlePro
           ))}
         </Breadcrumbs>
       )}
-      <Text as="h1">{name}</Text>
+      {name && <Text as="h1">{name}</Text>}
       {description && <RichText content={description} />}
       {children}
     </FrameWrapper>

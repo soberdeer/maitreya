@@ -14,7 +14,7 @@ export function MainPage({ data, ...rest }: MainPageProps) {
   const { classes } = useStyles();
 
   return (
-    <Animated as="header" {...rest}>
+    <Animated as="main" {...rest}>
       {data.fields?.top_post?.fields?.content && (
         <Animator merge duration={{ enter: 0.4, exit: 0.4 }}>
           <FrameWrapper className={classes.frameWrapper}>

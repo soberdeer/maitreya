@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+import { useRouter } from 'next/router';
 import { aa, aaVisibility, Animated, AnimatedProps, Animator } from '@arwes/react';
 import { LeftNav } from '@src/components/Header/LeftNav';
 import { Logo } from '@src/components/Header/Logo';
@@ -14,27 +15,31 @@ interface HeaderProps extends AnimatedProps {
 
 export function Header({ className, menu, vkUrl }: HeaderProps) {
   const { classes, cx } = useStyles();
+  const router = useRouter();
+  const active = useMemo(() => router.pathname !== '/login', [router]);
 
   return (
-    <Animated as="header" className={cx(classes.root, className)}>
-      <Box className={classes.container}>
-        <Illumination />
-        <Box className={classes.left}>
-          <Animator>
-            <Logo animated={aaVisibility()} />
-          </Animator>
+    <Animator active={active}>
+      <Animated as="header" className={cx(classes.root, className)}>
+        <Box className={classes.container}>
+          <Illumination />
+          <Box className={classes.left}>
+            <Animator>
+              <Logo animated={aaVisibility()} />
+            </Animator>
+          </Box>
+          <Animated className={cx(classes.section, classes.left)} animated={aa('x', -12, 0)}>
+            <LeftNav menu={menu} />
+          </Animated>
+          <div />
+          {/*<Animated className={cx(classes.section, classes.center)} animated={aa('scaleX', 0.9, 1)}>*/}
+          {/*  {center}*/}
+          {/*</Animated>*/}
+          <Animated className={cx(classes.section, classes.right)} animated={aa('x', 12, 0)}>
+            <RightNav vkUrl={vkUrl} />
+          </Animated>
         </Box>
-        <Animated className={cx(classes.section, classes.left)} animated={aa('x', -12, 0)}>
-          <LeftNav menu={menu} />
-        </Animated>
-        <div />
-        {/*<Animated className={cx(classes.section, classes.center)} animated={aa('scaleX', 0.9, 1)}>*/}
-        {/*  {center}*/}
-        {/*</Animated>*/}
-        <Animated className={cx(classes.section, classes.right)} animated={aa('x', 12, 0)}>
-          <RightNav vkUrl={vkUrl} />
-        </Animated>
-      </Box>
-    </Animated>
+      </Animated>
+    </Animator>
   );
 }

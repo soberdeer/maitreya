@@ -17,12 +17,11 @@ export function Anchor({
   styled,
   children,
   target,
-  ...rest
 }: AnchorProps) {
   const { classes, theme, cx } = useStyles();
 
   return (
-    <Animator {...rest}>
+    <Animator merge duration={{ enter: 0.4, exit: 0.4 }}>
       <Link
         href={href}
         passHref

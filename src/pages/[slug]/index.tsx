@@ -7,6 +7,7 @@ import fetchBasePage from '@src/util/fetchBasePage';
 import { Error } from '@src/components/Error';
 import { FrameWrapper } from '@src/components/FrameWrapper/FrameWrapper';
 import { Meta } from '@src/components/Meta/Meta';
+import { Box } from '@mantine/core';
 
 interface PageType {
   data: TypePage;
@@ -24,14 +25,16 @@ export default function Page({ data }: PageType) {
   }
 
   return (
-    <>
+    <Box pb={50}>
       <Meta title={data.fields.name} />
-      <Animator>
-        <FrameWrapper>
-          <ListPage data={data} />
-        </FrameWrapper>
+      <Animator combine manager="stagger">
+        <Animator merge duration={{ enter: 0.4, exit: 0.4 }}>
+          <FrameWrapper>
+            <ListPage data={data} />
+          </FrameWrapper>
+        </Animator>
       </Animator>
-    </>
+    </Box>
   );
 }
 

@@ -21,6 +21,7 @@ import { AnimateProvider } from '@src/hooks/use-animate';
 import { useRouter } from 'next/router';
 import { Meta } from '@src/components/Meta';
 import SpotlightProvider from '@src/components/SpotlightProvider/SpotlightProvider';
+import { Loader } from '@src/components/Loader';
 
 const roboto = Roboto({
   subsets: ['latin', 'cyrillic', 'cyrillic-ext'],
@@ -56,6 +57,7 @@ export function MaitreyaApp({
   chatScript,
 }: AppInterface) {
   const [animate, setAnimate] = useState(animateInitial);
+  const [active, setActive] = useState(true);
   const base = useMemo(() => initialBase, []);
   const router = useRouter();
   const toggleAnimate = () => {
@@ -69,6 +71,21 @@ export function MaitreyaApp({
     router.prefetch('/articles');
     router.prefetch('/');
   }, []);
+
+  useEffect(() => {
+    const start = () => setActive(false);
+    const end = () => setActive(true);
+
+    router.events.on('routeChangeStart', start);
+    router.events.on('routeChangeComplete', end);
+
+    // If the component is unmounted, unsubscribe
+    // from the event with the `off` method:
+    return () => {
+      router.events.off('routeChangeStart', start);
+      router.events.off('routeChangeComplete', end);
+    };
+  }, [router]);
 
   return (
     <div style={{ height: '100vh' }}>
@@ -84,12 +101,17 @@ export function MaitreyaApp({
               <Head>
                 <Meta />
               </Head>
-              <Animator combine manager="stagger">
-                <SpotlightProvider router={router}>
-                  <Header
-                    menu={base?.fields.menu as { href: string; children: string; icon: string }[]}
-                    vkUrl={base?.fields.vk_url}
-                  />
+              <SpotlightProvider router={router}>
+                <Animator active={!active}>
+                  <Box sx={{ position: 'fixed', right: 30, bottom: 30, zIndex: 1000 }}>
+                    <Loader small />
+                  </Box>
+                </Animator>
+                <Header
+                  menu={base?.fields.menu as { href: string; children: string; icon: string }[]}
+                  vkUrl={base?.fields.vk_url}
+                />
+                <Animator combine manager="stagger" active={active}>
                   <Box
                     component="main"
                     className={roboto.className}
@@ -101,8 +123,8 @@ export function MaitreyaApp({
                       <Component {...pageProps} />
                     </Container>
                   </Box>
-                </SpotlightProvider>
-              </Animator>
+                </Animator>
+              </SpotlightProvider>
             </AnimatorGeneralProvider>
           </MantineProvider>
         </ElementsProvider>
