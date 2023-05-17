@@ -1,15 +1,15 @@
 import React, { SVGProps } from 'react';
 import { Animated, Text, Animator } from '@arwes/react';
-import { Asset, Entry } from 'contentful';
+import { Asset } from 'contentful';
 import {
   Block,
   BLOCKS,
   Hyperlink,
+  Inline,
   INLINES,
-  Table as TableBlock,
+  Table as TableBlock, TableRow,
 } from '@contentful/rich-text-types';
 import { MantineTheme, List, Center } from '@mantine/core';
-import { TypeFetch } from '@src/util/types';
 import { Anchor } from '@src/components/Anchor';
 import { Image } from '@src/components/Image';
 import { Table } from '@src/components/Table';
@@ -21,7 +21,7 @@ export const options = (
   fullImage?: boolean
 ) => ({
   renderNode: {
-    [BLOCKS.EMBEDDED_ENTRY]: (node: { data: { target: Entry<any> } }) => {
+    [BLOCKS.EMBEDDED_ENTRY]: (node: Block | Inline) => {
       const entry = node?.data?.target;
       let middleLink;
       if (['combat', 'stands', 'rituals'].includes(entry?.sys?.contentType?.sys?.id)) {
@@ -39,7 +39,7 @@ export const options = (
         </div>
       ) : null;
     },
-    [INLINES.EMBEDDED_ENTRY]: ({ data }: { data: { target: TypeFetch } }) => {
+    [INLINES.EMBEDDED_ENTRY]: ({ data }: Block | Inline) => {
       const entry = data?.target;
       let middleLink;
       if (['combat', 'stands', 'rituals'].includes(entry?.sys?.contentType?.sys?.id)) {
@@ -55,9 +55,9 @@ export const options = (
         </Anchor>
       ) : null;
     },
-    [BLOCKS.EMBEDDED_ASSET]: (node: Block) => {
-      const { title, description } = node.data.target.fields;
-      const { url } = node.data.target.fields.file;
+    [BLOCKS.EMBEDDED_ASSET]: (node: Block | Inline) => {
+      const { description } = node.data.target.fields;
+      // const { url } = node.data.target.fields.file;
 
       // console.log(node.data.target.fields?.file);
       if (node.data.target.fields?.file?.contentType?.includes('image')) {
@@ -100,7 +100,7 @@ export const options = (
         </div>
       );
     },
-    [BLOCKS.UL_LIST]: (node: Block, children: React.ReactNode) => (
+    [BLOCKS.UL_LIST]: (node: Block | Inline, children: React.ReactNode) => (
       <List
         withPadding
         icon={
@@ -131,65 +131,70 @@ export const options = (
         {children}
       </List>
     ),
-    [BLOCKS.OL_LIST]: (node: Block, children: React.ReactNode) => (
+    [BLOCKS.OL_LIST]: (node: Block | Inline, children: React.ReactNode) => (
       <List type="ordered" withPadding>
         {children}
       </List>
     ),
-    [BLOCKS.LIST_ITEM]: (node: Block, children: React.ReactNode) => (
+    [BLOCKS.LIST_ITEM]: (node: Block | Inline, children: React.ReactNode) => (
       <List.Item sx={{ color: theme.colors.maitreya[3] }}>
         <Text as="span">{children}</Text>
       </List.Item>
     ),
-    [BLOCKS.PARAGRAPH]: (node: Block, children: React.ReactNode) => <Text as="p">{children}</Text>,
-    [INLINES.HYPERLINK]: (node: Hyperlink, children: React.ReactNode) => (
+    [BLOCKS.PARAGRAPH]: (node: Block | Inline, children: React.ReactNode) => (
+      <Text as="p">{children}</Text>
+    ),
+    [INLINES.HYPERLINK]: (node: Block | Inline, children: React.ReactNode) => (
       <Anchor href={node.data.uri} color="maitreyaSecondary">
         {children}
       </Anchor>
     ),
-    [BLOCKS.HEADING_1]: (node: Block, children: React.ReactNode) => (
+    [BLOCKS.HEADING_1]: (node: Block | Inline, children: React.ReactNode) => (
       <Text as="h1" color={theme.colors.maitreyaSecondary[4]}>
         {children}
       </Text>
     ),
-    [BLOCKS.HEADING_2]: (node: Block, children: React.ReactNode) => (
+    [BLOCKS.HEADING_2]: (node: Block | Inline, children: React.ReactNode) => (
       <Text as="h2" color={theme.colors.maitreyaSecondary[4]}>
         {children}
       </Text>
     ),
-    [BLOCKS.HEADING_3]: (node: Block, children: React.ReactNode) => (
+    [BLOCKS.HEADING_3]: (node: Block | Inline, children: React.ReactNode) => (
       <Text as="h3" color={theme.colors.maitreyaSecondary[4]}>
         {children}
       </Text>
     ),
-    [BLOCKS.HEADING_4]: (node: Block, children: React.ReactNode) => (
+    [BLOCKS.HEADING_4]: (node: Block | Inline, children: React.ReactNode) => (
       <Text as="h4" color={theme.colors.maitreyaSecondary[4]}>
         {children}
       </Text>
     ),
-    [BLOCKS.HEADING_5]: (node: Block, children: React.ReactNode) => (
+    [BLOCKS.HEADING_5]: (node: Block | Inline, children: React.ReactNode) => (
       <Text as="h5" color={theme.colors.maitreyaSecondary[4]}>
         {children}
       </Text>
     ),
-    [BLOCKS.HEADING_6]: (node: Block, children: React.ReactNode) => (
+    [BLOCKS.HEADING_6]: (node: Block | Inline, children: React.ReactNode) => (
       <Text as="h6" color={theme.colors.maitreyaSecondary[4]}>
         {children}
       </Text>
     ),
     [BLOCKS.TABLE_HEADER_CELL]: () => null,
     [BLOCKS.TABLE_CELL]: () => null,
-    [BLOCKS.TABLE]: (node: TableBlock) => {
-      const withHeaders = node.content[0].content[0].nodeType === BLOCKS.TABLE_HEADER_CELL;
+    [BLOCKS.TABLE]: (node: Block | Inline) => {
+      const n = node as TableBlock;
+      const withHeaders = n.content[0].content[0].nodeType === BLOCKS.TABLE_HEADER_CELL;
 
       const headers = withHeaders
-        ? node.content[0].content.map((item) => item.content.map((k) => k.content))
+        ? n.content[0].content.map((item) => item.content.map((k) => k.content))
         : null;
-      const rows = withHeaders ? node.content.slice(1) : node.content;
+      const rows = withHeaders ? n.content.slice(1) : node.content;
       return (
         <Table
           headers={headers}
-          rows={rows.map((row) => row.content.map((item) => item.content.map((k) => k.content)))}
+          rows={rows.map((row) =>
+            (row as TableRow).content.map((item) => item.content.map((k) => k.content))
+          )}
         />
       );
     },
