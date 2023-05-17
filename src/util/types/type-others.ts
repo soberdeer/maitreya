@@ -1,4 +1,5 @@
 import { Entry, EntrySkeletonType } from 'contentful';
+import { TypeCombat, TypeCombatSkeleton, TypeRituals, TypeStands } from '@src/util/types/content-types';
 
 type Levels = 'Ученик' | 'Адепт' | 'Мастер';
 type TechnicType =
@@ -26,10 +27,10 @@ export type RankNumberType =
   | '4 - энсин, капитан-лейтенант, командор, адмирал системы';
 export type HonorType = 'Человек Высокой Чести' | 'Человек Чести' | 'Человек без Чести';
 
-export type LevelType<T extends EntrySkeletonType> = {
-  pupil: Entry<T>[];
-  adept: Entry<T>[];
-  master: Entry<T>[];
+export type LevelType<T extends TypeCombat | TypeRituals | TypeStands = TypeCombat> = {
+  pupil: T[];
+  adept: T[];
+  master: T[];
 };
 
 export type SchemeType = {

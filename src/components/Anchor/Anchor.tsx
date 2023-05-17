@@ -4,7 +4,7 @@ import { Animator, AnimatorProps } from '@arwes/react';
 import { MantineColor } from '@mantine/core';
 import useStyles from './Anchor.styles';
 
-interface AnchorProps extends AnimatorProps {
+export interface AnchorProps extends AnimatorProps {
   href: string;
   color?: MantineColor;
   styled?: boolean;

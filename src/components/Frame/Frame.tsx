@@ -33,7 +33,7 @@ export function Frame({ className, children, ...rest }: FrameWrapperProps) {
   return (
     <Box className={cx(classes.root, className)} {...rest}>
       <Illumination />
-      <Animator merge duration={{ enter: 0.4, exit: 0.4, delay: 1 }}>
+      <Animator merge duration={{ enter: 0.4, exit: 0.4, delay: 0.1 }}>
         {Object.keys(transitionStyles).map((cl) => (
           <Animated
             key={cl}

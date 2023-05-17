@@ -1,0 +1,1 @@
+export { StandardIcon } from './StandardIcon';

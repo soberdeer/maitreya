@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import App, { AppContext, AppProps } from 'next/app';
 import Head from 'next/head';
-import { Box, Container, MantineProvider } from '@mantine/core';
+import { Box, Button, Container, MantineProvider } from '@mantine/core';
 import { Roboto } from 'next/font/google';
 import {
   type AnimatorGeneralProviderSettings,
@@ -73,8 +73,16 @@ export function MaitreyaApp({
   }, []);
 
   useEffect(() => {
-    const start = () => setActive(false);
-    const end = () => setActive(true);
+    const start = (e: any[]) => {
+      if (!e.includes('/technics?')) {
+        setActive(false);
+      }
+    };
+    const end = (e: any[]) => {
+      if (!e.includes('/technics?')) {
+        setActive(true);
+      }
+    };
 
     router.events.on('routeChangeStart', start);
     router.events.on('routeChangeComplete', end);
@@ -102,6 +110,11 @@ export function MaitreyaApp({
                 <Meta />
               </Head>
               <SpotlightProvider router={router}>
+                <Box sx={{ position: 'fixed', right: 30, bottom: 60, zIndex: 1000 }}>
+                  <Button onClick={() => setActive((a) => !a)}>
+                    {active ? 'deactivate' : 'activate'}
+                  </Button>
+                </Box>
                 <Animator active={!active}>
                   <Box sx={{ position: 'fixed', right: 30, bottom: 30, zIndex: 1000 }}>
                     <Loader small />
