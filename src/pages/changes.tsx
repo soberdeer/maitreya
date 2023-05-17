@@ -28,7 +28,7 @@ export default function ChangesPage({ user, dbUser }: UserPageProps) {
             breadcrumb: {
               whiteSpace: 'normal',
             },
-            separator: { color: theme.colors.maitreya[3] },
+            separator: { color: theme.colors.maitreya[3], height: '100%' },
           })}
         >
           {[

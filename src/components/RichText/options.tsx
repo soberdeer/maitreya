@@ -4,16 +4,18 @@ import { Asset } from 'contentful';
 import {
   Block,
   BLOCKS,
-  Hyperlink,
   Inline,
   INLINES,
-  Table as TableBlock, TableRow,
+  Table as TableBlock,
+  TableRow,
 } from '@contentful/rich-text-types';
 import { MantineTheme, List, Center } from '@mantine/core';
 import { Anchor } from '@src/components/Anchor';
 import { Image } from '@src/components/Image';
 import { Table } from '@src/components/Table';
-import { Video } from '../Video/Video';
+import { Video } from '@src/components/Video';
+import { Frame } from '@src/components/Frame';
+import { Blockquote } from '@src/components/Blockquote';
 
 export const options = (
   classes: Record<string | number | symbol, string>,
@@ -57,20 +59,13 @@ export const options = (
     },
     [BLOCKS.EMBEDDED_ASSET]: (node: Block | Inline) => {
       const { description } = node.data.target.fields;
-      // const { url } = node.data.target.fields.file;
-
-      // console.log(node.data.target.fields?.file);
       if (node.data.target.fields?.file?.contentType?.includes('image')) {
         return (
           <div className={classes.imageWrapper}>
-            {/* eslint-disable-next-line react/jsx-no-undef */}
             <Image
               image={node.data.target as Asset}
               className={classes.asset}
               fullImage={fullImage}
-              // fullImage={fullImage}
-              // imageWidth={node.data.target.fields.file?.details?.image?.width}
-              // imageHeight={node.data.target.fields.file?.details?.image?.height}
             >
               {description}
             </Image>
@@ -100,6 +95,16 @@ export const options = (
         </div>
       );
     },
+    [BLOCKS.QUOTE]: (node: Block | Inline, children: React.ReactNode) => (
+      <Animator duration={{ enter: 0.4, exit: 0.4 }}>
+        <Blockquote>{children}</Blockquote>
+      </Animator>
+    ),
+    [BLOCKS.HR]: () => (
+      <Animator duration={{ enter: 0.4, exit: 0.4 }}>
+        <Frame sx={{ width: '100%', height: 0, marginBottom: '1rem' }} />
+      </Animator>
+    ),
     [BLOCKS.UL_LIST]: (node: Block | Inline, children: React.ReactNode) => (
       <List
         withPadding

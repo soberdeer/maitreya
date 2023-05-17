@@ -6,6 +6,9 @@ import { VkIcon } from './VkIcon';
 import { ActivateButton } from './ActivateButton';
 import { SearchButton } from './SearchButton';
 import useStyles from './RightNav.styles';
+import { IconUser } from '@tabler/icons-react';
+import Link from 'next/link';
+import { Center } from '@mantine/core';
 
 interface RightNavProps extends AnimatedProps {
   vkUrl?: string;
@@ -36,6 +39,15 @@ export function RightNav({ vkUrl }: RightNavProps) {
               </MenuItem>
             </Animator>
           )}
+          <Animator>
+            <MenuItem className={classes.menuItem} animated={rightItemAnimation}>
+              <Link href="/user" title="Vkontakte" style={{ height: '100%' }} passHref>
+                <Center sx={{ height: '100%' }}>
+                  <IconUser />
+                </Center>
+              </Link>
+            </MenuItem>
+          </Animator>
         </Menu>
       </Animator>
     </Animator>

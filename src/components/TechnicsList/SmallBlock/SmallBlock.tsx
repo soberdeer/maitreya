@@ -10,8 +10,6 @@ import { Element } from '../Element';
 
 export interface SmallBlockProps {
   data: (TypeCombat | TypeStands | TypeRituals)[];
-  // filter?: AllTechnicStateType;
-  style?: Record<string, any>;
 }
 
 const keysStates = {
@@ -43,22 +41,14 @@ export const getDisplay = (
   return 'none';
 };
 
-export function SmallBlock({ data, style }: SmallBlockProps) {
+export function SmallBlock({ data }: SmallBlockProps) {
   if (data.length === 0) {
     return null;
   }
-  // getDisplay(item, filter)
   return (
     <>
       {data.map((item, index) => (
-        <Element
-          item={item}
-          key={index}
-          sx={{
-            ...style,
-            // display: getDisplay(item, filter),
-          }}
-        />
+        <Element item={item} key={index} />
       ))}
     </>
   );

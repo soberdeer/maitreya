@@ -1,6 +1,5 @@
 import type { GetServerSidePropsContext } from 'next';
-import { Entry } from 'contentful';
-import { TypeMainSkeleton, TypePageSkeleton, TypeBlockSkeleton } from './types';
+import { TypeMainSkeleton, TypePageSkeleton, TypeBlock } from './types';
 import { getEntries } from '../contentful';
 import fetchTechnics from './fetchTechnics';
 import checkUser, { UserReturn } from './checkUser';
@@ -51,7 +50,7 @@ export default function fetchBasePage(forceSlug?: string) {
     const { blocks } = data.fields;
 
     const updatedBlocks = updateBlocks(
-      blocks as Entry<TypeBlockSkeleton, undefined, string>[],
+      blocks as TypeBlock[],
       user,
       userId
     );

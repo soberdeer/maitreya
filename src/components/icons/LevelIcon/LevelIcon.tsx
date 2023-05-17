@@ -1,6 +1,7 @@
 import React, { SVGProps, useMemo } from 'react';
 import { Tooltip } from '@src/components/Tooltip';
 import { Animated, Animator } from '@arwes/react';
+import { useMantineTheme } from '@mantine/core';
 
 type LevelType = { visible: number[]; color: string };
 
@@ -27,10 +28,10 @@ export interface LevelsIconProps {
 
 export function LevelIcon({ level, size = 26, tooltip, ...others }: LevelsIconProps) {
   const data: LevelType = useMemo(() => levelMapper[level] || levelMapper.pupil, [level]);
-
+  const theme = useMantineTheme();
   return (
-    <Animator merge combine manager="stagger" duration={{ enter: 0.4, exit: 0.4, delay: 0.5 }}>
-      <Tooltip label={tooltip}>
+    <Animator merge combine manager="stagger" duration={{ enter: 0.4, exit: 0.4, delay: 0.1 }}>
+      <Tooltip label={tooltip} disabled={!tooltip}>
         <svg viewBox="0 0 344.81 199.5" xmlns="http://www.w3.org/2000/svg" width={size} {...others}>
           <Animated<SVGRectElement, SVGProps<SVGRectElement>>
             as="rect"
@@ -50,42 +51,46 @@ export function LevelIcon({ level, size = 26, tooltip, ...others }: LevelsIconPr
             style={{ transition: 'height 0.4s ease' }}
           />
           {data.visible[1] && (
-            <Animated<SVGRectElement, SVGProps<SVGRectElement>>
-              as="rect"
-              fill={data.color}
-              d="M14 8V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2h7a2 2 0 002-2v-2"
-              animated={{
-                initialStyle: { height: 0 },
-                transitions: {
-                  entering: { height: 156.01 },
-                  exiting: { height: 0 },
-                },
-              }}
-              width={88.1}
-              rx={17.2}
-              x={128.35}
-              y={21.75}
-              style={{ transition: 'height 0.4s ease' }}
-            />
+            <Animator merge combine duration={{ offset: 0.1 }}>
+              <Animated<SVGRectElement, SVGProps<SVGRectElement>>
+                as="rect"
+                fill={data.color}
+                d="M14 8V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2h7a2 2 0 002-2v-2"
+                animated={{
+                  initialStyle: { height: 0 },
+                  transitions: {
+                    entering: { height: 156.01 },
+                    exiting: { height: 0 },
+                  },
+                }}
+                width={88.1}
+                rx={17.2}
+                x={128.35}
+                y={21.75}
+                style={{ transition: 'height 0.4s ease' }}
+              />
+            </Animator>
           )}
           {data.visible[2] && (
-            <Animated<SVGRectElement, SVGProps<SVGRectElement>>
-              as="rect"
-              fill={data.color}
-              d="M14 8V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2h7a2 2 0 002-2v-2"
-              animated={{
-                initialStyle: { height: 0 },
-                transitions: {
-                  entering: { height: 156.01 },
-                  exiting: { height: 0 },
-                },
-              }}
-              width={88.1}
-              rx={17.2}
-              x={232.45}
-              y={21.75}
-              style={{ transition: 'height 0.4s ease' }}
-            />
+            <Animator merge combine duration={{ offset: 0.1 }}>
+              <Animated<SVGRectElement, SVGProps<SVGRectElement>>
+                as="rect"
+                fill={data.color}
+                d="M14 8V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2h7a2 2 0 002-2v-2"
+                animated={{
+                  initialStyle: { height: 0 },
+                  transitions: {
+                    entering: { height: 156.01 },
+                    exiting: { height: 0 },
+                  },
+                }}
+                width={88.1}
+                rx={17.2}
+                x={232.45}
+                y={21.75}
+                style={{ transition: 'height 0.4s ease' }}
+              />
+            </Animator>
           )}
           <Animated<SVGRectElement, SVGProps<SVGRectElement>>
             as="rect"

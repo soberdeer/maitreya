@@ -1,10 +1,9 @@
 import { GetServerSidePropsContext } from 'next';
-import { Entry } from 'contentful';
-import { TypeUsersSkeleton } from './types';
+import { TypeUsers, TypeUsersSkeleton } from './types';
 import { getEntry } from '../contentful';
 
 export type UserReturn = {
-  user: Entry<TypeUsersSkeleton> | null;
+  user: TypeUsers | null;
   userId: string;
   redirect: null;
 };
@@ -28,7 +27,7 @@ export default async function checkUser(
 
   const user =
     userId === 'guest'
-      ? ({} as Entry<TypeUsersSkeleton>)
+      ? ({} as TypeUsers)
       : await getEntry<TypeUsersSkeleton>(userId);
 
   if (userId !== 'guest' && !user) {

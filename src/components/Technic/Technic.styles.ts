@@ -8,6 +8,10 @@ export default createStyles(() => ({
     width: '100%',
     gap: 30,
     alignItems: 'flex-start',
+
+    '& p': {
+      marginBlockEnd: 0,
+    },
   },
 
   flex: {
@@ -23,9 +27,7 @@ export default createStyles(() => ({
   },
 
   title: {
-    alignItems: 'flex-start',
-
-    '& > div': {},
+    // marginBlockStart: 0,
   },
 
   description: {
@@ -42,6 +44,6 @@ export default createStyles(() => ({
   },
 
   text: {
-    fontFamily: 'Arounder, sans-serif',
+    fontFamily: 'Arounder',
   },
 }));

@@ -11,8 +11,22 @@ const background = keyframes({
     backgroundColor: '#003333',
   },
 });
+
+const image = keyframes({
+  from: {
+    opacity: 0,
+  },
+  to: {
+    opacity: 1,
+  },
+});
 export default createStyles((theme) => ({
-  root: {},
+  root: {
+    width: '100%',
+    transition: 'opacity 400ms ease',
+    marginBlockEnd: '2rem',
+    marginBlockStart: '2rem',
+  },
   imageWrapper: {
     position: 'relative',
     display: 'block',
@@ -23,7 +37,8 @@ export default createStyles((theme) => ({
     marginBlockEnd: 0,
     marginInlineStart: 0,
     marginInlineEnd: 0,
-    transition: 'width 250ms ease, height 250ms ease',
+    overflow: 'hidden',
+    transition: 'width 250ms ease, height 250ms ease, opacity 400ms ease',
   },
   holder: {
     ref: getStylesRef('holder'),
@@ -34,6 +49,7 @@ export default createStyles((theme) => ({
   },
   img: {
     ref: getStylesRef('img'),
+    maxHeight: 400,
     display: 'block',
     border: 'none',
     margin: 0,
@@ -43,9 +59,12 @@ export default createStyles((theme) => ({
     width: '100%',
     height: '100%',
     verticalAlign: 'top',
+    // opacity: 0,
     boxShadow: 'none',
+    // animation: `${image} 400ms ease forwards`,
+    // animationDelay: '300ms',
     transition:
-      'width 250ms ease-in, height 250ms ease-in, min-width 250ms ease-in, min-height 250ms ease-in, opacity 250ms ease-in',
+      'width 250ms ease-in, height 250ms ease-in, min-width 250ms ease-in, min-height 250ms ease-in',
   },
   placeholder: {
     height: 100,

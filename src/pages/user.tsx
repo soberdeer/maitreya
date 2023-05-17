@@ -1,37 +1,39 @@
 import React from 'react';
 import type { GetServerSidePropsContext } from 'next';
-import type { Entry } from 'contentful';
-import { getEntry } from '../contentful/client';
-import type { UserProps } from '../util/types';
-import { Text } from '../components/arwes';
-import FrameWrapper from '../components/FrameWrapper/FrameWrapper';
-import User from '../components/User/User';
-import Meta from '../components/Meta/Meta';
+import { getEntry } from '@src/contentful';
+import type { TypeUsers, TypeUsersSkeleton } from '@src/util/types';
+import { Animator } from '@arwes/react';
+import { Box } from '@mantine/core';
+import { Error } from '@src/components/Error';
+import { FrameWrapper } from '@src/components/FrameWrapper';
+import { User } from '@src/components/User';
+import { Meta } from '@src/components/Meta';
 
 interface UserPageProps {
-  user?: Entry<UserProps> | null;
-  // userId?: string;
-  // users: Entry<UserProps>[];
+  user?: TypeUsers | null;
   isMaster: boolean;
 }
 
 export default function UserPage({ user, isMaster }: UserPageProps) {
+  if (!user) {
+    return <Error type="noPerson" />;
+  }
   return (
-    <>
-      <Meta title={user ? user.fields.name : 'Информация не найдена'} />
-      <FrameWrapper flex={!user} autoWidth={!user} frameBoxProps={{ style: { padding: 30 } }}>
-        {user ? (
-          <User user={user?.fields} isMaster={isMaster} />
-        ) : (
-          <Text styledFont>Цензорат не обладает информацией об этом человеке</Text>
-        )}
-      </FrameWrapper>
-    </>
+    <Box pb={50}>
+      <Meta title={user.fields.name} />
+      <Animator combine manager="stagger">
+        <Animator merge duration={{ enter: 0.4, exit: 0.4 }}>
+          <FrameWrapper>
+            <User initialUser={user} isMaster={isMaster} />
+          </FrameWrapper>
+        </Animator>
+      </Animator>
+    </Box>
   );
 }
 
 export async function getServerSideProps({ req, res }: GetServerSidePropsContext) {
-  const userId = req?.cookies['_maitreya_user'] || null;
+  const userId = req?.cookies._maitreya_user || null;
   if (!userId) {
     return {
       redirect: {
@@ -41,7 +43,7 @@ export async function getServerSideProps({ req, res }: GetServerSidePropsContext
     };
   }
 
-  const user = userId === 'guest' ? ({} as Entry<UserProps>) : await getEntry<UserProps>(userId);
+  const user = userId === 'guest' ? ({} as TypeUsers) : await getEntry<TypeUsersSkeleton>(userId);
 
   if (userId !== 'guest' && !user) {
     res.setHeader('Set-Cookie', '_maitreya_user=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT');
@@ -55,9 +57,7 @@ export async function getServerSideProps({ req, res }: GetServerSidePropsContext
 
   return {
     props: {
-      // users,
       user: userId === 'guest' ? null : user || null,
-      // userId,
       isMaster: userId === process.env.MASTER_ID,
     },
   };

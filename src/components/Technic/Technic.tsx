@@ -1,13 +1,11 @@
 import React, { useMemo } from 'react';
-import { Text } from '@arwes/react';
+import { Animator, Text } from '@arwes/react';
 import { Center, Group, Stack } from '@mantine/core';
-import { LevelIcon, levelMapper } from '@src/components/icons';
-import { Tooltip } from '@src/components/Tooltip';
+import { ICONS_MAP, LevelIcon, levelMapper } from '@src/components/icons';
 import { ElementTags } from '../ElementTags/ElementTags';
 import { RichText } from '../RichText/RichText';
 import { Video } from '../Video/Video';
 import { TechnicProps } from './map-technic-data';
-import { iconsMap } from './icons';
 import useStyles from './Technic.styles';
 
 export function Technic({
@@ -22,96 +20,114 @@ export function Technic({
   ritual: boolean;
 }) {
   const { classes, cx } = useStyles();
-  const iconObject = useMemo(() => (!ritual && data.type ? iconsMap[data.type] : null), [data]);
-  const Icon = useMemo(() => (iconObject ? iconObject.icon : null), [iconObject]);
+  const Icon = useMemo(() => (!ritual && data.type ? ICONS_MAP[data.type] : null), [data]);
   const levelKey = useMemo(
     () => (data.level === 'Ученик' ? 'pupil' : data.level === 'Адепт' ? 'adept' : 'master'),
     [data]
   );
 
   return (
-    <div className={cx(classes.root, className)} {...others}>
-      <Group>
-        <Tooltip label={data.type}>{Icon && <Icon {...iconObject!.props} />}</Tooltip>
-        <Text as="h1">{data.name}</Text>
-      </Group>
-
-      <div className={classes.flex}>
-        <LevelIcon level={levelKey} size={30} />
-        <Text className={classes.text} style={{ fontSize: 22, color: levelMapper[levelKey].color }}>
-          {data.level}
-        </Text>
-      </div>
-
-      {!stand && (
-        <Stack spacing="xs" sx={{ width: '100%' }}>
-          <div className={classes.flex}>
-            <Text>
-              <span className={classes.key}>Печати: </span>
-              <span>{!data.elements ? 'Не требуются' : ''}</span>
-            </Text>
-            {data.elements && <ElementTags elements={data.elements} />}
-          </div>
-          <Text>
-            <span className={classes.key}>Воля: </span>
-            <span>{data.will || 'Не требуется'}</span>
+    <Animator combine manager="stagger" duration={{ enter: 0.4, exit: 0.4, delay: 0.1 }}>
+      <div className={cx(classes.root, className)} {...others}>
+        <Group position="center">
+          {Icon && <Icon size={40} tooltip={data.type} />}
+          <Text as="h1" className={classes.title}>
+            {data.name}
           </Text>
-          {!ritual && (
-            <>
-              <Text>
-                <span className={classes.key}>Воздействие: </span>
-                <span>{data.target || 'Нет'}</span>
+        </Group>
+
+        <Group>
+          <LevelIcon level={levelKey} size={30} />
+
+          <Text
+            className={classes.text}
+            style={{ fontSize: 22, color: levelMapper[levelKey].color }}
+          >
+            {data.level}
+          </Text>
+        </Group>
+
+        {!stand && (
+          <Stack spacing="xs" sx={{ width: '100%' }}>
+            <Group spacing="xs">
+              <Text as="span" className={classes.key}>
+                Печати:{' '}
               </Text>
-              <Text>
-                <span className={classes.key}>Состояние: </span>
-                <span>{data.state || 'Не определено'}</span>
+              {data.elements ? (
+                <ElementTags elements={data.elements} />
+              ) : (
+                <Text as="span">{!data.elements ? 'Не требуются' : ''}</Text>
+              )}
+            </Group>
+            <Group spacing="xs">
+              <Text as="span" className={classes.key}>
+                Воля:{' '}
               </Text>
-              <Text>
-                <span className={classes.key}>Касание: </span>
-                <span>{data.touch ? 'Да' : 'Нет'}</span>
-              </Text>
-            </>
-          )}
-          <>
-            {data.effect && (
-              <Stack sx={{ width: '100%' }} spacing={0}>
-                <Center>
-                  <Text as="h3">Эффект</Text>
-                </Center>
-                <Text as="p">{data.effect}</Text>
-              </Stack>
+              <Text as="span">{data.will || 'Не требуется'}</Text>
+            </Group>
+            {!ritual && (
+              <>
+                <Group spacing="xs">
+                  <Text as="span" className={classes.key}>
+                    Воздействие:{' '}
+                  </Text>
+                  <Text as="span">{data.target || 'Нет'}</Text>
+                </Group>
+                <Group spacing="xs">
+                  <Text as="span" className={classes.key}>
+                    Состояние:{' '}
+                  </Text>
+                  <Text as="span">{data.state || 'Не определено'}</Text>
+                </Group>
+                <Group spacing="xs">
+                  <Text as="span" className={classes.key}>
+                    Касание:{' '}
+                  </Text>
+                  <Text as="span">{data.touch ? 'Да' : 'Нет'}</Text>
+                </Group>
+              </>
             )}
-          </>
-        </Stack>
-      )}
+            <>
+              {data.effect && (
+                <Stack sx={{ width: '100%' }} spacing={0}>
+                  <Center>
+                    <Text as="h3">Эффект</Text>
+                  </Center>
+                  <Text as="p">{data.effect}</Text>
+                </Stack>
+              )}
+            </>
+          </Stack>
+        )}
 
-      {data.description && (
-        <Stack sx={{ width: '100%' }} spacing={0}>
-          <Center>
-            <Text as="h3">Описание</Text>
-          </Center>
-          <RichText content={data.description} />
-        </Stack>
-      )}
+        {data.description && (
+          <Stack sx={{ width: '100%' }} spacing={0}>
+            <Center>
+              <Text as="h3">Описание</Text>
+            </Center>
+            <RichText content={data.description} />
+          </Stack>
+        )}
 
-      {ritual && data.manifest && (
-        <div className={classes.description}>
-          <Text as="h3">Пример манифестации</Text>
-          <div>
-            <RichText content={data.manifest} />
+        {ritual && data.manifest && (
+          <div className={classes.description}>
+            <Text as="h3">Пример манифестации</Text>
+            <div>
+              <RichText content={data.manifest} />
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {data.video && (
-        <div className={classes.videoContainer}>
-          <Video
-            src={data.video.fields.file?.url as string}
-            title={data.video.fields.title as string}
-            type={data.video.fields.file?.contentType as string}
-          />
-        </div>
-      )}
-    </div>
+        {data.video && (
+          <div className={classes.videoContainer}>
+            <Video
+              src={data.video.fields.file?.url as string}
+              title={data.video.fields.title as string}
+              type={data.video.fields.file?.contentType as string}
+            />
+          </div>
+        )}
+      </div>
+    </Animator>
   );
 }

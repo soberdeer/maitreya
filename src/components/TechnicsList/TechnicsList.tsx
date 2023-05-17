@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { Box, Group, Stack, Tabs } from '@mantine/core';
 import { LevelType, TypeStands } from '@src/util/types';
 import { Animator, Text } from '@arwes/react';
-import { iconsMap } from '@src/components/Technic';
+import { COLORS_MAP_EN, ICONS_MAP } from '@src/components/icons';
 import { TECHNIC_TYPES } from '@src/util/constants';
 import { SmallBlock } from './SmallBlock';
 import useStyles from './TechnicsList.styles';
@@ -72,7 +72,7 @@ export function TechnicsList({ className, data, defaultTab, ...others }: Technic
   return (
     <Animator merge duration={{ enter: 0.4, exit: 0.4 }}>
       <Box className={cx(classes.root, className)} {...others}>
-        <Group position="left">
+        <Group position="center" sx={{ width: '100%' }}>
           <Text as="h1" style={{ marginBottom: 0 }}>
             Техники и стойки
           </Text>
@@ -91,18 +91,23 @@ export function TechnicsList({ className, data, defaultTab, ...others }: Technic
               const item = data[key as keyof TechnicsListDataProps];
 
               if (Object.keys(item).find((k) => item[k as keyof LevelType]?.length > 0)) {
-                const obj = iconsMap[TECHNIC_TYPES[key as keyof typeof TECHNIC_TYPES]];
-                const Icon = obj?.icon;
+                const Icon = ICONS_MAP[TECHNIC_TYPES[key as keyof typeof TECHNIC_TYPES]];
+                const color = COLORS_MAP_EN[key as keyof typeof TECHNIC_TYPES];
 
                 return (
-                  <Tabs.Tab value={key} icon={<Icon color={obj.props.color} size={20} key={key} />}>
-                    <Box ml={5} sx={(theme) => ({ color: theme.colors.maitreya[3] })}>
-                      <Animator merge duration={{ enter: 0.4, exit: 0.4, delay: 0.2 }}>
-                        <Text as="span" className={classes.tabText} color={obj?.props.color}>
+                  <Tabs.Tab value={key}>
+                    <Animator merge duration={{ enter: 0.4, exit: 0.4, delay: 0.2 }}>
+                      <Stack
+                        spacing={0}
+                        align="center"
+                        sx={(theme) => ({ color: theme.colors.maitreya[3] })}
+                      >
+                        <Icon size={20} key={key} />
+                        <Text as="span" className={classes.tabText} color={color}>
                           {TECHNIC_TYPES[key as keyof typeof TECHNIC_TYPES]}
                         </Text>
-                      </Animator>
-                    </Box>
+                      </Stack>
+                    </Animator>
                   </Tabs.Tab>
                 );
               }
@@ -115,11 +120,13 @@ export function TechnicsList({ className, data, defaultTab, ...others }: Technic
             if (Object.keys(item).find((k) => item[k as keyof LevelType]?.length > 0)) {
               return (
                 <Tabs.Panel value={key} pt="xl" key={key}>
-                  <Stack align="flex-start">
-                    <SmallBlock data={item.pupil} />
-                    <SmallBlock data={item.adept} />
-                    <SmallBlock data={item.master} />
-                  </Stack>
+                  <Animator merge manager="stagger" duration={{ enter: 0.4, exit: 0.4, offset: 1 }}>
+                    <Stack align="flex-start">
+                      <SmallBlock data={item.pupil} />
+                      <SmallBlock data={item.adept} />
+                      <SmallBlock data={item.master} />
+                    </Stack>
+                  </Animator>
                 </Tabs.Panel>
               );
             }

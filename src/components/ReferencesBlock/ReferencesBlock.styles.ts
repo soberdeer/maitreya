@@ -9,5 +9,6 @@ export default createStyles({
 
   wrapper: {
     marginTop: 20,
+    textAlign: 'left',
   },
 });

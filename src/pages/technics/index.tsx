@@ -1,7 +1,6 @@
 import React from 'react';
 import { Text, Animator } from '@arwes/react';
 import { Stack } from '@mantine/core';
-import { SCHEME_MAP } from '@src/util/constants';
 import fetchBasePage from '@src/util/fetchBasePage';
 import { TechnicsList, TechnicsListDataProps } from '@src/components/TechnicsList';
 import { FrameWrapper } from '@src/components/FrameWrapper';
@@ -13,13 +12,10 @@ import { Error } from '@src/components/Error';
 interface PageType {
   data: TechnicsListDataProps;
   rituals: TypeRituals[];
-  title: string;
-  query?: string[];
-  type: keyof typeof SCHEME_MAP;
   defaultTab?: string;
 }
 
-export default function Page({ data, rituals, title, query, defaultTab }: PageType) {
+export default function Page({ data, rituals, defaultTab }: PageType) {
   if (!data) {
     return <Error type="notFound" />;
   }
@@ -33,7 +29,7 @@ export default function Page({ data, rituals, title, query, defaultTab }: PageTy
         </FrameWrapper>
       </Animator>
       {rituals && rituals.length > 0 && (
-        <Animator manager="stagger" duration={{ enter: 0.4, exit: 0.4 }} combine>
+        <Animator manager="stagger" duration={{ enter: 0.4, exit: 0.4 }}>
           <FrameWrapper style={{ marginTop: 20 }}>
             <Text as="h1">Ритуалы</Text>
             <Stack align="flex-start">

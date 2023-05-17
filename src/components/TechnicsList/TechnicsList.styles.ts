@@ -32,12 +32,14 @@ export default createStyles((theme) => ({
   },
 
   tabList: {
-    borderBottom: '2px solid rgba(137, 255, 255, 0.4)',
+    borderBottom: `2px solid ${theme.fn.rgba(theme.colors.maitreya[5], 0.6)}`,
   },
   tab: {
     cursor: 'pointer',
+    transition: 'border-bottom 200ms ease, background-color 200ms ease',
     // border: '1px solid transparent',
     '&:hover': {
+      borderBottom: `2px solid ${theme.colors.maitreya[3]}`,
       backgroundColor: theme.fn.rgba(theme.colors.maitreya[7], 0.2),
       // borderColor: 'transparent',
     },

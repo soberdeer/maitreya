@@ -1,0 +1,1 @@
+export { BottomPart } from './BottomPart';

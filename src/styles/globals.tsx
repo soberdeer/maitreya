@@ -52,11 +52,11 @@ export const GlobalStyles = () => (
         fontWeight: 'bold',
         lineHeight: 1.3,
         color: '#ffa76c',
-        textShadow: '0 0 2px #ffa76c',
       },
 
       h1: {
         fontSize: '1.75rem',
+        textShadow: '0 0 2px #ffa76c',
       },
       h2: {
         fontSize: '1.625rem',

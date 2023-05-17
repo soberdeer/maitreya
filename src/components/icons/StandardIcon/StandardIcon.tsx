@@ -20,7 +20,7 @@ export function StandardIcon({
     <Animator merge combine manager="stagger" duration={{ enter: 0.4, exit: 0.4, delay: 0.5 }}>
       <Box style={{ width: size, ...style }} {...others}>
         <Center sx={{ height: '100%' }}>
-          <Tooltip label={tooltip}>
+          <Tooltip label={tooltip} disabled={!tooltip}>
             <svg
               fill="none"
               stroke={color}

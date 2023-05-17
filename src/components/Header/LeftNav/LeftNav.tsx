@@ -29,7 +29,7 @@ export function LeftNav({ menu }: LeftNavProps) {
                 active={router.asPath.startsWith(link) as boolean}
                 animated={leftItemAnimation}
               >
-                <Link href={link} title={label} passHref shallow>
+                <Link href={link} title={label} passHref>
                   {Icon && <Icon stroke={1} />}
                   <Text as="span" className={classes.menuText}>
                     {label}
@@ -44,7 +44,7 @@ export function LeftNav({ menu }: LeftNavProps) {
               active={router.asPath.startsWith('/restricted') as boolean}
               animated={leftItemAnimation}
             >
-              <Link href="/restricted" title="restricted" passHref shallow>
+              <Link href="/restricted" title="restricted" passHref>
                 <IconBlockquote stroke={1} />
                 <Text as="span" className={classes.menuText}>
                   Restricted

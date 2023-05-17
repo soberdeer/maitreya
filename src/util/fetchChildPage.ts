@@ -1,7 +1,7 @@
 import type { GetServerSidePropsContext } from 'next';
 import { Entry } from 'contentful';
 import { SCHEME_MAP } from './constants';
-import { TypeArticlesSkeleton, TypeFetchSkeleton, TypeMainSkeleton } from './types';
+import { TypeArticlesSkeleton, TypeFetch, TypeFetchSkeleton, TypeMainSkeleton } from './types';
 import { getEntries, getEntry } from '../contentful';
 import checkAvailable from './checkAvailable';
 import checkUser, { UserReturn } from './checkUser';
@@ -40,7 +40,7 @@ export default function fetchChildPage(forceSlug?: string) {
     const data = await getEntry<TypeFetchSkeleton>((childSlug as string) || '');
 
     const available = checkAvailable(
-      data,
+      data as TypeFetch,
       (checkResult as UserReturn).user,
       (checkResult as UserReturn).userId === 'guest'
     ) as Entry<TypeArticlesSkeleton> | null;

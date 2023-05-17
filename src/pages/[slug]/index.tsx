@@ -1,7 +1,6 @@
 import React from 'react';
 import { Animator } from '@arwes/react';
 import { TypePage } from '@src/util/types';
-import { SCHEME_MAP } from '@src/util/constants';
 import { ListPage } from '@src/components/ListPage/ListPage';
 import fetchBasePage from '@src/util/fetchBasePage';
 import { Error } from '@src/components/Error';
@@ -11,12 +10,6 @@ import { Box } from '@mantine/core';
 
 interface PageType {
   data: TypePage;
-  scheme: {
-    href: string;
-    children: string;
-  };
-  query?: string[];
-  type: keyof typeof SCHEME_MAP;
 }
 
 export default function Page({ data }: PageType) {

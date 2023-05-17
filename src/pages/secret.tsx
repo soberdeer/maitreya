@@ -34,7 +34,7 @@ export default function Secret({ users, columns }: UserPageProps) {
                 breadcrumb: {
                   whiteSpace: 'normal',
                 },
-                separator: { color: palette.primary.main },
+                separator: { color: palette.primary.main,  },
               }}
             >
               {[

@@ -18,8 +18,8 @@ export function ElementTags({ className, elements, ...others }: ElementTagsProps
   }
 
   return (
-    <Group className={cx(classes.root, className)} {...others}>
-      <Animator manager="stagger" combine>
+    <Animator manager="stagger" combine>
+      <Group spacing={10} position="left" className={cx(classes.root, className)} {...others}>
         {elements
           .toLowerCase()
           .split('')
@@ -32,7 +32,7 @@ export function ElementTags({ className, elements, ...others }: ElementTagsProps
             }
             return <ElementStamp key={index} element={element.eng_key as unknown as string} />;
           })}
-      </Animator>
-    </Group>
+      </Group>
+    </Animator>
   );
 }
