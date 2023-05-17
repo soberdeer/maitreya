@@ -22,7 +22,7 @@ export function Table({ headers, rows }: TableProps) {
                   c.map((item, k) => {
                     if (item.nodeType === 'text') {
                       return (
-                        <Text key={k} as="p" className={classes.header} >
+                        <Text key={k} as="p" className={classes.header}>
                           {item.value}
                         </Text>
                       );

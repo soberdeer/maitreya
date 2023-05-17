@@ -2,8 +2,8 @@ import React, { useMemo } from 'react';
 import { Text } from '@arwes/react';
 import { IconAperture, IconBrandChrome, IconCircleX } from '@tabler/icons-react';
 import { HonorType } from '@src/util/types';
-import useStyles from './Honor.styles';
 import { Group, GroupProps } from '@mantine/core';
+import useStyles from './Honor.styles';
 
 type HonorWithIdType = {
   id: HonorType;
@@ -29,11 +29,7 @@ const honors: HonorWithIdType[] = [
   },
 ];
 
-export function Honor({
-  className,
-  honor,
-  ...others
-}: { honor: string } & GroupProps) {
+export function Honor({ className, honor, ...others }: { honor: string } & GroupProps) {
   const { classes, cx } = useStyles();
   const honorItem = useMemo(() => honors.find((item) => honor === item.id), [honor]);
 

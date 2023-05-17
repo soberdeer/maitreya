@@ -49,11 +49,7 @@ export default function fetchBasePage(forceSlug?: string) {
 
     const { blocks } = data.fields;
 
-    const updatedBlocks = updateBlocks(
-      blocks as TypeBlock[],
-      user,
-      userId
-    );
+    const updatedBlocks = updateBlocks(blocks as TypeBlock[], user, userId);
 
     if (updatedBlocks.length === 0) {
       return {

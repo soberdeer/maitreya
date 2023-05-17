@@ -43,7 +43,6 @@ export function Navigation({ size = 26, tooltip, ...others }: IconType) {
             d="M3 12a9 9 0 1018 0 9 9 0 10-18 0M12 3v2M12 19v2M3 12h2M19 12h2"
             strokeDasharray={60}
           />
-
         </svg>
       </Tooltip>
     </Animator>

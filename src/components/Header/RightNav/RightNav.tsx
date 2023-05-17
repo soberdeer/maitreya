@@ -1,14 +1,14 @@
 import React from 'react';
 import { aa, aaVisibility, AnimatedProps, Animator } from '@arwes/react';
+import { IconUser } from '@tabler/icons-react';
+import Link from 'next/link';
+import { Center } from '@mantine/core';
 import { Menu } from '../Menu';
 import { MenuItem } from '../MenuItem';
 import { VkIcon } from './VkIcon';
 import { ActivateButton } from './ActivateButton';
 import { SearchButton } from './SearchButton';
 import useStyles from './RightNav.styles';
-import { IconUser } from '@tabler/icons-react';
-import Link from 'next/link';
-import { Center } from '@mantine/core';
 
 interface RightNavProps extends AnimatedProps {
   vkUrl?: string;

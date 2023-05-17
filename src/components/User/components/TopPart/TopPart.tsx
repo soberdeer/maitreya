@@ -55,7 +55,9 @@ export function TopPart({ user }: { user: MappedUser }) {
         {user.rating && (
           <Group sx={(theme) => ({ color: theme.colors.maitreya[3] })}>
             <StarIcon tooltip="Личный рейтинг" size={20} />
-            <Text className={cx(classes.text, classes.styled)} style={{fontSize: 24}}>{user.rating}</Text>
+            <Text className={cx(classes.text, classes.styled)} style={{ fontSize: 24 }}>
+              {user.rating}
+            </Text>
           </Group>
         )}
         {user.bio && (

@@ -11,9 +11,9 @@ import {
 import { aaVisibility, Animated, Animator, Text } from '@arwes/react';
 import { Loader } from '@src/components/Loader';
 import { Frame } from '@src/components/Frame';
-import useStyles from './Image.styles';
 import { useElementSize } from '@mantine/hooks';
 import { aaOpacity } from '@arwes/react-animated/build/esm/animations/animations';
+import useStyles from './Image.styles';
 
 export interface ImageProps extends BoxProps {
   image: Asset;

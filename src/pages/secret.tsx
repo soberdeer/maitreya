@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { db } from '@vercel/postgres';
 import type { GetServerSidePropsContext } from 'next';
 import type { Entry } from 'contentful';
+import { Breadcrumbs } from '@mantine/core';
 import { getEntry } from '../contentful/client';
 import type { UserProps, UsersTable } from '../util/types';
 import { Text } from '../components/arwes';
@@ -10,7 +11,6 @@ import User from '../components/User/User';
 import Meta from '../components/Meta/Meta';
 import ChangesTable from '@/components/ChangesTable/ChangesTable';
 import Anchor from '@/components/Anchor/Anchor';
-import { Breadcrumbs } from '@mantine/core';
 import PaletteContext from '@/components/contexts/PaletteContext';
 
 interface UserPageProps {
@@ -34,12 +34,12 @@ export default function Secret({ users, columns }: UserPageProps) {
                 breadcrumb: {
                   whiteSpace: 'normal',
                 },
-                separator: { color: palette.primary.main,  },
+                separator: { color: palette.primary.main },
               }}
             >
               {[
                 { title: 'Профиль', href: '/user' },
-                { title: 'Таблица изменений', href: `/secret` },
+                { title: 'Таблица изменений', href: '/secret' },
               ].map((item, index) => (
                 <Anchor href={item.href} key={index}>
                   {item.title}
@@ -57,7 +57,7 @@ export default function Secret({ users, columns }: UserPageProps) {
 }
 
 export async function getServerSideProps({ req, res }: GetServerSidePropsContext) {
-  const userId = req?.cookies['_maitreya_user'] || null;
+  const userId = req?.cookies._maitreya_user || null;
   if (!userId) {
     return {
       redirect: {

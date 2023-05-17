@@ -1,5 +1,10 @@
 import { Entry, EntrySkeletonType } from 'contentful';
-import { TypeCombat, TypeCombatSkeleton, TypeRituals, TypeStands } from '@src/util/types/content-types';
+import {
+  TypeCombat,
+  TypeCombatSkeleton,
+  TypeRituals,
+  TypeStands,
+} from '@src/util/types/content-types';
 
 type Levels = 'Ученик' | 'Адепт' | 'Мастер';
 type TechnicType =

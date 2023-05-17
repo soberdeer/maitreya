@@ -5,7 +5,6 @@ import { IconType } from './icon-type';
 import { COLORS_MAP_EN } from './colors-map';
 
 export function Shooting({ size = 26, tooltip, ...others }: IconType) {
-
   return (
     <Animator merge manager="stagger" duration={{ enter: 0.4, exit: 0.4, delay: 0.5 }}>
       <Tooltip label={tooltip} disabled={!tooltip}>

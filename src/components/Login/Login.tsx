@@ -4,9 +4,9 @@ import { Button } from '@src/components/Button';
 import { FrameWrapper } from '@src/components/FrameWrapper';
 // import { FrameCorners, Text, FrameBox } from '../arwes';
 import { Loader } from '@src/components/Loader';
-import useStyles from './Login.styles';
 import { Box, Center, Container, Stack } from '@mantine/core';
 import { TextInput } from '@src/components/TextInput';
+import useStyles from './Login.styles';
 
 export interface LoginProps extends React.HTMLProps<HTMLDivElement> {
   error: boolean;
@@ -67,11 +67,9 @@ export function Login({
 
   const onGuestLogin = () => updateUser('guest');
 
-  useEffect(() => {
-    return () => {
+  useEffect(() => () => {
       setErrorTerm('');
-    };
-  }, []);
+    }, []);
 
   useEffect(() => {
     if (!activateInput) {
@@ -126,7 +124,9 @@ export function Login({
                     <Text className={classes.errorText}>{errorTerm}</Text>
                   </Animator>
                   <Button onClick={onLogin}>Войти</Button>
-                  <Button onClick={onGuestLogin} color="maitreya">Войти как гость</Button>
+                  <Button onClick={onGuestLogin} color="maitreya">
+                    Войти как гость
+                  </Button>
                   {children}
                 </Stack>
               </FrameWrapper>

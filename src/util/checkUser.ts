@@ -25,10 +25,7 @@ export default async function checkUser(
     };
   }
 
-  const user =
-    userId === 'guest'
-      ? ({} as TypeUsers)
-      : await getEntry<TypeUsersSkeleton>(userId);
+  const user = userId === 'guest' ? ({} as TypeUsers) : await getEntry<TypeUsersSkeleton>(userId);
 
   if (userId !== 'guest' && !user) {
     res.setHeader('Set-Cookie', '_maitreya_user=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT');

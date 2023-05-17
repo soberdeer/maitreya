@@ -1,8 +1,4 @@
-import type {
-  Entry,
-  EntryFieldTypes,
-  EntrySkeletonType,
-} from 'contentful';
+import type { Entry, EntryFieldTypes, EntrySkeletonType } from 'contentful';
 
 export interface TypeArticlesFields {
   name: EntryFieldTypes.Text;

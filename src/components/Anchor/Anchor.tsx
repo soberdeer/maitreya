@@ -11,13 +11,7 @@ export interface AnchorProps extends AnimatorProps {
   target?: string;
 }
 
-export function Anchor({
-  href,
-  color = 'maitreya',
-  styled,
-  children,
-  target,
-}: AnchorProps) {
+export function Anchor({ href, color = 'maitreya', styled, children, target }: AnchorProps) {
   const { classes, theme, cx } = useStyles();
 
   return (

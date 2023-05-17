@@ -7,8 +7,8 @@ import Ideas from '@src/components/User/components/Ideas';
 import ActiveButton from '@src/components/ActiveButton';
 import Idea from '@src/components/Editor/Idea/Idea';
 import { useRouter } from 'next/router';
-import useStyles from './Editor.styles';
 import { Text } from '@arwes/react';
+import useStyles from './Editor.styles';
 
 type Ideas = {
   introjects: string[];
@@ -135,9 +135,7 @@ export function Editor({ user, dbUser }: { user: TypeUsers; dbUser: UsersTable }
       <div className={classes.root}>
         <Text as="h6">Дисклеймер</Text>
         <Text as="p">
-          {
-            'Этот раздел существует для учета идей. Если вы видите отличия с тем, как идеи представлены в вашем профиле, значит, изменения еще находятся в процессе модерации.'
-          }
+          Этот раздел существует для учета идей. Если вы видите отличия с тем, как идеи представлены в вашем профиле, значит, изменения еще находятся в процессе модерации.
         </Text>
         <div className={classes.group}>
           <Text as="h6">Идеи</Text>

@@ -42,9 +42,7 @@ export default function Page({ data }: PageType) {
                   { title: data.fields.name || 'Техника', href: `/technics/${data.sys.id}` },
                 ].map((item, index) => (
                   <Animator combine key={index}>
-                    <Anchor href={item.href}>
-                      {item.title}
-                    </Anchor>
+                    <Anchor href={item.href}>{item.title}</Anchor>
                   </Animator>
                 ))}
               </Breadcrumbs>
