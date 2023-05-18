@@ -7,17 +7,15 @@ const slideRight = keyframes({
   '100%': { marginTop: -5 },
 });
 
-export default createStyles((theme) => ({
+export default createStyles(() => ({
   st0: {
     fill: 'none',
-    stroke: theme.colors.maitreya[3],
     strokeWidth: 42,
     strokeMiterlimit: 10,
     transform: 'scaleX(-1), translateX(100%)',
   },
   st1: {
     fill: 'none',
-    stroke: theme.colors.maitreya[3],
     strokeWidth: 42,
     strokeMiterlimit: 10,
     strokeDasharray: '50, 90, 200, 30, 40, 0',
@@ -25,14 +23,12 @@ export default createStyles((theme) => ({
   st2: {
     // strokeDasharray: 2500,
     fill: 'none',
-    stroke: theme.colors.maitreya[3],
     strokeWidth: 42,
     strokeMiterlimit: 10,
     strokeLinecap: 'square',
   },
   st3: {
     fill: 'none',
-    stroke: theme.colors.maitreya[3],
     strokeMiterlimit: 10,
     strokeWidth: 16,
     strokeLinecap: 'square',

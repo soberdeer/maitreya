@@ -61,6 +61,7 @@ export interface TypeHouseFields {
   name?: EntryFieldTypes.Text;
   type?: EntryFieldTypes.Symbol<'Великий Дом' | 'Картель' | 'Малый Дом' | 'Орден' | 'Союз'>;
   image?: EntryFieldTypes.AssetLink;
+  color?: EntryFieldTypes.Array<EntryFieldTypes.Symbol>;
   width: EntryFieldTypes.Integer;
   height: EntryFieldTypes.Integer;
 }

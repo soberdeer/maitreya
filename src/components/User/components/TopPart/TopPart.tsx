@@ -14,20 +14,28 @@ import useStyles from './TopPart.styles';
 export function TopPart({ user }: { user: MappedUser }) {
   const { classes, cx } = useStyles({ longName: user.name ? user.name?.length > 20 : false });
   const isSmall = useMediaQuery('(max-width: 400px)');
-  // console.log(isSmall)
+  const isMedium = useMediaQuery('(max-width: 720px)');
+
   return (
-    <Group position="left" align="flex-start" spacing={20} sx={{ width: '100%' }}>
+    <Group
+      position="left"
+      align="flex-start"
+      spacing={20}
+      sx={{ width: '100%' }}
+      noWrap={!isMedium}
+    >
       <Center sx={{ width: isSmall ? '100%' : 'auto' }} mt={isSmall ? 50 : 0}>
         <Animator combine merge manager="stagger" duration={{ enter: 0.4, exit: 0.4, delay: 0.1 }}>
           <Ring
             size={isSmall ? 200 : 300}
             avatar={user?.avatar_profile?.fields?.file?.url as string}
+            colors={user.order?.fields.color || user.house?.fields.color}
           />
         </Animator>
       </Center>
       <Box>
         <Group position="left" align="center" spacing={20} pt={isSmall ? 0 : 30} pb={30} noWrap>
-          {user.order && (
+          {user.order ? (
             <Animator
               combine
               merge
@@ -36,8 +44,7 @@ export function TopPart({ user }: { user: MappedUser }) {
             >
               <House house={user.order?.fields} homeless={false} />
             </Animator>
-          )}
-          {user.house && (
+          ) : user.house ? (
             <Animator
               combine
               merge
@@ -46,7 +53,7 @@ export function TopPart({ user }: { user: MappedUser }) {
             >
               <House house={user.house?.fields} homeless={user.homeless} />
             </Animator>
-          )}
+          ) : null}
           <Text as="h1" className={classes.name}>
             {user.name}
           </Text>

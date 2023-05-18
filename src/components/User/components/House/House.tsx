@@ -12,6 +12,7 @@ type House = {
   name?: string | undefined;
   type?: 'Великий Дом' | 'Картель' | 'Малый Дом' | 'Орден' | 'Союз' | undefined;
   image?: Asset<'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'> | undefined;
+  color?: string[];
   width: number;
   height: number;
 };

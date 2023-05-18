@@ -1,10 +1,22 @@
-import React, { SVGProps } from 'react';
+import React, { SVGProps, useMemo } from 'react';
 import { aaVisibility, Animated, Animator } from '@arwes/react';
 import { Box } from '@mantine/core';
 import useStyles from './Ring.styles';
 
-export function Ring({ size = 100, avatar }: { size: number; avatar?: string }) {
-  const { classes } = useStyles();
+export function Ring({
+  size = 100,
+  avatar,
+  colors,
+}: {
+  size: number;
+  avatar?: string;
+  colors?: string[];
+}) {
+  const { classes, theme } = useStyles();
+  const colorsArr = useMemo(
+    () => colors || [...Array(3).map(() => theme.colors.maitreya[3])],
+    [colors]
+  );
 
   return (
     <Animator combine manager="stagger">
@@ -32,7 +44,9 @@ export function Ring({ size = 100, avatar }: { size: number; avatar?: string }) 
             height={size}
           >
             <Animated<SVGPathElement, SVGProps<SVGPathElement>>
+              className={classes.st0}
               as="path"
+              stroke={colorsArr[0]}
               animated={{
                 initialStyle: {
                   strokeDashoffset: 2500,
@@ -50,7 +64,6 @@ export function Ring({ size = 100, avatar }: { size: number; avatar?: string }) 
                 },
               }}
               d="M197.2,500a302.8,302.8 0 1,0 605.6,0a302.8,302.8 0 1,0 -605.6,0"
-              className={classes.st0}
             >
               <animateTransform
                 attributeType="xml"
@@ -63,7 +76,9 @@ export function Ring({ size = 100, avatar }: { size: number; avatar?: string }) 
               />
             </Animated>
             <Animated<SVGPathElement, SVGProps<SVGPathElement>>
+              className={classes.st2}
               as="path"
+              stroke={colorsArr[1]}
               animated={{
                 initialStyle: {
                   strokeDashoffset: 2500,
@@ -81,7 +96,6 @@ export function Ring({ size = 100, avatar }: { size: number; avatar?: string }) 
                 },
               }}
               d="M133.2,500a366.8,366.8 0 1,0 733.6,0a366.8,366.8 0 1,0 -733.6,0"
-              className={classes.st2}
             >
               <animateTransform
                 attributeType="xml"
@@ -94,7 +108,9 @@ export function Ring({ size = 100, avatar }: { size: number; avatar?: string }) 
               />
             </Animated>
             <Animated<SVGPathElement, SVGProps<SVGPathElement>>
+              className={classes.st3}
               as="path"
+              stroke={colorsArr[2]}
               animated={{
                 initialStyle: {
                   strokeDashoffset: 2500,
@@ -110,7 +126,6 @@ export function Ring({ size = 100, avatar }: { size: number; avatar?: string }) 
               }}
               d="M114.89999999999998,500a385.1,385.1 0 1,0 770.2,0a385.1,385.1 0 1,0 -770.2,0"
               strokeDasharray={2500}
-              className={classes.st3}
             />
           </svg>
         </Box>

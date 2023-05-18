@@ -51,12 +51,12 @@ export default createStyles((theme) => ({
   },
 
   stats: {
-    paddingTop: 30,
-    display: 'flex',
-    alignItems: 'flex-start',
     width: '100%',
+    flexWrap: 'nowrap',
+    gap: 30,
 
     '@media screen and (max-width: 720px)': {
+      flexWrap: 'wrap',
       flexDirection: 'column-reverse',
       alignItems: 'center',
     },

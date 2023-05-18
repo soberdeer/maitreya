@@ -60,7 +60,7 @@ export function User({
         </Box>
         <TopPart user={user} />
 
-        <div className={classes.stats}>
+        <Group className={classes.stats} align="flex-start" pt={30}>
           <Ideas introjects={user.introjects} beliefs={user.beliefs} creed={user.creed} />
           {user && (
             <Box>
@@ -74,7 +74,7 @@ export function User({
               </div>
             </Box>
           )}
-        </div>
+        </Group>
 
         <BottomPart user={user} />
       </Box>
