@@ -2,8 +2,9 @@ import React from 'react';
 import { aa, aaVisibility, AnimatedProps, Animator } from '@arwes/react';
 import { IconUser } from '@tabler/icons-react';
 import Link from 'next/link';
-import { Center } from '@mantine/core';
+import { Box, Center } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
+import { LogoutButton } from '@src/components/LogoutButton';
 import { Menu } from '../Menu';
 import { MenuItem } from '../MenuItem';
 import { VkIcon } from './VkIcon';
@@ -13,9 +14,10 @@ import useStyles from './RightNav.styles';
 
 interface RightNavProps extends AnimatedProps {
   vkUrl?: string;
+  isGuest?: boolean;
 }
 
-export function RightNav({ vkUrl }: RightNavProps) {
+export function RightNav({ vkUrl, isGuest }: RightNavProps) {
   const { classes } = useStyles();
   const rightItemAnimation = [aaVisibility(), aa('x', 4, 0, 0)];
   const mobile = useMediaQuery('(max-width: 720px)');
@@ -48,11 +50,17 @@ export function RightNav({ vkUrl }: RightNavProps) {
 
           <Animator>
             <MenuItem className={classes.menuItem} animated={rightItemAnimation}>
-              <Link href="/user" title="Vkontakte" style={{ height: '100%' }} passHref>
-                <Center sx={{ height: '100%' }}>
-                  <IconUser />
-                </Center>
-              </Link>
+              {isGuest ? (
+                <Box px={3}>
+                  <LogoutButton iconSize={24} style={{ top: -3 }} />
+                </Box>
+              ) : (
+                <Link href="/user" title="Vkontakte" style={{ height: '100%' }} passHref>
+                  <Center sx={{ height: '100%' }}>
+                    <IconUser />
+                  </Center>
+                </Link>
+              )}
             </MenuItem>
           </Animator>
         </Menu>

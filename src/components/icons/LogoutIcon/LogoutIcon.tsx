@@ -2,7 +2,7 @@ import React, { SVGProps } from 'react';
 import { Animated, Animator } from '@arwes/react';
 import { useMantineTheme } from '@mantine/core';
 
-export function LogoutIcon({ width = 20, height = 20, ...rest }: SVGProps<SVGSVGElement>) {
+export function LogoutIcon({ width = 20, height = 20, color, ...rest }: SVGProps<SVGSVGElement>) {
   const theme = useMantineTheme();
   return (
     <svg
@@ -18,7 +18,7 @@ export function LogoutIcon({ width = 20, height = 20, ...rest }: SVGProps<SVGSVG
       <Animator manager="stagger" combine merge>
         <Animated<SVGPathElement, SVGProps<SVGPathElement>>
           as="path"
-          stroke={theme.colors.maitreyaSecondary[4]}
+          stroke={color || theme.colors.maitreyaSecondary[4]}
           d="M14 8V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2h7a2 2 0 002-2v-2"
           animated={{
             initialStyle: { strokeDashoffset: 50 },
@@ -41,7 +41,7 @@ export function LogoutIcon({ width = 20, height = 20, ...rest }: SVGProps<SVGSVG
             },
           }}
           strokeDasharray={20}
-          stroke={theme.colors.maitreyaSecondary[4]}
+          stroke={color || theme.colors.maitreyaSecondary[4]}
           style={{ transition: 'stroke-dashoffset 0.4s ease' }}
         />
       </Animator>

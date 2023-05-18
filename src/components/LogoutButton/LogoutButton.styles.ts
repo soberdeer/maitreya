@@ -5,8 +5,6 @@ export default createStyles(() => ({
     padding: 0,
     margin: 0,
     backgroundColor: 'transparent',
-    width: 20,
-    height: 20,
     cursor: 'pointer',
   },
 }));

@@ -52,6 +52,7 @@ const animatorsSettings: AnimatorGeneralProviderSettings = {
 export function MaitreyaApp({
   Component,
   pageProps,
+  isGuest,
   base: initialBase,
   animate: animateInitial,
   chatScript,
@@ -128,6 +129,7 @@ export function MaitreyaApp({
                 <Header
                   menu={base?.fields.menu as { href: string; children: string; icon: string }[]}
                   vkUrl={base?.fields.vk_url}
+                  isGuest={isGuest}
                 />
                 <Animator combine manager="stagger" active={active}>
                   <Box

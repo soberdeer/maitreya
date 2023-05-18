@@ -11,9 +11,10 @@ import useStyles from './Header.styles';
 interface HeaderProps extends AnimatedProps {
   menu: { href: string; children: string; icon: string }[];
   vkUrl?: string;
+  isGuest?: boolean;
 }
 
-export function Header({ className, menu, vkUrl }: HeaderProps) {
+export function Header({ className, menu, vkUrl, isGuest }: HeaderProps) {
   const { classes, cx } = useStyles();
   const router = useRouter();
   const active = useMemo(() => router.pathname !== '/login', [router]);
@@ -36,7 +37,7 @@ export function Header({ className, menu, vkUrl }: HeaderProps) {
           {/*  {center}*/}
           {/*</Animated>*/}
           <Animated className={cx(classes.section, classes.right)} animated={aa('x', 12, 0)}>
-            <RightNav vkUrl={vkUrl} />
+            <RightNav vkUrl={vkUrl} isGuest={isGuest} />
           </Animated>
         </Box>
       </Animated>
