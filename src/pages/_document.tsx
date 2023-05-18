@@ -1,14 +1,12 @@
 import Document, { DocumentContext, Head, Html, Main, NextScript } from 'next/document';
 import { ServerStyles, createStylesServer } from '@mantine/next';
-import { rtlCache } from '@src/util/rtl-cache';
+import { emotionCache } from '@src/util/emotion-cache';
 
-const stylesServer = createStylesServer(rtlCache);
+const stylesServer = createStylesServer(emotionCache);
 
 export default class _Document extends Document {
   static async getInitialProps(ctx: DocumentContext) {
     const initialProps = await Document.getInitialProps(ctx);
-
-    // Add your app specific logic here
 
     return {
       ...initialProps,

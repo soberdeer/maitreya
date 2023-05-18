@@ -44,7 +44,6 @@
     "react-blurhash": "^0.3.0",
     "react-dom": "^18.2.0",
     "recharts": "^2.6.2",
-    "stylis-plugin-rtl": "^2.1.1",
     "tsparticles": "^2.9.3"
   },
   "devDependencies": {
