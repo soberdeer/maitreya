@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { ChevronDown } from 'react-feather';
 import { Box, Group, Input, Popover, Stack, Text, UnstyledButton } from '@mantine/core';
 import { ElementTags } from '@src/components/ElementTags';
+import { ChevronDownIcon } from '@src/components/icons';
 import useStyles from './SelectElement.styles';
 
 const elements = [
@@ -52,7 +52,7 @@ export function SelectElement({
                 right: 5,
               }}
             >
-              <ChevronDown size={14} />
+              <ChevronDownIcon size={14} />
             </Box>
           </Box>
         </Popover.Target>

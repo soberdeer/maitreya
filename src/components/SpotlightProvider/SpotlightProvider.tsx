@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Search } from 'react-feather';
 import { NextRouter } from 'next/router';
 import { SpotlightProvider as MantineSpotlightProvider, SpotlightAction } from '@mantine/spotlight';
+import { IconSearch } from '@tabler/icons-react';
 import { useDebouncedValue } from '@mantine/hooks';
 import { Loader } from '@src/components/Loader';
 import { Action } from './Action';
@@ -26,7 +26,7 @@ export default function SpotlightProvider({
   children: React.ReactNode;
   router: NextRouter;
 }) {
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
   const [query, setQuery] = useState('');
   const [spotlightMessage, setSpotlightMessage] = useState<React.ReactNode | null>(null);
   const [debouncedQuery] = useDebouncedValue(query, 200);
@@ -48,11 +48,7 @@ export default function SpotlightProvider({
     await fetch('/api/search', { method: 'POST', body: debouncedQuery })
       .then((res) => res.json())
       .then(({ entries }: { entries: EntryMapped[] }) => {
-        // console.log(entries);
-        // console.log(entries)
         setSpotlightMessage(entries.length === 0 ? defaultMessage : null);
-        // setSpotlightLoading(false);
-        // console.log(entries.map(r => toAction(r)))
         setSpotlightActions(entries.map((r) => toAction(r)));
       })
       .catch(() => setSpotlightMessage(errorMessage));
@@ -76,7 +72,7 @@ export default function SpotlightProvider({
         setQuery(value);
         setSpotlightActions([]);
       }}
-      searchIcon={<Search size="1.2rem" color="#0ff" />}
+      searchIcon={<IconSearch size="1.2rem" color={theme.colors.maitreya[3]} />}
       searchPlaceholder="Поиск"
       nothingFoundMessage={spotlightMessage}
       shortcut="mod + shift + C"
