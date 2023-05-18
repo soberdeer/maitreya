@@ -23,6 +23,7 @@ import { Meta } from '@src/components/Meta';
 import SpotlightProvider from '@src/components/SpotlightProvider/SpotlightProvider';
 import { Loader } from '@src/components/Loader';
 import PostScribe from '@marshallku/react-postscribe';
+import { rtlCache } from '@src/util/rtl-cache';
 
 const roboto = Roboto({
   subsets: ['latin', 'cyrillic', 'cyrillic-ext'],
@@ -95,14 +96,19 @@ export function MaitreyaApp({
   }, [router]);
 
   return (
-    <div style={{ height: '100vh' }}>
+    <div dir="rtl" style={{ height: '100vh' }}>
       <AnimateProvider animate={animate} toggleAnimate={toggleAnimate}>
         <ElementsProvider
           elements={
             base?.fields.elements?.map((entry) => entry?.fields as TypeElementsFields) || []
           }
         >
-          <MantineProvider withGlobalStyles withNormalizeCSS theme={mantineTheme}>
+          <MantineProvider
+            withGlobalStyles
+            withNormalizeCSS
+            theme={mantineTheme}
+            emotionCache={rtlCache}
+          >
             <GlobalStyles />
             <AnimatorGeneralProvider {...animatorsSettings} disabled={!animate}>
               <Head>

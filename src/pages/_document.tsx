@@ -1,8 +1,8 @@
-import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document';
+import Document, { DocumentContext, Head, Html, Main, NextScript } from 'next/document';
 import { ServerStyles, createStylesServer } from '@mantine/next';
+import { rtlCache } from '@src/util/rtl-cache';
 
-// optional: you can provide your cache as a first argument in createStylesServer function
-const stylesServer = createStylesServer();
+const stylesServer = createStylesServer(rtlCache);
 
 export default class _Document extends Document {
   static async getInitialProps(ctx: DocumentContext) {
@@ -23,15 +23,8 @@ export default class _Document extends Document {
     return (
       <Html lang="ru">
         <Head>
-          {/*<link rel="preconnect" href="https://fonts.googleapis.com" />*/}
-          {/*<link rel="preconnect" href="https://fonts.gstatic.com" />*/}
-          {/*<link*/}
-          {/*  href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"*/}
-          {/*  rel="stylesheet"*/}
-          {/*/>*/}
           <link rel="manifest" href="/manifest.json" />
           <link rel="shortcut icon" href="/favicon.svg" />
-          {/*<style>{`@ import url(/arounder.ttf');`}</style>*/}
           <meta charSet="UTF-8" />
           <meta name="viewport" content="width=device-width,initial-scale=1.0" />
           <meta name="theme-color" content="#09201f" />
