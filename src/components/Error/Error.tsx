@@ -15,6 +15,7 @@ const errorTypesMap = {
   noChanges: 'Изменений не обнаружено, Цензорат спит спокойно',
   changeSuccess: 'Данные успешно записаны',
   changeFail: 'Произошла ошибка, обратитесь к ближайшему цензору',
+  technicError: 'Техника недоступна',
 };
 
 export function Error({ type }: { type?: keyof typeof errorTypesMap }) {

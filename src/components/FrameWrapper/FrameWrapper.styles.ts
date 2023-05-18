@@ -15,7 +15,7 @@ export default createStyles((theme) => ({
     textAlign: 'center',
 
     [`@media (max-width: ${em(getBreakpointValue(theme.breakpoints.sm))})`]: {
-      padding: '0.75rem 1rem',
+      padding: '2rem 0.75rem',
     },
   },
 

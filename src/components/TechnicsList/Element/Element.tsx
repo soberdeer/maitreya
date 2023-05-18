@@ -32,7 +32,7 @@ export function Element({ item, ...others }: Element) {
 
   return (
     <Animator merge duration={{ enter: 0.4, exit: 0.4 }}>
-      <Group spacing={10} position="left" mb={10} {...others}>
+      <Group spacing={10} position="left" mb={10} noWrap {...others}>
         <LevelIcon level={levelKey} size={30} tooltip={item.fields.level} />
 
         <Anchor href={`/technics/${item.sys.id}`}>

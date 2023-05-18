@@ -21,7 +21,7 @@ export function Article({ description, name, children, breadcrumbs }: ArticlePro
         <Breadcrumbs
           pb={30}
           styles={{
-            root: { alignItems: 'flex-start' },
+            root: { alignItems: 'center' },
             breadcrumb: {
               whiteSpace: 'normal',
             },

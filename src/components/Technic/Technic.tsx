@@ -29,9 +29,9 @@ export function Technic({
   return (
     <Animator combine manager="stagger" duration={{ enter: 0.4, exit: 0.4, delay: 0.1 }}>
       <div className={cx(classes.root, className)} {...others}>
-        <Group position="center">
+        <Group position="left" align="center" noWrap>
           {Icon && <Icon size={40} tooltip={data.type} />}
-          <Text as="h1" className={classes.title}>
+          <Text as="h2" className={classes.title}>
             {data.name}
           </Text>
         </Group>

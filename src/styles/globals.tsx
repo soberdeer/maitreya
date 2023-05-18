@@ -46,12 +46,17 @@ export const GlobalStyles = () => (
         },
       },
 
+      '& *': {
+        textAlign: 'left',
+      },
+
       'h1, h2, h3, h4, h5, h6': {
         fontFamily: '"Arounder", sans-serif',
         letterSpacing: '.1em',
         fontWeight: 'bold',
         lineHeight: 1.3,
         color: '#ffa76c',
+        textAlign: 'center',
       },
 
       h1: {
@@ -90,6 +95,7 @@ export const GlobalStyles = () => (
       a: {
         color: 'inherit',
         textDecoration: 'none',
+        textAlign: 'left',
       },
 
       '*, *::before, *::after': {

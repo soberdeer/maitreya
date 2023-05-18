@@ -29,7 +29,7 @@ export default function Secret({ users }: UserPageProps) {
             <Breadcrumbs
               pb={30}
               styles={{
-                root: { alignItems: 'flex-start' },
+                root: { alignItems: 'center' },
                 breadcrumb: {
                   whiteSpace: 'normal',
                 },

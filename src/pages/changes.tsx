@@ -25,7 +25,7 @@ export default function ChangesPage({ user, dbUser }: UserPageProps) {
             <Breadcrumbs
               pb={30}
               styles={(theme) => ({
-                root: { alignItems: 'flex-start' },
+                root: { alignItems: 'center' },
                 breadcrumb: {
                   whiteSpace: 'normal',
                 },

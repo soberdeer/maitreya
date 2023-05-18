@@ -27,7 +27,11 @@ export default createStyles(() => ({
   },
 
   title: {
+    textAlign: 'left',
     // marginBlockStart: 0,
+    '@media screen and (max-width: 720px)': {
+      fontSize: '1.4rem',
+    },
   },
 
   description: {

@@ -17,6 +17,7 @@ export function Telepathy({ size = 26, tooltip, ...others }: IconType) {
           xmlns="http://www.w3.org/2000/svg"
           width={size}
           height={size}
+          style={{ minWidth: size }}
           {...others}
           {...others}
         >

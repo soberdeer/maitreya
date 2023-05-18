@@ -7,6 +7,7 @@ import {
   Animated,
   AnimatedProps,
 } from '@arwes/react';
+import { Box } from '@mantine/core';
 import { Illumination } from '@src/components/Illumination';
 import useStyles from './FrameWrapper.styles';
 
@@ -35,7 +36,7 @@ export function FrameWrapper({
           smallLineWidth={3}
         />
       </Animator>
-      {children}
+      <Box pb={20}>{children}</Box>
     </Animated>
   );
 }
