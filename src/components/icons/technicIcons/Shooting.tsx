@@ -18,6 +18,7 @@ export function Shooting({ size = 26, tooltip, ...others }: IconType) {
           width={size}
           height={size}
           {...others}
+          {...others}
         >
           <Animated<SVGPathElement, SVGProps<SVGPathElement>>
             as="path"

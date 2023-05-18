@@ -13,7 +13,7 @@ export default createStyles((theme) => ({
     stroke: theme.colors.maitreya[3],
     strokeWidth: 42,
     strokeMiterlimit: 10,
-    strokeDasharray: '12.1947, 12.1947, 12.1947, 12.1947, 12.1947, 12.1947',
+    transform: 'scaleX(-1), translateX(100%)',
   },
   st1: {
     fill: 'none',
@@ -23,12 +23,12 @@ export default createStyles((theme) => ({
     strokeDasharray: '50, 90, 200, 30, 40, 0',
   },
   st2: {
+    // strokeDasharray: 2500,
     fill: 'none',
     stroke: theme.colors.maitreya[3],
     strokeWidth: 42,
     strokeMiterlimit: 10,
     strokeLinecap: 'square',
-    strokeDasharray: '120, 20, 110, 20, 140',
   },
   st3: {
     fill: 'none',

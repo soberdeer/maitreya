@@ -1,6 +1,6 @@
-import { createStyles, getStylesRef, keyframes } from '@mantine/core';
+import { createStyles } from '@mantine/core';
 
-export default createStyles((theme) => ({
+export default createStyles(() => ({
   root: {
     padding: 0,
     margin: 0,

@@ -1,7 +1,6 @@
 import React, { SVGProps, useMemo } from 'react';
 import { Tooltip } from '@src/components/Tooltip';
 import { Animated, Animator } from '@arwes/react';
-import { useMantineTheme } from '@mantine/core';
 
 type LevelType = { visible: number[]; color: string };
 
@@ -28,7 +27,7 @@ export interface LevelsIconProps {
 
 export function LevelIcon({ level, size = 26, tooltip, ...others }: LevelsIconProps) {
   const data: LevelType = useMemo(() => levelMapper[level] || levelMapper.pupil, [level]);
-  const theme = useMantineTheme();
+
   return (
     <Animator merge combine manager="stagger" duration={{ enter: 0.4, exit: 0.4, delay: 0.1 }}>
       <Tooltip label={tooltip} disabled={!tooltip}>

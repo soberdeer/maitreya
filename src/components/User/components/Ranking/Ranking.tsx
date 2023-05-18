@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
-import { Box, BoxProps } from '@mantine/core';
+import { useMediaQuery } from '@mantine/hooks';
+import { Box, BoxProps, Center, SimpleGrid } from '@mantine/core';
 import { aaVisibility, Animated, Text } from '@arwes/react';
 import { RankGroupType, RankNumberType } from '@src/util/types';
 import useStyles from './Ranking.styles';
@@ -41,23 +42,31 @@ export function Ranking({
 }: { rankGroup: RankGroupType; rankNumber: RankNumberType } & BoxProps) {
   const { classes, cx } = useStyles();
   const group = useMemo(() => ranks.find((item) => item.id === rankGroup), [rankGroup]);
+  const number = useMemo(
+    () => (rankNumber ? parseInt(rankNumber.slice(0, 1), 10) : null),
+    [rankNumber]
+  );
+  const isSmall = useMediaQuery('(max-width: 400px)');
 
-  if (!group) {
+  if (!group || typeof number !== 'number') {
     return <Text as="span">Не определено</Text>;
   }
 
   return (
     <Box className={cx(classes.root, className)} {...others}>
-      {[...Array(parseInt(rankNumber.slice(0, 1), 10)).keys()].map((_, index) => (
-        <Animated
-          key={index}
-          animated={aaVisibility()}
-          className={classes.sphere}
-          style={{ backgroundColor: group.color, width: 15, height: 15 }}
-        />
-      ))}
-      <Text as="span" style={{ color: group.color, fontSize: 20 }}>
-        {group.names[parseInt(rankNumber.slice(0, 1), 10) - 1]}
+      <SimpleGrid cols={isSmall ? 2 : number || 0} spacing={10}>
+        {[...Array(number).keys()].map((_, index) => (
+          <Center key={index} sx={{ height: '100%' }}>
+            <Animated
+              animated={aaVisibility()}
+              className={classes.sphere}
+              style={{ backgroundColor: group.color }}
+            />
+          </Center>
+        ))}
+      </SimpleGrid>
+      <Text as="span" className={classes.text} style={{ color: group.color }}>
+        {group.names[number - 1]}
       </Text>
     </Box>
   );

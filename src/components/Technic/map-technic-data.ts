@@ -1,14 +1,13 @@
+import { Asset } from 'contentful';
 import {
   isTypeCombat,
   isTypeRituals,
   isTypeStands,
   TypeCombat,
-  TypeCombatSkeleton,
   TypeRituals,
   TypeStands,
   TypeStandsSkeleton,
 } from '@src/util/types';
-import { Asset, EntryFieldTypes } from 'contentful';
 import { Document } from '@contentful/rich-text-types';
 
 type Standard = 'Воин' | 'Навигатор' | 'Телепат' | 'Целитель';

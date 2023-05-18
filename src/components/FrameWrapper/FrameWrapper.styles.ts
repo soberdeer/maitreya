@@ -1,4 +1,4 @@
-import { createStyles } from '@mantine/core';
+import { createStyles, em, getBreakpointValue } from '@mantine/core';
 
 export default createStyles((theme) => ({
   root: {
@@ -13,16 +13,43 @@ export default createStyles((theme) => ({
     border: '1px solid transparent',
     padding: '2rem 4rem',
     textAlign: 'center',
+
+    [`@media (max-width: ${em(getBreakpointValue(theme.breakpoints.sm))})`]: {
+      padding: '0.75rem 1rem',
+    },
   },
 
   default: {
-    '& path[data-name="decoration"]': { color: theme.colors.maitreya[3] },
-    '& path[data-name="shape"]': { color: theme.fn.rgba(theme.colors.maitreya[9], 0.2) },
+    '& path[data-name="decoration"]': {
+      transition: 'color 200ms ease',
+      color: theme.colors.maitreya[3],
+    },
+    '& path[data-name="shape"]': {
+      transition: 'color 200ms ease',
+      color: theme.fn.rgba(theme.colors.maitreya[9], 0.2),
+    },
   },
 
   red: {
-    '& path[data-name="decoration"]': { color: '#FF3333' },
-    '& path[data-name="shape"]': { color: theme.fn.rgba('#260D0D', 0.5) },
+    '& path[data-name="decoration"]': {
+      transition: 'color 200ms ease',
+      color: '#FF3333',
+    },
+    '& path[data-name="shape"]': {
+      transition: 'color 200ms ease',
+      color: theme.fn.rgba('#260D0D', 0.5),
+    },
+  },
+
+  green: {
+    '& path[data-name="decoration"]': {
+      transition: 'color 200ms ease',
+      color: theme.colors.green[5],
+    },
+    '& path[data-name="shape"]': {
+      transition: 'color 200ms ease',
+      color: theme.fn.rgba(theme.fn.darken(theme.colors.green[9], 0.9), 0.5),
+    },
   },
 
   frame: {

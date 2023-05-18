@@ -13,7 +13,7 @@ import { checkReferences } from './checkAvailable';
 import groupTechnics from './groupTechnicsList';
 
 export default async function fetchTechnics(
-  user?: Entry<TypeUsersSkeleton> | null,
+  user?: Entry<TypeUsersSkeleton, 'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'> | null,
   userId?: string,
   context?: GetServerSidePropsContext
 ) {
@@ -50,14 +50,23 @@ export default async function fetchTechnics(
     };
   }
 
-  const levels: Record<'Адепт' | 'Мастер' | 'Ученик', number> = {
-    Ученик: 0,
-    Адепт: 1,
-    Мастер: 2,
+  const levelKeys = {
+    pupil: 'Ученик',
+    adept: 'Адепт',
+    master: 'Мастер',
+  };
+
+  const levels: Record<(typeof levelKeys)[keyof typeof levelKeys], number> = {
+    [levelKeys.pupil]: 0,
+    [levelKeys.adept]: 1,
+    [levelKeys.master]: 2,
   };
 
   const available = checkReferences<TypeCombatSkeleton>(
-    filtered as Entry<TypeCombatSkeleton>[] | null | undefined,
+    filtered as
+      | Entry<TypeCombatSkeleton, 'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'>[]
+      | null
+      | undefined,
     user,
     userId === 'guest'
   );

@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { ChevronDown } from 'react-feather';
-import { Box, Collapse, Group, Input, Popover, Stack, Text, UnstyledButton } from '@mantine/core';
-import ElementTags from '@/components/ElementTags/ElementTags';
+import { Box, Group, Input, Popover, Stack, Text, UnstyledButton } from '@mantine/core';
+import { ElementTags } from '@src/components/ElementTags';
 import useStyles from './SelectElement.styles';
-import colors from '../../../styles/colors';
 
 const elements = [
   { value: 'в', label: 'Вода' },
@@ -13,7 +12,7 @@ const elements = [
   { value: 'о', label: 'Огонь' },
 ];
 
-export default function SelectElement({
+export function SelectElement({
   onAdd,
   value,
   error,
@@ -22,7 +21,7 @@ export default function SelectElement({
   error?: any;
   onAdd(value: string): void;
 }) {
-  const classes = useStyles();
+  const { classes, theme } = useStyles();
   const [opened, setOpened] = useState(false);
 
   return (
@@ -38,9 +37,11 @@ export default function SelectElement({
             <UnstyledButton
               className={classes.input}
               onClick={() => setOpened((o) => !o)}
-              sx={{ borderColor: error ? '#e03131 !important' : colors.secondary }}
+              sx={{
+                borderColor: error ? 'red !important' : theme.colors.maitreyaSecondary[5],
+              }}
             >
-              {value && <ElementTags elements={value} disableAnimation />}
+              {value && <ElementTags elements={value} />}
             </UnstyledButton>
             <Box
               sx={{
@@ -69,7 +70,7 @@ export default function SelectElement({
                 py="xs"
               >
                 <Group spacing="xs">
-                  <ElementTags elements={item.value} disableAnimation />
+                  <ElementTags elements={item.value} />
                   <Text className={classes.text}>{item.label}</Text>
                 </Group>
               </UnstyledButton>

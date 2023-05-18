@@ -16,10 +16,7 @@ export default function LoginPage() {
       body: JSON.stringify({ userCode }),
     })
       .then((res) => res.json())
-      .catch((err) => {
-        console.log(err);
-        return { user: null };
-      });
+      .catch(() => ({ user: null }));
 
     setLoading(false);
     if (user) {

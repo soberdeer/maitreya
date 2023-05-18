@@ -12,14 +12,6 @@ const background = keyframes({
   },
 });
 
-const image = keyframes({
-  from: {
-    opacity: 0,
-  },
-  to: {
-    opacity: 1,
-  },
-});
 export default createStyles((theme) => ({
   root: {
     width: '100%',

@@ -8,4 +8,11 @@ export default createStyles({
     alignItems: 'center',
     gap: 10,
   },
+
+  text: {
+    marginBottom: 0,
+    lineHeight: '26px',
+    marginBlockEnd: 0,
+    textAlign: 'left',
+  },
 });

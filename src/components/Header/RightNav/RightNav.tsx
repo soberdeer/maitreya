@@ -3,6 +3,7 @@ import { aa, aaVisibility, AnimatedProps, Animator } from '@arwes/react';
 import { IconUser } from '@tabler/icons-react';
 import Link from 'next/link';
 import { Center } from '@mantine/core';
+import { useMediaQuery } from '@mantine/hooks';
 import { Menu } from '../Menu';
 import { MenuItem } from '../MenuItem';
 import { VkIcon } from './VkIcon';
@@ -17,6 +18,7 @@ interface RightNavProps extends AnimatedProps {
 export function RightNav({ vkUrl }: RightNavProps) {
   const { classes } = useStyles();
   const rightItemAnimation = [aaVisibility(), aa('x', 4, 0, 0)];
+  const mobile = useMediaQuery('(max-width: 720px)');
 
   return (
     <Animator combine manager="stagger">
@@ -27,18 +29,23 @@ export function RightNav({ vkUrl }: RightNavProps) {
               <SearchButton />
             </MenuItem>
           </Animator>
-          <Animator>
-            <MenuItem className={classes.menuItem} animated={rightItemAnimation}>
-              <ActivateButton />
-            </MenuItem>
-          </Animator>
-          {vkUrl && (
-            <Animator>
-              <MenuItem className={classes.menuItem} animated={rightItemAnimation}>
-                <VkIcon href={vkUrl} />
-              </MenuItem>
-            </Animator>
+          {!mobile && (
+            <>
+              <Animator>
+                <MenuItem className={classes.menuItem} animated={rightItemAnimation}>
+                  <ActivateButton />
+                </MenuItem>
+              </Animator>
+              {vkUrl && (
+                <Animator>
+                  <MenuItem className={classes.menuItem} animated={rightItemAnimation}>
+                    <VkIcon href={vkUrl} />
+                  </MenuItem>
+                </Animator>
+              )}
+            </>
           )}
+
           <Animator>
             <MenuItem className={classes.menuItem} animated={rightItemAnimation}>
               <Link href="/user" title="Vkontakte" style={{ height: '100%' }} passHref>

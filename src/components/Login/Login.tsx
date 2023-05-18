@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Animator, Text } from '@arwes/react';
 import { Button } from '@src/components/Button';
 import { FrameWrapper } from '@src/components/FrameWrapper';
-// import { FrameCorners, Text, FrameBox } from '../arwes';
 import { Loader } from '@src/components/Loader';
 import { Box, Center, Container, Stack } from '@mantine/core';
 import { TextInput } from '@src/components/TextInput';
@@ -17,20 +16,12 @@ export interface LoginProps extends React.HTMLProps<HTMLDivElement> {
 
 const errorMessage = 'Пользователь не найден'.split('');
 
-export function Login({
-  className,
-  children,
-  updateUser,
-  error,
-  setError,
-  loading,
-  ...others
-}: LoginProps) {
+export function Login({ className, children, updateUser, error, setError, loading }: LoginProps) {
   const { classes, cx } = useStyles();
   const [activateInput, setActivateInput] = useState(true);
   const [userCode, setUserCode] = useState<string>('');
-  const [palette, setPalette] = useState<'primary' | 'error'>('primary');
   const [errorTerm, setErrorTerm] = useState<string>('');
+  const [errorClassName, setErrorClassName] = useState(false);
 
   const writeError = () => {
     const timeout = setTimeout(() => {
@@ -50,16 +41,9 @@ export function Login({
     return () => clearTimeout(timeout);
   };
 
-  const updatePalette = () => {
-    if (error) {
-      setPalette('error');
-      setTimeout(() => setPalette('primary'), 100);
-    }
-  };
-
   const onLogin = () => {
     if (error) {
-      updatePalette();
+      setErrorClassName(true);
     } else {
       updateUser(userCode);
     }
@@ -67,9 +51,13 @@ export function Login({
 
   const onGuestLogin = () => updateUser('guest');
 
-  useEffect(() => () => {
+  useEffect(
+    () => () => {
       setErrorTerm('');
-    }, []);
+      setErrorClassName(false);
+    },
+    []
+  );
 
   useEffect(() => {
     if (!activateInput) {
@@ -78,12 +66,9 @@ export function Login({
   }, [activateInput]);
 
   useEffect(() => {
-    updatePalette();
-  }, [error]);
-
-  useEffect(() => {
     if (error) {
       writeError();
+      setErrorClassName(true);
     } else {
       removeError();
     }
@@ -98,7 +83,10 @@ export function Login({
         <Container size="md">
           <Box sx={{ width: '100%', minWidth: 325 }}>
             <Animator merge duration={{ enter: 0.4, exit: 0.4 }}>
-              <FrameWrapper className={cx(classes.frame, className)}>
+              <FrameWrapper
+                className={cx(classes.frame, className, { [classes.error]: errorClassName })}
+                color={errorClassName ? 'red' : 'default'}
+              >
                 <Stack spacing="xs" align="center" sx={{ width: '100%' }}>
                   <Animator merge>
                     <Text className={classes.title}>Введите ключ</Text>
@@ -109,6 +97,7 @@ export function Login({
                       type="password"
                       onChange={(e) => {
                         setError(false);
+                        setErrorClassName(false);
                         setUserCode(e.target.value);
                       }}
                       onKeyDown={(e) => {

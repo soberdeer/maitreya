@@ -30,20 +30,21 @@ export function House({ house, homeless }: { house?: House; homeless?: boolean }
       }}
     >
       <Tooltip label={homeless ? 'Нет Дома' : (house?.name as unknown as string) || 'Нет Дома'}>
-        <div style={{ ...sizes, display: 'flex', alignItems: 'center' }}>
-          <Animated animated={aaVisibility()}>
-            {house && !homeless ? (
-              <img
-                className={classes.flag}
-                src={(house.image as unknown as Asset)?.fields.file?.url as string}
-                alt={house.name as unknown as string}
-                style={sizes}
-              />
-            ) : (
-              <IconCirclePlus width={50} color="#ededed" />
-            )}
-          </Animated>
-        </div>
+        <Animated
+          animated={aaVisibility()}
+          style={{ ...sizes, display: 'flex', alignItems: 'center' }}
+        >
+          {house && !homeless ? (
+            <img
+              className={classes.flag}
+              src={(house.image as unknown as Asset)?.fields.file?.url as string}
+              alt={house.name as unknown as string}
+              style={sizes}
+            />
+          ) : (
+            <IconCirclePlus size={50} color="#ededed" />
+          )}
+        </Animated>
       </Tooltip>
     </Box>
   );

@@ -6,8 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint --fix",
-    "prettier": "prettier --write \"**/*.{ts,tsx}\""
+    "prettier": "prettier --write \"**/*.{ts,tsx}\" && next lint --fix"
   },
   "dependencies": {
     "@arwes/react": "^1.0.0-next.7",
@@ -16,10 +15,12 @@
     "@emotion/react": "^11.11.0",
     "@emotion/server": "^11.11.0",
     "@mantine/core": "^6.0.10",
+    "@mantine/form": "^6.0.11",
     "@mantine/hooks": "^6.0.10",
     "@mantine/modals": "^6.0.10",
     "@mantine/next": "^6.0.10",
     "@mantine/spotlight": "^6.0.10",
+    "@marshallku/react-postscribe": "^0.1.9",
     "@tabler/icons-react": "^2.18.0",
     "@types/recharts": "^1.8.24",
     "@vanilla-extract/next-plugin": "^2.1.2",
@@ -31,6 +32,7 @@
     "copy-webpack-plugin": "^11.0.0",
     "crypto": "^1.0.1",
     "eslint": "8.39.0",
+    "kysely": "^0.24.2",
     "motion": "^10.15.5",
     "next": "^13.4.2",
     "nextjs-cors": "^2.1.2",

@@ -1,25 +1,23 @@
-import React, { useContext } from 'react';
-import cx from 'clsx';
-import { RotateCcw, X } from 'react-feather';
+import React from 'react';
 import { Box, Center, Group, UnstyledButton } from '@mantine/core';
-import PaletteContext from '@/components/contexts/PaletteContext';
-import AnimatedIcon from '@/components/AnimatedIcon/AnimatedIcon';
-import TextWithElements from '@/components/User/components/Ideas/TextWithElements/TextWithElements';
+import { TextWithElements } from '@src/components/Ideas/TextWithElements';
+import { RotateIcon, XIcon } from '@src/components/icons';
+import { Tooltip } from '@src/components/Tooltip';
 import useStyles from './Idea.styles';
 
 interface IdeaProps {
-  disabled: boolean;
+  disabled?: boolean;
   isDeleted: boolean;
   item: string;
   type: string;
-  disableAnimation: any;
+  disableAnimation?: any;
 
-  revertIdea(idea: string, type: string);
+  revertIdea(idea: string, type: string): void;
 
-  deleteIdea(idea: string, type: string);
+  deleteIdea(idea: string, type: string): void;
 }
 
-export default function Idea({
+export function Idea({
   disabled,
   isDeleted,
   revertIdea,
@@ -28,8 +26,7 @@ export default function Idea({
   type,
   disableAnimation,
 }: IdeaProps) {
-  const classes = useStyles();
-  const { palette } = useContext(PaletteContext);
+  const { classes, cx, theme } = useStyles();
 
   return (
     <Group spacing="xl" mb={20} noWrap>
@@ -40,44 +37,30 @@ export default function Idea({
           })}
           onClick={() => (isDeleted ? revertIdea(item, type) : deleteIdea(item, type))}
         >
-          <AnimatedIcon width={24} height={24} tooltip={isDeleted ? 'Вернуть' : 'Удалить'}>
-            <Box
-              sx={{
-                height: 24,
-                width: 24,
-                display: 'flex',
-                alignItems: 'center',
-                position: 'relative',
-              }}
-            >
-              {/*<Box sx={{position: 'absolute'}}*/}
+          <Tooltip label={isDeleted ? 'Вернуть' : 'Удалить'}>
+            <Center sx={{ height: 24, width: 24 }}>
               {isDeleted ? (
                 <Center sx={{ width: '100%' }}>
-                  <RotateCcw size={20} color={palette.primary.main} />
+                  <RotateIcon size={20} color={theme.colors.maitreya[3]} />
                 </Center>
               ) : (
-                <X size={24} color="red" />
+                <XIcon size={24} color="red" />
               )}
-            </Box>
-          </AnimatedIcon>
+            </Center>
+          </Tooltip>
         </UnstyledButton>
       ) : (
-        <div style={{ width: 24 }} />
+        <Box sx={{ width: 24 }} />
       )}
       <Box sx={{ position: 'relative' }}>
-        <TextWithElements
-          noWrap
-          className={classes.idea}
-          // textProps={{ className: cx({ [classes.strike]: isDeleted }) }}
-          {...disableAnimation}
-        >
+        <TextWithElements className={classes.idea} {...disableAnimation}>
           {item}
         </TextWithElements>
         <Box
           className={classes.strike}
           sx={{
             opacity: isDeleted ? 1 : 0,
-            backgroundColor: palette.primary.main,
+            backgroundColor: theme.colors.maitreya[3],
           }}
         />
       </Box>

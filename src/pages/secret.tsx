@@ -1,32 +1,31 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { db } from '@vercel/postgres';
 import type { GetServerSidePropsContext } from 'next';
-import type { Entry } from 'contentful';
-import { Breadcrumbs } from '@mantine/core';
-import { getEntry } from '../contentful/client';
-import type { UserProps, UsersTable } from '../util/types';
-import { Text } from '../components/arwes';
-import FrameWrapper from '../components/FrameWrapper/FrameWrapper';
-import User from '../components/User/User';
-import Meta from '../components/Meta/Meta';
-import ChangesTable from '@/components/ChangesTable/ChangesTable';
-import Anchor from '@/components/Anchor/Anchor';
-import PaletteContext from '@/components/contexts/PaletteContext';
+import { Box, Breadcrumbs, useMantineTheme } from '@mantine/core';
+import type { UsersTable } from '@src/util/types';
+import { Animator } from '@arwes/react';
+import { FrameWrapper } from '@src/components/FrameWrapper/FrameWrapper';
+import { Meta } from '@src/components/Meta/Meta';
+import { SecretTable } from '@src/components/SecretTable';
+import { Error } from '@src/components/Error';
+import { Anchor } from '@src/components/Anchor';
+import { Logger } from '@src/contentful/logger';
 
 interface UserPageProps {
   users?: UsersTable[];
-  columns: any;
-  isMaster: boolean;
 }
 
-export default function Secret({ users, columns }: UserPageProps) {
-  const { palette } = useContext(PaletteContext);
+export default function Secret({ users }: UserPageProps) {
+  const theme = useMantineTheme();
+  if (!users || users.length === 0) {
+    return <Error type="noChanges" />;
+  }
   return (
-    <>
+    <Box pb={50}>
       <Meta title="Таблица изменений" />
-      <FrameWrapper flex={users.length === 0} autoWidth={users.length === 0}>
-        {users.length !== 0 ? (
-          <>
+      <Animator combine manager="stagger">
+        <Animator merge duration={{ enter: 0.4, exit: 0.4 }}>
+          <FrameWrapper>
             <Breadcrumbs
               pb={30}
               styles={{
@@ -34,7 +33,7 @@ export default function Secret({ users, columns }: UserPageProps) {
                 breadcrumb: {
                   whiteSpace: 'normal',
                 },
-                separator: { color: palette.primary.main },
+                separator: { color: theme.colors.maitreya[3], height: '100%' },
               }}
             >
               {[
@@ -46,17 +45,15 @@ export default function Secret({ users, columns }: UserPageProps) {
                 </Anchor>
               ))}
             </Breadcrumbs>
-            <ChangesTable users={users} />
-          </>
-        ) : (
-          <Text styledFont>Изменений не обнаружено, Цензорат спит спокойно</Text>
-        )}
-      </FrameWrapper>
-    </>
+            <SecretTable users={users} />
+          </FrameWrapper>
+        </Animator>
+      </Animator>
+    </Box>
   );
 }
 
-export async function getServerSideProps({ req, res }: GetServerSidePropsContext) {
+export async function getServerSideProps({ req }: GetServerSidePropsContext) {
   const userId = req?.cookies._maitreya_user || null;
   if (!userId) {
     return {
@@ -80,12 +77,14 @@ export async function getServerSideProps({ req, res }: GetServerSidePropsContext
   let users;
   try {
     users = await client.sql`SELECT * FROM Users`;
-  } catch (error) {}
+  } catch (error) {
+    Logger.error(error);
+  }
 
   return {
     props: {
       users:
-        users.rows.filter((user) =>
+        users?.rows.filter((user) =>
           [
             'added_convictions',
             'added_introjects',
@@ -93,7 +92,6 @@ export async function getServerSideProps({ req, res }: GetServerSidePropsContext
             'removed_introjects',
           ].find((key) => user[key] && user[key].length > 0)
         ) || [],
-      columns: JSON.parse(JSON.stringify(users.fields)) || [],
     },
   };
 }

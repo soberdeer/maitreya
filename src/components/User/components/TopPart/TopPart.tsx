@@ -1,6 +1,7 @@
 import React from 'react';
-import { Text } from '@arwes/react';
-import { Box, Group } from '@mantine/core';
+import { Animator, Text } from '@arwes/react';
+import { Box, Center, Group } from '@mantine/core';
+import { useMediaQuery } from '@mantine/hooks';
 import { Anchor } from '@src/components/Anchor';
 import { FileIcon, StarIcon } from '@src/components/icons';
 import { Ring } from '../Ring';
@@ -12,18 +13,44 @@ import useStyles from './TopPart.styles';
 
 export function TopPart({ user }: { user: MappedUser }) {
   const { classes, cx } = useStyles({ longName: user.name ? user.name?.length > 20 : false });
-
+  const isSmall = useMediaQuery('(max-width: 400px)');
+  // console.log(isSmall)
   return (
-    <div className={classes.root}>
-      <Ring size={300} avatar={user?.avatar_profile?.fields?.file?.url as string} />
-      <div>
-        <Text as="h1" className={classes.name}>
-          <div className={classes.flex} style={{ alignItems: 'flex-start' }}>
-            {user.order && <House house={user.order?.fields} homeless={false} />}
-            {user.house && <House house={user.house?.fields} homeless={user.homeless} />}
-            <span>{user.name}</span>
-          </div>
-        </Text>
+    <Group position="left" align="flex-start" spacing={20} sx={{ width: '100%' }}>
+      <Center sx={{ width: isSmall ? '100%' : 'auto' }} mt={isSmall ? 50 : 0}>
+        <Animator combine merge manager="stagger" duration={{ enter: 0.4, exit: 0.4, delay: 0.1 }}>
+          <Ring
+            size={isSmall ? 200 : 300}
+            avatar={user?.avatar_profile?.fields?.file?.url as string}
+          />
+        </Animator>
+      </Center>
+      <Box>
+        <Group position="left" align="center" spacing={20} pt={isSmall ? 0 : 30} pb={30} noWrap>
+          {user.order && (
+            <Animator
+              combine
+              merge
+              manager="stagger"
+              duration={{ enter: 0.4, exit: 0.4, delay: 0.1 }}
+            >
+              <House house={user.order?.fields} homeless={false} />
+            </Animator>
+          )}
+          {user.house && (
+            <Animator
+              combine
+              merge
+              manager="stagger"
+              duration={{ enter: 0.4, exit: 0.4, delay: 0.1 }}
+            >
+              <House house={user.house?.fields} homeless={user.homeless} />
+            </Animator>
+          )}
+          <Text as="h1" className={classes.name}>
+            {user.name}
+          </Text>
+        </Group>
         {user.honor && (
           <Box className={classes.text} mb={20}>
             <Honor honor={user.honor} />
@@ -61,16 +88,14 @@ export function TopPart({ user }: { user: MappedUser }) {
           </Group>
         )}
         {user.bio && (
-          <div style={{ display: 'flex' }}>
-            <Anchor href={user.bio} target="_blank">
-              <Group>
-                <FileIcon size={20} />
-                <Text as="span">Биография</Text>
-              </Group>
-            </Anchor>
-          </div>
+          <Anchor href={user.bio} target="_blank" color="maitreyaSecondary" noShadow>
+            <Group align="center" spacing={10}>
+              <FileIcon size={20} style={{ marginBottom: 3 }} />
+              <Text as="span">Биография</Text>
+            </Group>
+          </Anchor>
         )}
-      </div>
-    </div>
+      </Box>
+    </Group>
   );
 }

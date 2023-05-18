@@ -20,9 +20,9 @@ export function BottomPart({ user }: { user: MappedUser }) {
     return object[key].length > 0
       ? object[key].map((item, index: number) => (
           <Anchor key={index} href={`/technics/${item.sys.id}`}>
-            <Group>
+            <Group mb="md" noWrap>
               <LevelIcon level={key} size={26} />
-              <Text>{item.fields.name as string}</Text>
+              <Text className={classes.techName}>{item.fields.name as string}</Text>
             </Group>
           </Anchor>
         ))
@@ -30,7 +30,7 @@ export function BottomPart({ user }: { user: MappedUser }) {
   }
 
   return (
-    <Box className={classes.root}>
+    <Box className={classes.root} pb={30} pt={40}>
       {technics && (
         <Box className={classes.block}>
           <Text as="h2">Техники</Text>

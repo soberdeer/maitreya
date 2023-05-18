@@ -22,7 +22,13 @@ export default createStyles({
   sphere: {
     width: 15,
     height: 15,
+    minWidth: 15,
     borderRadius: '50%',
-    marginBottom: 2,
+  },
+
+  text: {
+    fontSize: 20,
+    textAlign: 'left',
+    marginLeft: 5,
   },
 });

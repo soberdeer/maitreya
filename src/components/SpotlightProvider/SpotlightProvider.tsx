@@ -55,11 +55,7 @@ export default function SpotlightProvider({
         // console.log(entries.map(r => toAction(r)))
         setSpotlightActions(entries.map((r) => toAction(r)));
       })
-      .catch((err) => {
-        console.log(err);
-        setSpotlightMessage(errorMessage);
-        // setSpotlightActions([spotlightError]);
-      });
+      .catch(() => setSpotlightMessage(errorMessage));
   };
 
   useEffect(() => {

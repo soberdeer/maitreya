@@ -1,9 +1,8 @@
-import { createUseStyles } from 'react-jss';
-import colors from '../../../styles/colors';
+import { createStyles } from '@mantine/core';
 
-export default createUseStyles({
+export default createStyles((theme) => ({
   label: {
-    color: colors.primary,
+    color: theme.colors.maitreya[3],
   },
 
   input: {
@@ -11,16 +10,17 @@ export default createUseStyles({
     outline: 'none',
     borderWidth: '0px 0px 2px',
     borderStyle: 'solid',
-    borderColor: colors.secondary,
+    borderColor: theme.colors.maitreyaSecondary[4],
     padding: '5px 10px',
     width: '100%',
     lineHeight: '30px',
-    color: colors.primary,
+    color: theme.colors.maitreya[3],
     backgroundColor: 'transparent',
     borderRadius: 0,
+    transition: 'border-color 200ms ease',
 
     '&:focus, &:focus-within': {
-      borderColor: colors.secondary,
+      borderColor: theme.colors.maitreyaSecondary[4],
       boxShadow: 'none',
     },
   },
@@ -31,12 +31,13 @@ export default createUseStyles({
 
   dropdown: {
     backgroundColor: 'rgba(8, 34, 33, 0.9)',
-    border: `1px solid ${colors.light.primary}`,
+    border: `1px solid ${theme.colors.maitreya[2]}`,
     borderRadius: 0,
+    padding: 5,
   },
 
   item: {
-    color: colors.primary,
+    color: theme.colors.maitreya[3],
     backgroundColor: 'transparent',
     borderRadius: 0,
     transition: 'background-color 200ms ease',
@@ -51,7 +52,7 @@ export default createUseStyles({
     '&[data-selected]': {
       '&, &:hover': {
         backgroundColor: 'rgba(210,84,0,0.5)',
-        color: colors.primary,
+        color: theme.colors.maitreya[3],
       },
     },
   },
@@ -65,4 +66,4 @@ export default createUseStyles({
       color: 'red',
     },
   },
-});
+}));

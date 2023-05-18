@@ -2,14 +2,13 @@ import React from 'react';
 import { db } from '@src/kysely';
 import type { GetServerSidePropsContext } from 'next';
 import { getEntry } from '@src/contentful';
-import { Breadcrumbs } from '@mantine/core';
+import { Box, Breadcrumbs } from '@mantine/core';
 import type { TypeUsers, TypeUsersSkeleton, UsersTable } from '@src/util/types';
 import { FrameWrapper } from '@src/components/FrameWrapper';
-import { User } from '@src/components/User';
 import { Meta } from '@src/components/Meta';
 import { Anchor } from '@src/components/Anchor';
-import { Technic } from '@src/components/Technic';
 import { Editor } from '@src/components/Editor/Editor';
+import { Animator } from '@arwes/react';
 
 interface UserPageProps {
   user: TypeUsers;
@@ -18,31 +17,35 @@ interface UserPageProps {
 
 export default function ChangesPage({ user, dbUser }: UserPageProps) {
   return (
-    <>
+    <Box pb={50}>
       <Meta title="Редактор идей" />
-      <FrameWrapper>
-        <Breadcrumbs
-          pb={30}
-          styles={(theme) => ({
-            root: { alignItems: 'flex-start' },
-            breadcrumb: {
-              whiteSpace: 'normal',
-            },
-            separator: { color: theme.colors.maitreya[3], height: '100%' },
-          })}
-        >
-          {[
-            { title: 'Профиль', href: '/user' },
-            { title: 'Редактор идей', href: '/changes' },
-          ].map((item, index) => (
-            <Anchor href={item.href} key={index}>
-              {item.title}
-            </Anchor>
-          ))}
-        </Breadcrumbs>
-        <Editor user={user} dbUser={dbUser} />
-      </FrameWrapper>
-    </>
+      <Animator combine manager="stagger">
+        <Animator merge duration={{ enter: 0.4, exit: 0.4 }}>
+          <FrameWrapper>
+            <Breadcrumbs
+              pb={30}
+              styles={(theme) => ({
+                root: { alignItems: 'flex-start' },
+                breadcrumb: {
+                  whiteSpace: 'normal',
+                },
+                separator: { color: theme.colors.maitreya[3], height: '100%' },
+              })}
+            >
+              {[
+                { title: 'Профиль', href: '/user' },
+                { title: 'Редактор идей', href: '/changes' },
+              ].map((item, index) => (
+                <Anchor href={item.href} key={index}>
+                  {item.title}
+                </Anchor>
+              ))}
+            </Breadcrumbs>
+            <Editor user={user} dbUser={dbUser} />
+          </FrameWrapper>
+        </Animator>
+      </Animator>
+    </Box>
   );
 }
 

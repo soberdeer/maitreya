@@ -3,7 +3,7 @@ import { Tooltip } from '@src/components/Tooltip';
 import { Animated, Animator } from '@arwes/react';
 import { DefaultType } from '@src/components/icons/default-type';
 
-export function EditIcon({ size = 24, tooltip }: DefaultType) {
+export function EditIcon({ size = 24, tooltip, ...others }: DefaultType) {
   return (
     <Animator merge combine manager="stagger" duration={{ enter: 0.4, exit: 0.4, delay: 0.1 }}>
       <Tooltip label={tooltip} disabled={!tooltip}>
@@ -16,6 +16,7 @@ export function EditIcon({ size = 24, tooltip }: DefaultType) {
           xmlns="http://www.w3.org/2000/svg"
           width={size}
           height={size}
+          {...others}
         >
           <Animated<SVGPathElement, SVGProps<SVGPathElement>>
             as="path"

@@ -1,7 +1,6 @@
-import { createUseStyles } from 'react-jss';
-import colors from '../../../styles/colors';
+import { createStyles } from '@mantine/core';
 
-export default createUseStyles({
+export default createStyles((theme) => ({
   deleteButton: {
     display: 'flex',
     alignItems: 'center',
@@ -24,7 +23,7 @@ export default createUseStyles({
     height: 2,
     pointerEvents: 'none',
     transition: 'opacity 100ms ease',
-    backgroundColor: colors.primary,
+    backgroundColor: theme.colors.maitreya[3],
   },
 
   error: {
@@ -36,4 +35,4 @@ export default createUseStyles({
       color: 'red',
     },
   },
-});
+}));

@@ -1,19 +1,26 @@
-import React, { useRef } from 'react';
+import React, { JSX, useRef } from 'react';
 import { UnstyledButtonProps, UnstyledButton, Group, Center, MantineColor } from '@mantine/core';
 import { Animator, FrameSVGOctagon, Text, useFrameSVGAssemblingAnimation } from '@arwes/react';
-import { Illumination } from '@src/components/Illumination';
+import { DefaultType } from '@src/components/icons/default-type';
 import useStyles from './Button.styles';
 
 interface ButtonProps extends UnstyledButtonProps {
-  onClick(): void;
-
   color?: MantineColor;
-  leftIcon?: React.ReactNode;
-  rightIcon?: React.ReactNode;
+  leftIcon?: (props: DefaultType) => JSX.Element;
+  rightIcon?: (props: DefaultType) => JSX.Element;
   children?: string;
+
+  onClick(): void;
 }
 
-export function Button({ onClick, children, color = 'yellow', ...rest }: ButtonProps) {
+export function Button({
+  onClick,
+  children,
+  color = 'yellow',
+  rightIcon: RightIcon,
+  leftIcon: LeftIcon,
+  ...rest
+}: ButtonProps) {
   const { classes } = useStyles({ color });
   const svgRef = useRef<SVGSVGElement | null>(null);
   const { onRender } = useFrameSVGAssemblingAnimation(svgRef);
@@ -30,11 +37,11 @@ export function Button({ onClick, children, color = 'yellow', ...rest }: ButtonP
           strokeWidth={0.5}
           className={classes.box}
         />
-        <Center sx={{ height: '100%' }}>
+        <Center sx={{ height: '100%' }} className={classes.text}>
           <Group spacing="xs" px={30} py={15}>
-            <Text as="span" className={classes.text}>
-              {children}
-            </Text>
+            {LeftIcon && <LeftIcon size={24} />}
+            <Text as="span">{children}</Text>
+            {RightIcon && <RightIcon size={24} />}
           </Group>
         </Center>
         {/*</FrameSVGOctagon>*/}

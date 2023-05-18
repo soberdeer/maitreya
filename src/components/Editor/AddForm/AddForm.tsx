@@ -1,23 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm, isNotEmpty } from '@mantine/form';
-import { ChevronDown, Plus } from 'react-feather';
-import {
-  Box,
-  Center,
-  Collapse,
-  Group,
-  Input,
-  Select,
-  Stack,
-  TextInput,
-  UnstyledButton,
-} from '@mantine/core';
-import { Text } from '@/components/arwes';
-import PaletteContext from '@/components/contexts/PaletteContext';
-import SelectElement from '@/components/Editor/SelectElement/SelectElement';
-import AnimatedIcon from '@/components/AnimatedIcon/AnimatedIcon';
+import { Box, Collapse, Group, Input, Select, Stack, TextInput } from '@mantine/core';
+import { Text } from '@arwes/react';
+import { Button } from '@src/components/Button';
+import { ChevronDownIcon, PlusIcon } from '@src/components/icons';
+import { SelectElement } from '../SelectElement';
 import useStyles from './AddForm.styles';
-import ActiveButton from '@/components/ActiveButton/ActiveButton';
 
 const elementError = {
   introjects: 'Интроект должен иметь 2 стихии',
@@ -35,7 +23,7 @@ const errText = (type: string) =>
 const massErr =
   'Вы не можете добавить новые идеи, так как они достигли максимального количества. Пожалуйста, очистите идеи, чтобы добавить новые';
 
-export default function AddForm({
+export function AddForm({
   introjectsLength,
   convictionsLength,
   onAdd,
@@ -44,8 +32,7 @@ export default function AddForm({
   convictionsLength: number;
   onAdd(idea: string, type: string): void;
 }) {
-  const classes = useStyles();
-  const { palette } = useContext(PaletteContext);
+  const { classes, theme } = useStyles();
   const [elements, setElements] = useState<string[]>([]);
   const [lengthError, setLengthError] = useState<string | null>(null);
 
@@ -58,7 +45,9 @@ export default function AddForm({
 
     validate: {
       elements: (value, values) =>
-        values.elements.length === elementLength[values.type] ? null : elementError[values.type],
+        values.elements.length === elementLength[values.type as keyof typeof elementLength]
+          ? null
+          : elementError[values.type as keyof typeof elementLength],
       text: isNotEmpty('Это обязательное поле'),
     },
   });
@@ -79,7 +68,7 @@ export default function AddForm({
   };
 
   useEffect(() => {
-    setElements([...Array(elementLength[form.values.type])]);
+    setElements([...Array(elementLength[form.values.type as keyof typeof elementLength])]);
     form.setFieldValue('elements', '');
   }, [form.values.type]);
 
@@ -91,12 +80,12 @@ export default function AddForm({
     <>
       <Collapse in={introjectsLength < 5 || convictionsLength < 5}>
         <Box mt={50}>
-          <Text as="h6">Новая идея</Text>
+          <Text as="h3">Новая идея</Text>
           <Group align="top">
             <Select
               label="Тип идеи"
               classNames={classes}
-              rightSection={<ChevronDown size={14} color={palette.primary.main} />}
+              rightSection={<ChevronDownIcon size={14} color={theme.colors.maitreya[3]} />}
               rightSectionWidth={24}
               data={[
                 { value: 'introjects', label: 'Интроект' },
@@ -105,30 +94,32 @@ export default function AddForm({
               {...form.getInputProps('type')}
             />
             <Stack spacing={0}>
-              <Input.Label sx={{ color: '#89ffff', lineHeight: 1.55 }} pt={3}>
+              <Input.Label sx={{ color: theme.colors.maitreya[1], lineHeight: 1.55 }} pt={3}>
                 Стихии
               </Input.Label>
               <Group>
-                {[...Array(elementLength[form.values.type])].map((_, i) => (
-                  <SelectElement
-                    key={i}
-                    value={elements[i]}
-                    error={form.errors.elements}
-                    onAdd={(value) => {
-                      const clone = [...elements];
-                      clone[i] = value;
-                      setElements(clone);
-                      form.setFieldValue('elements', clone.filter((l) => !!l).join(''));
-                    }}
-                  />
-                ))}
+                {[...Array(elementLength[form.values.type as keyof typeof elementLength])].map(
+                  (_, i) => (
+                    <SelectElement
+                      key={i}
+                      value={elements[i]}
+                      error={form.errors.elements}
+                      onAdd={(value) => {
+                        const clone = [...elements];
+                        clone[i] = value;
+                        setElements(clone);
+                        form.setFieldValue('elements', clone.filter((l) => !!l).join(''));
+                      }}
+                    />
+                  )
+                )}
               </Group>
               <Input.Error
                 pt={5}
                 sx={{
                   width:
-                    60 * elementLength[form.values.type] +
-                    16 * (elementLength[form.values.type] - 1),
+                    60 * elementLength[form.values.type as keyof typeof elementLength] +
+                    16 * (elementLength[form.values.type as keyof typeof elementLength] - 1),
                 }}
               >
                 {form.errors.elements}
@@ -140,31 +131,20 @@ export default function AddForm({
               label="Описание"
               {...form.getInputProps('text')}
             />
-            <ActiveButton
-              onClick={add}
-              icon={
-                <AnimatedIcon width={24} height={24} style={{ cursor: 'pointer' }}>
-                  <Plus size={24} color="#ffa76c" />
-                </AnimatedIcon>
-              }
-            >
+            <Button sx={{ height: 54 }} mt={12} color="maitreya" onClick={add} rightIcon={PlusIcon}>
               Добавить
-            </ActiveButton>
+            </Button>
           </Group>
         </Box>
       </Collapse>
       <Collapse in={!!lengthError}>
         <Box pt={40}>
-          <Text className={classes.error} animator={{ animate: false }}>
-            {lengthError}
-          </Text>
+          <Text className={classes.error}>{lengthError}</Text>
         </Box>
       </Collapse>
       {introjectsLength === 5 && convictionsLength === 5 && (
         <Box pt={40}>
-          <Text className={classes.error} animator={{ animate: false }}>
-            {massErr}
-          </Text>
+          <Text className={classes.error}>{massErr}</Text>
         </Box>
       )}
     </>

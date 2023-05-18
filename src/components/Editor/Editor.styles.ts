@@ -54,7 +54,7 @@ export default createStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: theme.colors.maitreya[9],
+    backgroundColor: theme.fn.rgba(theme.fn.darken(theme.colors.maitreya[9], 0.7), 0.4),
     zIndex: 10,
     pointerEvents: 'none',
     opacity: 0,

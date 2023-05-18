@@ -806,6 +806,14 @@
     react-remove-scroll "^2.5.5"
     react-textarea-autosize "8.3.4"
 
+"@mantine/form@^6.0.11":
+  version "6.0.11"
+  resolved "https://registry.yarnpkg.com/@mantine/form/-/form-6.0.11.tgz#241dba070117461ea6b48b834bc546b0e1c5e699"
+  integrity sha512-fUkUF91bHbj0rVyMbLMsUc4/ieHrmsjVSevgfDbVtR9OAA+BL8B4huqsBpiE0NI2clc2zSf/ttbVcHON8PC4qQ==
+  dependencies:
+    fast-deep-equal "^3.1.3"
+    klona "^2.0.5"
+
 "@mantine/hooks@^6.0.10":
   version "6.0.10"
   resolved "https://registry.yarnpkg.com/@mantine/hooks/-/hooks-6.0.10.tgz#3f4383034f7c8508708abc31dd3d56b93f1e3a6b"
@@ -853,6 +861,13 @@
   version "6.0.10"
   resolved "https://registry.yarnpkg.com/@mantine/utils/-/utils-6.0.10.tgz#a7e99d4d7368912696f40fe56e444ef4f5befeae"
   integrity sha512-Lo4VUn3+/kqhdjSoPzUFbxXEjMxj5vS4pqRjKRGtJsTwHiMFNcm8u4cIESzMBAEsoaBrI1dGE4WttwOJhjUaSw==
+
+"@marshallku/react-postscribe@^0.1.9":
+  version "0.1.9"
+  resolved "https://registry.yarnpkg.com/@marshallku/react-postscribe/-/react-postscribe-0.1.9.tgz#70bf6431c8069ce124ea017fbf1c1f5119f5503b"
+  integrity sha512-dOc9YkVyuzyKOVfvhRqqpyuwxuvyCLoyZ8UiL7mVFlsLdrvlJuLgSJhdwyZ9Byi408yXYiJnJ4T9nQfa+KK3AQ==
+  dependencies:
+    postscribe "^2.0.8"
 
 "@motionone/animation@^10.15.1":
   version "10.15.1"
@@ -3494,6 +3509,16 @@ jsonc-parser@^3.2.0:
     array-includes "^3.1.5"
     object.assign "^4.1.3"
 
+klona@^2.0.5:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/klona/-/klona-2.0.6.tgz#85bffbf819c03b2f53270412420a4555ef882e22"
+  integrity sha512-dhG34DXATL5hSxJbIexCft8FChFXtmskoZYnoPWjXQuebWYCNkVeV3KkGegCK9CP1oswI/vQibS2GY7Em/sJJA==
+
+kysely@^0.24.2:
+  version "0.24.2"
+  resolved "https://registry.yarnpkg.com/kysely/-/kysely-0.24.2.tgz#caf3be037939bd20449c0b7840e932f074b4d12c"
+  integrity sha512-+7eaTJNUYm2yRq1x+lEOZc+78TO35dTZ9b0dh49+Z9CTt2byMSbMiOKpwPlOyCAaHD4kILkAYWYZNywFlmBwRA==
+
 language-subtag-registry@~0.3.2:
   version "0.3.22"
   resolved "https://registry.yarnpkg.com/language-subtag-registry/-/language-subtag-registry-0.3.22.tgz#2e1500861b2e457eba7e7ae86877cbd08fa1fd1d"
@@ -4083,10 +4108,22 @@ postgres-interval@^1.1.0:
   dependencies:
     xtend "^4.0.0"
 
+postscribe@^2.0.8:
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/postscribe/-/postscribe-2.0.8.tgz#5b7a53aad4b690b6c2f75818fcefe74490f410d5"
+  integrity sha512-Sxt6pek38NKX85Vb/PbcritqVxsgPZQFLcuf4o0f7lXRb76jM0XP79SGwCBPRTuv+U2zqByQan8EzRjqquD73A==
+  dependencies:
+    prescribe ">=1.1.2"
+
 prelude-ls@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.2.1.tgz#debc6489d7a6e6b0e7611888cec880337d316396"
   integrity sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==
+
+prescribe@>=1.1.2:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/prescribe/-/prescribe-1.1.3.tgz#8d3122445f3fbaf4c4c5817ea527a17fc8139ee6"
+  integrity sha512-HEg0ElY5tmmCshST4tzl47+SirJO2cVo6j/+O4d6xIz+80ixNcN0GgPQsn76AgeTTIAQOrwq1rfoptubQuZ1Uw==
 
 prettier@^2.8.8:
   version "2.8.8"

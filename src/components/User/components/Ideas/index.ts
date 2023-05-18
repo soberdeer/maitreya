@@ -1,1 +1,0 @@
-export { Ideas } from './Ideas';

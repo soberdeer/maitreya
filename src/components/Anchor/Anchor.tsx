@@ -9,10 +9,18 @@ export interface AnchorProps extends AnimatorProps {
   color?: MantineColor;
   styled?: boolean;
   target?: string;
+  noShadow?: boolean;
 }
 
-export function Anchor({ href, color = 'maitreya', styled, children, target }: AnchorProps) {
-  const { classes, theme, cx } = useStyles();
+export function Anchor({
+  href,
+  color = 'maitreya',
+  styled,
+  children,
+  target,
+  noShadow,
+}: AnchorProps) {
+  const { classes, cx } = useStyles({ color, noShadow });
 
   return (
     <Animator merge duration={{ enter: 0.4, exit: 0.4 }}>
@@ -21,11 +29,7 @@ export function Anchor({ href, color = 'maitreya', styled, children, target }: A
         passHref
         shallow
         target={target}
-        className={cx({ [classes.styled]: styled })}
-        style={{
-          color: theme.colors[color][color === 'maitreyaSecondary' ? 5 : 3],
-          textShadow: `0 0 1px ${theme.colors[color][color === 'maitreyaSecondary' ? 5 : 3]}`,
-        }}
+        className={cx(classes.anchor, { [classes.styled]: styled })}
       >
         {children}
       </Link>

@@ -1,16 +1,16 @@
 import React, { useMemo } from 'react';
 import { Text, TextProps, AnimatorProps, Animator } from '@arwes/react';
 import { ElementTags } from '@src/components/ElementTags';
+import { Group } from '@mantine/core';
 import useStyles from './TextWithElements.styles';
 
-export default function TextWithElements({
+export function TextWithElements({
   children,
   className,
   style,
   animator,
   textProps,
   as,
-  noWrap,
 }: {
   as?: keyof HTMLElementTagNameMap;
   children: string;
@@ -18,24 +18,19 @@ export default function TextWithElements({
   style?: Record<string, any>;
   animator?: AnimatorProps;
   textProps?: Omit<TextProps, 'children'>;
-  noWrap?: boolean;
 }) {
-  const { classes, cx } = useStyles();
+  const { classes } = useStyles();
   const { style: textStyle, ...textRest } = textProps || {};
   const splittedText = useMemo(() => children.split(' -- '), [children]);
 
   return (
-    <div className={cx(classes.root, className)} style={style}>
-      <Animator {...animator}>
-        <ElementTags elements={splittedText[1]} noWrap={noWrap} />
-        <Text
-          as={as || 'p'}
-          style={{ marginBottom: 0, lineHeight: '26px', ...(textStyle || {}) }}
-          {...(textRest || {})}
-        >
+    <Animator {...animator}>
+      <Group position="left" align="center" spacing={10} style={style} className={className} noWrap>
+        <ElementTags elements={splittedText[1]} noWrap={splittedText[1].length < 3} />
+        <Text as={as || 'p'} className={classes.text} style={textStyle} {...(textRest || {})}>
           {splittedText[0]}
         </Text>
-      </Animator>
-    </div>
+      </Group>
+    </Animator>
   );
 }

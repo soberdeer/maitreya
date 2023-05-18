@@ -1,4 +1,10 @@
-import { createStyles } from '@mantine/core';
+import { createStyles, getStylesRef, keyframes } from '@mantine/core';
+
+const bounce = keyframes({
+  '0%, 100%': { transform: 'translateX(0%)' },
+  '15%, 45%, 75%': { transform: 'translateX(-2%)' },
+  '30%, 60%': { transform: 'translateX(2%)' },
+});
 
 export default createStyles((theme) => ({
   loading: {
@@ -26,10 +32,12 @@ export default createStyles((theme) => ({
   },
 
   title: {
+    ref: getStylesRef('title'),
     fontSize: '1.5rem',
     fontFamily: 'Arounder',
     marginBlockEnd: '2rem',
     textShadow: `0 0 2px ${theme.colors.maitreya[3]}`,
+    transition: 'color 200ms ease, text-shadow 200ms ease',
 
     [theme.fn.smallerThan('lg')]: {
       width: 'auto',
@@ -56,9 +64,11 @@ export default createStyles((theme) => ({
   },
 
   error: {
-    color: '#FF3333',
-    stroke: '#FF3333',
-    fill: '#FF3333',
+    animation: `${bounce} 300ms ease-in-out forwards`,
+    [`& .${getStylesRef('title')}`]: {
+      color: '#FF3333',
+      textShadow: '0 0 2px #FF3333',
+    },
   },
 
   errorText: {

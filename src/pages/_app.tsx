@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import App, { AppContext, AppProps } from 'next/app';
 import Head from 'next/head';
-import { Box, Button, Container, MantineProvider } from '@mantine/core';
+import { Box, Container, MantineProvider } from '@mantine/core';
 import { Roboto } from 'next/font/google';
 import {
   type AnimatorGeneralProviderSettings,
@@ -22,6 +22,7 @@ import { useRouter } from 'next/router';
 import { Meta } from '@src/components/Meta';
 import SpotlightProvider from '@src/components/SpotlightProvider/SpotlightProvider';
 import { Loader } from '@src/components/Loader';
+import PostScribe from '@marshallku/react-postscribe';
 
 const roboto = Roboto({
   subsets: ['latin', 'cyrillic', 'cyrillic-ext'],
@@ -50,8 +51,6 @@ const animatorsSettings: AnimatorGeneralProviderSettings = {
 export function MaitreyaApp({
   Component,
   pageProps,
-  isLogin,
-  isGuest,
   base: initialBase,
   animate: animateInitial,
   chatScript,
@@ -110,11 +109,11 @@ export function MaitreyaApp({
                 <Meta />
               </Head>
               <SpotlightProvider router={router}>
-                <Box sx={{ position: 'fixed', right: 30, bottom: 60, zIndex: 1000 }}>
-                  <Button onClick={() => setActive((a) => !a)}>
-                    {active ? 'deactivate' : 'activate'}
-                  </Button>
-                </Box>
+                {/*<Box sx={{ position: 'fixed', right: 30, bottom: 60, zIndex: 1000 }}>*/}
+                {/*  <Button onClick={() => setActive((a) => !a)}>*/}
+                {/*    {active ? 'deactivate' : 'activate'}*/}
+                {/*  </Button>*/}
+                {/*</Box>*/}
                 <Animator active={!active}>
                   <Box sx={{ position: 'fixed', right: 30, bottom: 30, zIndex: 1000 }}>
                     <Loader small />
@@ -137,6 +136,7 @@ export function MaitreyaApp({
                     </Container>
                   </Box>
                 </Animator>
+                {chatScript && <PostScribe html={chatScript} />}
               </SpotlightProvider>
             </AnimatorGeneralProvider>
           </MantineProvider>
@@ -184,7 +184,6 @@ MaitreyaApp.getInitialProps = async (appContext: AppContext) => {
     ...appProps,
     base: base ? base[0] || null : null,
     isGuest: userId === 'guest',
-    isLogin: !userId,
     chatScript,
     animate: typeof animate === 'string' ? animate === 'true' : true,
   };

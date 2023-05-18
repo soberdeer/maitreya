@@ -1,11 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { db } from '../../kysely';
+import { UpdateResult } from 'kysely';
+import { db } from '@src/kysely';
 
-type preData = {
-  success: boolean;
-};
-
-export default async function handler(req: NextApiRequest, res: NextApiResponse<preData>) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse<UpdateResult | { success: boolean }>
+) {
   const { body } = req;
   const { added, deleted } = JSON.parse(body);
 
@@ -22,14 +22,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   };
 
   const intersection = [
-    ...preData.added_introjects.filter((value) => preData.removed_introjects.includes(value)),
-    ...preData.added_convictions.filter((value) => preData.removed_convictions.includes(value)),
+    ...preData.added_introjects.filter((value: string) =>
+      preData.removed_introjects.includes(value)
+    ),
+    ...preData.added_convictions.filter((value: string) =>
+      preData.removed_convictions.includes(value)
+    ),
   ];
 
   const data = Object.keys(preData).reduce(
     (acc, key) => ({
       ...acc,
-      [key]: preData[key].filter((idea) => !intersection.includes(idea)).join(', '),
+      [key]: preData[key as keyof typeof preData]
+        .filter((idea: string) => !intersection.includes(idea))
+        .join('| '),
     }),
     {} as typeof preData
   );

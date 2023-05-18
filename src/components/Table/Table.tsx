@@ -1,18 +1,19 @@
 import React from 'react';
 import { Text } from '@arwes/react';
-import { Table as MantineTable } from '@mantine/core';
+import { Table as MantineTable, TableProps as MantineTableProps } from '@mantine/core';
 import { Inline, Text as ContentfulText } from '@contentful/rich-text-types';
 import useStyles from './Table.styles';
 
-export interface TableProps {
+export interface TableProps extends MantineTableProps {
   headers?: (ContentfulText | Inline)[][][] | null;
   rows?: (ContentfulText | Inline)[][][][] | null;
 }
 
-export function Table({ headers, rows }: TableProps) {
-  const { classes } = useStyles();
+export function Table({ headers, rows, className, ...others }: TableProps) {
+  const { classes, cx } = useStyles();
+
   return (
-    <MantineTable className={classes.table}>
+    <MantineTable className={cx(classes.table, className)} {...others}>
       {headers && (
         <thead>
           <tr>

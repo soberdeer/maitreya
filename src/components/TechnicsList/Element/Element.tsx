@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Center, Group, GroupProps } from '@mantine/core';
+import { Group, GroupProps } from '@mantine/core';
 import { Animator, Text } from '@arwes/react';
 import { TypeStands, TypeCombat, TypeRituals, isTypeCombat } from '@src/util/types';
 import { LevelIcon, StandardIcon } from '@src/components/icons';
@@ -9,11 +9,18 @@ export interface Element extends GroupProps {
   item: TypeStands | TypeCombat | TypeRituals;
 }
 
+const keys = {
+  warrior: 'воин',
+  telepath: 'телепат',
+  healer: 'целитель',
+  navigator: 'навигатор',
+};
+
 const standardColors = {
-  воин: '#f06595',
-  телепат: '#a9e34b',
-  целитель: '#51cf66',
-  навигатор: '#4dabf7',
+  [keys.warrior]: '#f06595',
+  [keys.telepath]: '#a9e34b',
+  [keys.healer]: '#51cf66',
+  [keys.navigator]: '#4dabf7',
 };
 
 export function Element({ item, ...others }: Element) {

@@ -2,10 +2,6 @@ import { Entry, EntrySkeletonType } from 'contentful';
 import { TypeCombatSkeleton, TypeStandsSkeleton } from './types';
 import { TECHNIC_TYPES } from './constants';
 
-type Props = {
-  data: Entry<TypeCombatSkeleton | TypeStandsSkeleton>[];
-};
-
 interface LevelsProps<T extends EntrySkeletonType = TypeCombatSkeleton> {
   pupil: Entry<T>[];
   adept: Entry<T>[];

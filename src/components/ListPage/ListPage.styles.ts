@@ -1,6 +1,6 @@
 import { createStyles } from '@mantine/core';
 
-export default createStyles((theme) => ({
+export default createStyles(() => ({
   root: {
     margin: 'auto',
     width: '100%',

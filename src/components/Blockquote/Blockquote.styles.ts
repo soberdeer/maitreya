@@ -1,4 +1,4 @@
-import { createStyles, getStylesRef, px } from '@mantine/core';
+import { createStyles, getStylesRef } from '@mantine/core';
 
 const transition = 'width 250ms ease, height 250ms ease';
 

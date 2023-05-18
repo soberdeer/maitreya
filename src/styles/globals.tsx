@@ -57,6 +57,9 @@ export const GlobalStyles = () => (
       h1: {
         fontSize: '1.75rem',
         textShadow: '0 0 2px #ffa76c',
+        [`@media screen and (min-width: ${theme.breakpoints.xs}px)`]: {
+          fontSize: '1.4rem',
+        },
       },
       h2: {
         fontSize: '1.625rem',

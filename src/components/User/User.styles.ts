@@ -3,6 +3,10 @@ import { createStyles } from '@mantine/core';
 export default createStyles((theme) => ({
   root: {
     position: 'relative',
+
+    '@media screen and (max-width: 720px)': {
+      maxWidth: 'calc(100vw - 16px*4)',
+    },
   },
 
   flex: {
@@ -72,14 +76,15 @@ export default createStyles((theme) => ({
   },
 
   logoutWrapper: {
+    color: theme.colors.maitreyaSecondary[4],
     position: 'absolute',
     top: 0,
-    right: 0,
+    right: -30,
     display: 'flex',
     gap: 10,
 
     '@media screen and (max-width: 540px)': {
-      right: 10,
+      right: 0,
     },
   },
 

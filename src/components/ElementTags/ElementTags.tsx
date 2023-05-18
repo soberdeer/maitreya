@@ -3,14 +3,12 @@ import { Group, GroupProps } from '@mantine/core';
 import { useElements } from '@src/hooks/use-elements';
 import { ElementStamp } from '@src/components/ElementStamp';
 import { Animator } from '@arwes/react';
-import useStyles from './ElementTags.styles';
 
 export interface ElementTagsProps extends GroupProps {
   elements: string;
 }
 
 export function ElementTags({ className, elements, ...others }: ElementTagsProps) {
-  const { classes, cx } = useStyles();
   const { elements: elementsData } = useElements();
 
   if (!elements) {
@@ -19,7 +17,7 @@ export function ElementTags({ className, elements, ...others }: ElementTagsProps
 
   return (
     <Animator manager="stagger" combine>
-      <Group spacing={10} position="left" className={cx(classes.root, className)} {...others}>
+      <Group spacing={10} position="left" align="center" className={className} {...others}>
         {elements
           .toLowerCase()
           .split('')

@@ -36,10 +36,12 @@ export default createStyles((theme, { longName }: Props) => ({
   },
 
   name: {
-    fontSize: longName ? 28 : 45,
+    fontSize: longName ? '1.5rem' : '2rem',
+    marginBlockEnd: 0,
+    marginBlockStart: 0,
 
     '@media screen and (max-width: 720px)': {
-      fontSize: [28, '!important'],
+      fontSize: ['1.5rem', '!important'],
       wordBreak: 'break-word',
       hyphens: 'auto',
     },

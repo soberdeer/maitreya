@@ -2,7 +2,6 @@ import { createStyles } from '@mantine/core';
 
 export default createStyles({
   root: {
-    paddingTop: 40,
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
@@ -24,6 +23,10 @@ export default createStyles({
 
   text: {
     display: 'flex',
+  },
+
+  techName: {
+    marginBlockEnd: 0,
   },
 
   data: {

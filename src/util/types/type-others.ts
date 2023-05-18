@@ -1,25 +1,19 @@
-import { Entry, EntrySkeletonType } from 'contentful';
-import {
-  TypeCombat,
-  TypeCombatSkeleton,
-  TypeRituals,
-  TypeStands,
-} from '@src/util/types/content-types';
+import { TypeCombat, TypeRituals, TypeStands } from '@src/util/types/content-types';
 
-type Levels = 'Ученик' | 'Адепт' | 'Мастер';
-type TechnicType =
-  | 'Восстановление'
-  | 'Ближний бой'
-  | 'Стрельба'
-  | 'Телепатия'
-  | 'Навигация'
-  | 'Защита';
+// type Levels = 'Ученик' | 'Адепт' | 'Мастер';
+// type TechnicType =
+//   | 'Восстановление'
+//   | 'Ближний бой'
+//   | 'Стрельба'
+//   | 'Телепатия'
+//   | 'Навигация'
+//   | 'Защита';
 
 export type TechnicStateType = 'Только в фуге' | 'Только вне фуги' | 'И в фуге, и вне фуги';
 export type AllTechnicStateType = TechnicStateType | 'Все';
 
 export type KeysType = 'technics' | 'setting' | 'models' | 'rituals';
-export type ElementsEngKeys = 'water' | 'wood' | 'fire' | 'earth' | 'metal';
+// export type ElementsEngKeys = 'water' | 'wood' | 'fire' | 'earth' | 'metal';
 export type RankGroupType =
   | 'До-офицерский состав'
   | 'Младший офицерский состав'

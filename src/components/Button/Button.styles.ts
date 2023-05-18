@@ -30,6 +30,9 @@ export default createStyles((theme, { color }: Props) => ({
       },
       [`& .${getStylesRef('text')}`]: {
         color: theme.colors[color][2],
+        '& *': {
+          color: theme.colors[color][2],
+        },
       },
     },
   },
@@ -46,5 +49,10 @@ export default createStyles((theme, { color }: Props) => ({
     ref: getStylesRef('text'),
     transition: 'color 200ms ease',
     color: theme.colors[color][color === 'maitreya' ? 3 : 5],
+
+    '& *': {
+      transition: 'color 200ms ease',
+      color: theme.colors[color][color === 'maitreya' ? 3 : 5],
+    },
   },
 }));
