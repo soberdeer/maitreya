@@ -13,6 +13,7 @@ export default createStyles(() => ({
     zIndex: 0,
     filter: 'hue-rotate(0deg) brightness(1) blur(10px)',
     transition: 'filter 200ms ease',
+    objectFit: 'cover',
   },
 
   redImage: {
