@@ -1,4 +1,5 @@
 import { Animator } from '@arwes/react';
+import { Box } from '@mantine/core';
 import checkUser from '@src/util/checkUser';
 import { getEntries } from '@src/contentful';
 import { GetServerSidePropsContext } from 'next';
@@ -15,11 +16,13 @@ export default function Index({ data }: { data?: TypeMain_page }) {
     );
   }
   return (
-    <Animator combine manager="stagger">
-      <Animator merge duration={{ enter: 0.4, exit: 0.4 }}>
-        <MainPage data={data} />
+    <Box pb={50}>
+      <Animator combine manager="stagger">
+        <Animator merge duration={{ enter: 0.4, exit: 0.4 }}>
+          <MainPage data={data} />
+        </Animator>
       </Animator>
-    </Animator>
+    </Box>
   );
 }
 
