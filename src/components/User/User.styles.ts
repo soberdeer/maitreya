@@ -1,4 +1,4 @@
-import { createStyles } from '@mantine/core';
+import { createStyles, em, getBreakpointValue } from '@mantine/core';
 
 export default createStyles((theme) => ({
   root: {
@@ -83,7 +83,7 @@ export default createStyles((theme) => ({
     display: 'flex',
     gap: 10,
 
-    '@media screen and (max-width: 540px)': {
+    [`@media (max-width: ${em(getBreakpointValue(theme.breakpoints.sm))})`]: {
       right: 0,
     },
   },

@@ -34,8 +34,8 @@ export function User({
   const health = useMemo(() => calcHealth(user), [user]);
 
   return (
-    <Animator combine duration={{ delay: 0.4, stagger: 0.1 }}>
-      <Box className={cx(classes.root, className)} {...others}>
+    <Box className={cx(classes.root, className)} {...others}>
+      <Animator combine duration={{ delay: 0.4, stagger: 0.1 }}>
         <Box className={classes.logoutWrapper}>
           <Group align="flex-start" spacing="sm">
             {isMaster && (
@@ -77,7 +77,7 @@ export function User({
         </Group>
 
         <BottomPart user={user} />
-      </Box>
-    </Animator>
+      </Animator>
+    </Box>
   );
 }

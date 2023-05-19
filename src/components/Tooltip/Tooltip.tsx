@@ -12,7 +12,7 @@ export function Tooltip({ children, ...rest }: TooltipProps) {
       transitionProps={{ transition: 'scale-x' }}
       withinPortal
       classNames={classes}
-      events={{ hover: true, focus: true, touch: false }}
+      events={{ hover: true, touch: true, focus: true }}
     >
       {children}
     </MantineTooltip>

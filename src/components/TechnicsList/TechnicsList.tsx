@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { useMediaQuery } from '@mantine/hooks';
 import { Box, Group, Stack, Tabs } from '@mantine/core';
 import { LevelType, TypeStands } from '@src/util/types';
 import { Animator, Text } from '@arwes/react';
@@ -30,6 +31,7 @@ export function TechnicsList({ className, data, defaultTab, ...others }: Technic
   const [activeTab, setActiveTab] = useState<string>(
     (router.query.type as string) || defaultTab || 'melee'
   );
+  const mobile = useMediaQuery('(max-width: 720px)');
 
   const replaceRouter = async (tab: string) => {
     router.push(
@@ -59,7 +61,7 @@ export function TechnicsList({ className, data, defaultTab, ...others }: Technic
         {
           pathname: '/technics',
           query: {
-            type: 'melee',
+            type: defaultTab || 'melee',
           },
         },
         undefined,
@@ -84,10 +86,11 @@ export function TechnicsList({ className, data, defaultTab, ...others }: Technic
           variant="default"
           defaultValue={activeTab}
           onTabChange={setTab}
+          orientation={mobile ? 'horizontal' : 'vertical'}
           sx={{ width: '100%' }}
           classNames={{ tab: classes.tab, tabIcon: classes.tabIcon, tabsList: classes.tabList }}
         >
-          <Tabs.List grow>
+          <Tabs.List grow={mobile}>
             {Object.keys(data).map((key) => {
               const item = data[key as keyof TechnicsListDataProps];
 
@@ -98,16 +101,17 @@ export function TechnicsList({ className, data, defaultTab, ...others }: Technic
                 return (
                   <Tabs.Tab value={key} key={key}>
                     <Animator merge duration={{ enter: 0.4, exit: 0.4, delay: 0.2 }}>
-                      <Stack
-                        spacing={0}
+                      <Group
+                        spacing={5}
                         align="center"
+                        noWrap
                         sx={(theme) => ({ color: theme.colors.maitreya[3] })}
                       >
-                        <Icon size={20} key={key} />
+                        <Icon size={mobile ? 20 : 30} key={key} />
                         <Text as="span" className={classes.tabText} color={color}>
                           {TECHNIC_TYPES[key as keyof typeof TECHNIC_TYPES]}
                         </Text>
-                      </Stack>
+                      </Group>
                     </Animator>
                   </Tabs.Tab>
                 );
@@ -120,7 +124,7 @@ export function TechnicsList({ className, data, defaultTab, ...others }: Technic
 
             if (Object.keys(item).find((k) => item[k as keyof LevelType]?.length > 0)) {
               return (
-                <Tabs.Panel value={key} pt="xl" key={key}>
+                <Tabs.Panel value={key} pt={mobile ? 'xl' : 0} pl={mobile ? 0 : 'xl'} key={key}>
                   <Animator merge manager="stagger" duration={{ enter: 0.4, exit: 0.4, offset: 1 }}>
                     <Stack align="flex-start">
                       <SmallBlock data={item.pupil} />
