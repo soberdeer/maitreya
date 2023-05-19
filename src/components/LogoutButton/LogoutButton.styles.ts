@@ -6,5 +6,6 @@ export default createStyles(() => ({
     margin: 0,
     backgroundColor: 'transparent',
     cursor: 'pointer',
+    color: 'inherit',
   },
 }));

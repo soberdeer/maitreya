@@ -1,7 +1,18 @@
 import { createStyles } from '@mantine/core';
 
 export default createStyles((theme) => ({
-  root: {},
+  root: {
+    position: 'relative',
+    width: '100%',
+    '&::-webkit-scrollbar': {
+      display: 'none',
+    },
+
+    [theme.fn.smallerThan('lg')]: {
+      width: 'auto',
+      overflowX: 'scroll',
+    },
+  },
   asset: {
     '& picture': {
       backgroundColor: 'transparent',
@@ -15,12 +26,12 @@ export default createStyles((theme) => ({
     alignItems: 'center',
   },
 
-  tableWrapper: {
-    width: '100%',
-    overflowX: 'scroll',
-    '&::-webkit-scrollbar': {
-      display: 'none',
-    },
+  underline: {
+    backgroundColor: theme.colors.maitreyaSecondary[3],
+    height: 1,
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
   },
 
   header: {
@@ -44,6 +55,7 @@ export default createStyles((theme) => ({
     textAlign: 'left',
     marginTop: theme.spacing.xl,
     marginBottom: theme.spacing.xl,
+    overflowX: 'auto',
 
     '& th, & td': {
       fontSize: '.875rem',
@@ -51,9 +63,9 @@ export default createStyles((theme) => ({
       verticalAlign: 'top',
     },
 
-    '& th': {
-      borderBottom: `1px solid ${theme.colors.maitreya[4]} !important`,
-    },
+    // '& th': {
+    //   borderBottom: `1px solid ${theme.colors.maitreya[4]} !important`,
+    // },
     '& td': {
       borderTop: 'none !important',
     },
@@ -92,5 +104,30 @@ export default createStyles((theme) => ({
   listItemContent: {
     alignItems: 'flex-start',
     marginBottom: 0,
+  },
+
+  overflow: {
+    position: 'absolute',
+    top: 0,
+    width: 50,
+    height: '100%',
+    zIndex: 2,
+    opacity: 0,
+    pointerEvents: 'none',
+    transition: 'opacity 200ms ease',
+  },
+
+  overflowLeft: {
+    left: 0,
+    background: theme.fn.linearGradient(90, '#051e1d', 'transparent'),
+  },
+  overflowRight: {
+    right: 0,
+    background: theme.fn.linearGradient(90, 'transparent', '#051e1d'),
+  },
+
+  show: {
+    opacity: 1,
+    pointerEvents: 'auto',
   },
 }));

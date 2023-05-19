@@ -1,5 +1,5 @@
 import React, { SVGProps } from 'react';
-import { Animated, Text, Animator } from '@arwes/react';
+import { Animated, Text, Animator, aaVisibility } from '@arwes/react';
 import { Asset } from 'contentful';
 import {
   Block,
@@ -9,7 +9,7 @@ import {
   Table as TableBlock,
   TableRow,
 } from '@contentful/rich-text-types';
-import { MantineTheme, List, Center } from '@mantine/core';
+import { MantineTheme, List, Center, Text as MantineText } from '@mantine/core';
 import { Anchor } from '@src/components/Anchor';
 import { Image } from '@src/components/Image';
 import { Table } from '@src/components/Table';
@@ -106,46 +106,60 @@ export const options = (
       </Animator>
     ),
     [BLOCKS.UL_LIST]: (node: Block | Inline, children: React.ReactNode) => (
-      <List
-        withPadding
-        icon={
-          <Center sx={{ height: '100%', marginTop: 7 }}>
-            <Animator duration={{ enter: 0.4, exit: 0.4 }}>
-              <svg className={classes.circleSvg} viewBox="0 0 50 50" width={8} height={8}>
-                <Animated<SVGPathElement, SVGProps<SVGPathElement>>
-                  animated={{
-                    initialStyle: { strokeDashoffset: 100 },
-                    transitions: {
-                      entering: { strokeDashoffset: 0 },
-                      exiting: { strokeDashoffset: 100 },
-                    },
-                  }}
-                  as="path"
-                  d="M1.07 12.99A11.93 11.93 0 1013 1.06 11.93 11.93 0 001.07 12.99"
-                  fill="none"
-                  stroke={theme.colors.maitreya[3]}
-                  strokeWidth={10}
-                  // className={classes.circle}
-                  style={{ transform: 'translate(40%, 40%)' }}
-                />
-              </svg>
-            </Animator>
-          </Center>
-        }
-      >
-        {children}
-      </List>
+      <Animated animated={aaVisibility()}>
+        <List
+          withPadding
+          sx={{ marginBlockEnd: '2rem' }}
+          icon={
+            <Center sx={{ height: '100%', marginTop: 7 }}>
+              <Animator duration={{ enter: 0.4, exit: 0.4 }}>
+                <svg className={classes.circleSvg} viewBox="0 0 50 50" width={8} height={8}>
+                  <Animated<SVGPathElement, SVGProps<SVGPathElement>>
+                    animated={{
+                      initialStyle: { strokeDashoffset: 100 },
+                      transitions: {
+                        entering: { strokeDashoffset: 0 },
+                        exiting: { strokeDashoffset: 100 },
+                      },
+                    }}
+                    as="path"
+                    d="M1.07 12.99A11.93 11.93 0 1013 1.06 11.93 11.93 0 001.07 12.99"
+                    fill="none"
+                    stroke={theme.colors.maitreya[3]}
+                    strokeWidth={10}
+                    // className={classes.circle}
+                    style={{ transform: 'translate(40%, 40%)' }}
+                  />
+                </svg>
+              </Animator>
+            </Center>
+          }
+        >
+          {children}
+        </List>
+      </Animated>
     ),
     [BLOCKS.OL_LIST]: (node: Block | Inline, children: React.ReactNode) => (
-      <List type="ordered" withPadding>
-        {children}
-      </List>
+      <Animated animated={aaVisibility()}>
+        <List type="ordered" withPadding sx={{ marginBlockEnd: '2rem' }}>
+          {children}
+        </List>
+      </Animated>
     ),
-    [BLOCKS.LIST_ITEM]: (node: Block | Inline, children: React.ReactNode) => (
-      <List.Item sx={{ color: theme.colors.maitreya[3] }}>
-        <Text as="span">{children}</Text>
-      </List.Item>
-    ),
+    [BLOCKS.LIST_ITEM]: (node: Block | Inline, children: React.ReactNode) => {
+      const newChildren = Array.isArray(children)
+        ? children.map((child) => (child.props.as === 'p' ? child.props.children : child))
+        : (children as React.ReactElement)?.props?.as === 'p'
+        ? [(children as React.ReactElement)?.props?.children]
+        : [children];
+      return (
+        <List.Item sx={{ color: theme.colors.maitreya[3], marginBottom: '1rem' }}>
+          {newChildren.map((child, index) =>
+            !child.$$typeof ? <MantineText key={index}>{child}</MantineText> : child
+          )}
+        </List.Item>
+      );
+    },
     [BLOCKS.PARAGRAPH]: (node: Block | Inline, children: React.ReactNode) => (
       <Text as="p">{children}</Text>
     ),

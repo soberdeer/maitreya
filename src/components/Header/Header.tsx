@@ -1,12 +1,9 @@
-import React, { useMemo } from 'react';
-import { useRouter } from 'next/router';
-import { aa, aaVisibility, Animated, AnimatedProps, Animator } from '@arwes/react';
-import { LeftNav } from '@src/components/Header/LeftNav';
-import { Logo } from '@src/components/Header/Logo';
-import { Box } from '@mantine/core';
-import { RightNav } from '@src/components/Header/RightNav';
-import { Illumination } from '@src/components/Illumination';
-import useStyles from './Header.styles';
+import React from 'react';
+import { AnimatedProps } from '@arwes/react';
+// import { Box } from '@mantine/core';
+import { DesktopHeader } from '@src/components/Header/DesktopHeader';
+// import { MobileHeader } from '@src/components/Header/MobileHeader';
+// import useStyles from './Header.styles';
 
 interface HeaderProps extends AnimatedProps {
   menu: { href: string; children: string; icon: string }[];
@@ -14,33 +11,17 @@ interface HeaderProps extends AnimatedProps {
   isGuest?: boolean;
 }
 
-export function Header({ className, menu, vkUrl, isGuest }: HeaderProps) {
-  const { classes, cx } = useStyles();
-  const router = useRouter();
-  const active = useMemo(() => router.pathname !== '/login', [router]);
+export function Header(props: HeaderProps) {
+  // const { classes } = useStyles();
 
   return (
-    <Animator active={active}>
-      <Animated as="header" className={cx(classes.root, className)}>
-        <Box className={classes.container}>
-          <Illumination />
-          <Box className={classes.left}>
-            <Animator>
-              <Logo animated={aaVisibility()} />
-            </Animator>
-          </Box>
-          <Animated className={cx(classes.section, classes.left)} animated={aa('x', -12, 0)}>
-            <LeftNav menu={menu} />
-          </Animated>
-          <div />
-          {/*<Animated className={cx(classes.section, classes.center)} animated={aa('scaleX', 0.9, 1)}>*/}
-          {/*  {center}*/}
-          {/*</Animated>*/}
-          <Animated className={cx(classes.section, classes.right)} animated={aa('x', 12, 0)}>
-            <RightNav vkUrl={vkUrl} isGuest={isGuest} />
-          </Animated>
-        </Box>
-      </Animated>
-    </Animator>
+    <>
+      {/*<Box className={classes.desktop}>*/}
+      <DesktopHeader {...props} />
+      {/*</Box>*/}
+      {/*<Box className={classes.mobile}>*/}
+      {/*  <MobileHeader {...props} />*/}
+      {/*</Box>*/}
+    </>
   );
 }

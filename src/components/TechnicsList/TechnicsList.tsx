@@ -26,9 +26,10 @@ export interface TechnicsListProps {
 
 export function TechnicsList({ className, data, defaultTab, ...others }: TechnicsListProps) {
   const { classes, cx } = useStyles();
-  // const [filter] = useState<AllTechnicStateType>('Все');
   const router = useRouter();
-  const [activeTab, setActiveTab] = useState<string>((router.query.type as string) || 'melee');
+  const [activeTab, setActiveTab] = useState<string>(
+    (router.query.type as string) || defaultTab || 'melee'
+  );
 
   const replaceRouter = async (tab: string) => {
     router.push(
@@ -95,7 +96,7 @@ export function TechnicsList({ className, data, defaultTab, ...others }: Technic
                 const color = COLORS_MAP_EN[key as keyof typeof TECHNIC_TYPES];
 
                 return (
-                  <Tabs.Tab value={key}>
+                  <Tabs.Tab value={key} key={key}>
                     <Animator merge duration={{ enter: 0.4, exit: 0.4, delay: 0.2 }}>
                       <Stack
                         spacing={0}

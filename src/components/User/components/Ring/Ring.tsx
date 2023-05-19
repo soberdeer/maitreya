@@ -14,7 +14,7 @@ export function Ring({
 }) {
   const { classes, theme } = useStyles();
   const colorsArr = useMemo(
-    () => colors || [...Array(3).map(() => theme.colors.maitreya[3])],
+    () => colors || [...Array(3).keys()].map(() => theme.colors.maitreya[3]),
     [colors]
   );
 

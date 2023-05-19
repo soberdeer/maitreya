@@ -39,7 +39,7 @@ export function LevelIcon({ level, size = 26, tooltip, ...others }: LevelsIconPr
             animated={{
               initialStyle: { height: 0 },
               transitions: {
-                entering: { height: 156.01 },
+                entering: { height: 156 },
                 exiting: { height: 0 },
               },
             }}
@@ -58,7 +58,7 @@ export function LevelIcon({ level, size = 26, tooltip, ...others }: LevelsIconPr
                 animated={{
                   initialStyle: { height: 0 },
                   transitions: {
-                    entering: { height: 156.01 },
+                    entering: { height: 156 },
                     exiting: { height: 0 },
                   },
                 }}
@@ -79,7 +79,7 @@ export function LevelIcon({ level, size = 26, tooltip, ...others }: LevelsIconPr
                 animated={{
                   initialStyle: { height: 0 },
                   transitions: {
-                    entering: { height: 156.01 },
+                    entering: { height: 156 },
                     exiting: { height: 0 },
                   },
                 }}

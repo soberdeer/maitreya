@@ -122,7 +122,7 @@ export function MaitreyaApp({
                 {/*  </Button>*/}
                 {/*</Box>*/}
                 <Animator active={!active}>
-                  <Box sx={{ position: 'fixed', right: 30, bottom: 30, zIndex: 1000 }}>
+                  <Box sx={{ position: 'fixed', right: 30, bottom: 80, zIndex: 1000 }}>
                     <Loader small />
                   </Box>
                 </Animator>

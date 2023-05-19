@@ -1,9 +1,17 @@
 import localFont from 'next/font/local';
+import { Roboto } from 'next/font/google';
 import { Global } from '@mantine/core';
 
 const Arounder = localFont({
   src: './arounder.ttf',
-  display: 'swap',
+  display: 'auto',
+  preload: true,
+  fallback: ['Roboto', 'sans-serif'],
+});
+
+const roboto = Roboto({
+  weight: ['400', '700'],
+  subsets: ['cyrillic', 'latin'],
 });
 
 // console.log(roboto)
@@ -20,7 +28,7 @@ export const GlobalStyles = () => (
 
       'html,body': {
         WebkitFontSmoothing: 'antialiased',
-        fontFamily: 'Roboto, sans-serif',
+        fontFamily: roboto.style.fontFamily,
         transition: 'color 100ms ease, text-shadow 100ms ease, background-color 100ms ease',
         padding: 0,
         margin: 0,
@@ -48,6 +56,11 @@ export const GlobalStyles = () => (
 
       '& *': {
         textAlign: 'left',
+      },
+
+      b: {
+        // backgroundColor: theme.fn.rgba(theme.colors.yellow[4], 0.2),
+        color: theme.colors.maitreya[2],
       },
 
       'h1, h2, h3, h4, h5, h6': {

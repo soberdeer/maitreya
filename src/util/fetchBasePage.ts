@@ -68,6 +68,7 @@ export default function fetchBasePage(forceSlug?: string) {
       props: {
         type: slug,
         data: clone || null,
+        defaultTab: userId === 'guest' ? 'stand' : 'melee',
         // query: [slug],
         scheme,
       },

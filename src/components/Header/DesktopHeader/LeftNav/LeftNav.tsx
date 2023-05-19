@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { aa, aaVisibility, Text, AnimatedProps, Animator } from '@arwes/react';
 import { MenuItem } from '@src/components/Header/MenuItem';
-import { Menu } from '@src/components/Header/Menu';
+import { Menu } from '@src/components/Header/DesktopHeader/Menu';
 import { Tooltip } from '@src/components/Tooltip';
 import { useMediaQuery } from '@mantine/hooks';
 import { mapLinks } from './mapNavLinks';

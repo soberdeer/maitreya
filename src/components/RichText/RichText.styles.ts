@@ -2,52 +2,28 @@ import { createStyles } from '@mantine/core';
 
 export default createStyles(() => ({
   root: {
+    width: '100%',
+    overflowX: 'hidden',
     textAlign: 'left',
-  },
-  asset: {
-    '& picture': {
-      backgroundColor: 'transparent',
-    },
-  },
 
-  imageWrapper: {
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+    '& ul, & ol': {
+      // verticalAlign: 'text-top !important',
+      // '& li': {
+      //   verticalAlign: 'text-top !important',
+      //   position: 'relative',
+      //   // display: 'inline-block',
+      //   '&::marker': {
+      //     height: '100% !important',
+      //   },
+      // },
 
-  tableWrapper: {
-    width: '100%',
-    overflowX: 'scroll',
-    '&::-webkit-scrollbar': {
-      display: 'none',
-    },
-  },
-
-  table: {
-    // minWidth: 850,
-    '& .arwes-table__cell': {
-      hyphens: 'auto',
-
-      '@media screen and (max-width: 540px)': {
-        minWidth: 150,
+      '& ul, & ol': {
+        marginBlockStart: '1rem',
+        marginBlockEnd: 0,
+      },
+      '& p': {
+        marginBlockEnd: 0,
       },
     },
-    '&::-webkit-scrollbar': {
-      display: 'none',
-    },
-  },
-
-  listItem: {
-    '&::marker': {
-      content: '""',
-      display: 'none',
-    },
-  },
-
-  listItemContent: {
-    alignItems: 'flex-start',
-    marginBottom: 0,
   },
 }));

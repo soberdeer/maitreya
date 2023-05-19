@@ -26,7 +26,12 @@ export function FrameWrapper({
   const { onRender } = useFrameSVGAssemblingAnimation(svgRef);
 
   return (
-    <Animated className={cx(classes.content, className)} animated={[aa('y', 24, 0)]} {...rest}>
+    <Animated
+      className={cx(classes.content, className)}
+      animated={[aa('y', 24, 0)]}
+      data-name="frame-wrapper"
+      {...rest}
+    >
       <Illumination />
       <Animator merge duration={{ enter: 0.4, exit: 0.4 }}>
         <FrameSVGLines

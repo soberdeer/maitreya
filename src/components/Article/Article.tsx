@@ -29,10 +29,8 @@ export function Article({ description, name, children, breadcrumbs }: ArticlePro
           }}
         >
           {breadcrumbs.map((item, index) => (
-            <Animator duration={{ delay: 0.4, stagger: 0.1 }}>
-              <Anchor href={item.href} key={index}>
-                {item.title}
-              </Anchor>
+            <Animator duration={{ delay: 0.4, stagger: 0.1 }} key={index}>
+              <Anchor href={item.href}>{item.title}</Anchor>
             </Animator>
           ))}
         </Breadcrumbs>
