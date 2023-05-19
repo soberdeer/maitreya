@@ -67,7 +67,6 @@ export default createStyles((theme) => ({
       borderRight: `2px solid ${theme.fn.rgba(theme.colors.maitreya[5], 0.6)}`,
 
       [`& .${getStylesRef('tab')}`]: {
-
         // border: '1px solid transparent',
         '&:hover': {
           borderRight: `2px solid ${theme.colors.maitreya[3]}`,

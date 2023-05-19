@@ -95,7 +95,8 @@ export default async function fetchTechnics(
     };
   }
 
-  const defaultTab = getCookie('maitreya_default_tab', context) || userId === 'guest' ? 'stand' : 'melee';
+  const defaultTab =
+    getCookie('maitreya_default_tab', context) || userId === 'guest' ? 'stand' : 'melee';
 
   return {
     props: {
