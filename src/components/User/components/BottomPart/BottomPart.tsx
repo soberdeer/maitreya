@@ -31,7 +31,7 @@ export function BottomPart({ user }: { user: MappedUser }) {
 
   return (
     <Box className={classes.root} pb={30} pt={40}>
-      {technics && (
+      {technics && (user.technics?.length || 0) > 0 && (
         <Box className={classes.block}>
           <Text as="h2">Техники</Text>
           <Box className={classes.data}>
@@ -42,7 +42,7 @@ export function BottomPart({ user }: { user: MappedUser }) {
         </Box>
       )}
 
-      {rituals && (
+      {rituals && (user.rituals?.length || 0) > 0 && (
         <Box className={classes.block}>
           <Text as="h2">Ритуалы</Text>
           <Box className={classes.data}>
