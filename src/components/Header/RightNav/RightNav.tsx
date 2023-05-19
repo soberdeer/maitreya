@@ -6,7 +6,7 @@ import { Box, Center } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import { LogoutButton } from '@src/components/LogoutButton';
 import { Menu } from '../Menu';
-import { MenuItem } from '../../MenuItem';
+import { MenuItem } from '../MenuItem';
 import { VkIcon } from './VkIcon';
 import { ActivateButton } from './ActivateButton';
 import { SearchButton } from './SearchButton';
@@ -55,7 +55,7 @@ export function RightNav({ vkUrl, isGuest }: RightNavProps) {
                   <LogoutButton iconSize={24} style={{ top: -3 }} />
                 </Box>
               ) : (
-                <Link href="/src/pages/user" title="Vkontakte" style={{ height: '100%' }} passHref>
+                <Link href="/user" title="Vkontakte" style={{ height: '100%' }} passHref>
                   <Center sx={{ height: '100%' }}>
                     <IconUser />
                   </Center>
