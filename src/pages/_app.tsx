@@ -2,7 +2,6 @@ import React, { useEffect, useMemo, useState } from 'react';
 import App, { AppContext, AppProps } from 'next/app';
 import Head from 'next/head';
 import { Box, Container, MantineProvider } from '@mantine/core';
-import { Roboto } from 'next/font/google';
 import {
   type AnimatorGeneralProviderSettings,
   AnimatorGeneralProvider,
@@ -24,12 +23,6 @@ import SpotlightProvider from '@src/components/SpotlightProvider/SpotlightProvid
 import { Loader } from '@src/components/Loader';
 import PostScribe from '@marshallku/react-postscribe';
 import { emotionCache } from '@src/util/emotion-cache';
-
-const roboto = Roboto({
-  subsets: ['latin', 'cyrillic', 'cyrillic-ext'],
-  weight: ['400', '700'],
-  style: ['normal'],
-});
 
 interface AppInterface extends AppProps {
   Component: NextPage;
@@ -97,20 +90,20 @@ export function MaitreyaApp({
   }, [router]);
 
   return (
-    <div style={{ height: '100vh' }}>
-      <AnimateProvider animate={animate} toggleAnimate={toggleAnimate}>
-        <ElementsProvider
-          elements={
-            base?.fields.elements?.map((entry) => entry?.fields as TypeElementsFields) || []
-          }
-        >
-          <MantineProvider
-            withGlobalStyles
-            withNormalizeCSS
-            theme={mantineTheme}
-            emotionCache={emotionCache}
+    <MantineProvider
+      withGlobalStyles
+      withNormalizeCSS
+      theme={mantineTheme}
+      emotionCache={emotionCache}
+    >
+      <GlobalStyles />
+      <div style={{ height: '100vh' }}>
+        <AnimateProvider animate={animate} toggleAnimate={toggleAnimate}>
+          <ElementsProvider
+            elements={
+              base?.fields.elements?.map((entry) => entry?.fields as TypeElementsFields) || []
+            }
           >
-            <GlobalStyles />
             <AnimatorGeneralProvider {...animatorsSettings} disabled={!animate}>
               <Head>
                 <Meta />
@@ -134,7 +127,6 @@ export function MaitreyaApp({
                 <Animator combine manager="stagger" active={active}>
                   <Box
                     component="main"
-                    className={roboto.className}
                     sx={{ height: '100vh', paddingTop: 100, paddingBottom: 50 }}
                   >
                     <Background />
@@ -147,10 +139,10 @@ export function MaitreyaApp({
                 {chatScript && <PostScribe html={chatScript} />}
               </SpotlightProvider>
             </AnimatorGeneralProvider>
-          </MantineProvider>
-        </ElementsProvider>
-      </AnimateProvider>
-    </div>
+          </ElementsProvider>
+        </AnimateProvider>
+      </div>
+    </MantineProvider>
   );
 }
 

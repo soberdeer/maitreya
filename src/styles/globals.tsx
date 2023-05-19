@@ -2,7 +2,7 @@ import localFont from 'next/font/local';
 import { Roboto } from 'next/font/google';
 import { Global } from '@mantine/core';
 
-const Arounder = localFont({
+const arounder = localFont({
   src: './arounder.ttf',
   display: 'auto',
   preload: true,
@@ -18,13 +18,13 @@ const roboto = Roboto({
 export const GlobalStyles = () => (
   <Global
     styles={(theme) => ({
-      '@font-face': {
-        fontFamily: 'Arounder',
-        src: `url('${Arounder}') format("ttf")`,
-        fontWeight: 400,
-        sizeAdjust: '120%',
-        fontStyle: 'normal',
-      },
+      // '@font-face': {
+      //   fontFamily: 'Arounder',
+      //   src: `url('${arounder}') format("ttf")`,
+      //   fontWeight: 400,
+      //   sizeAdjust: '120%',
+      //   fontStyle: 'normal',
+      // },
 
       'html,body': {
         WebkitFontSmoothing: 'antialiased',
@@ -43,6 +43,7 @@ export const GlobalStyles = () => (
 
       body: {
         ...theme.fn.fontStyles(),
+        fontFamily: roboto.style.fontFamily,
         color: '#00e6e6',
 
         '&::-webkit-scrollbar': {
@@ -64,7 +65,7 @@ export const GlobalStyles = () => (
       },
 
       'h1, h2, h3, h4, h5, h6': {
-        fontFamily: '"Arounder", sans-serif',
+        fontFamily: `${arounder.style.fontFamily}, sans-serif`,
         letterSpacing: '.1em',
         fontWeight: 'bold',
         lineHeight: 1.3,
