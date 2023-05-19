@@ -1,5 +1,5 @@
-import * as icons from '@tabler/icons-react';
-import { TablerIconsProps } from '@tabler/icons-react';
+import * as icons from '@src/components/icons';
+import { DefaultType } from '@src/components/icons/default-type';
 
 export type RawLinkType = {
   icon: string;
@@ -10,7 +10,7 @@ export type RawLinkType = {
 const technics: RawLinkType = {
   href: '/technics',
   children: 'Техники',
-  icon: 'IconAnalyze',
+  icon: 'AnalyzeIcon',
 };
 
 export const mapLinks = (dynamicPages: RawLinkType[]) =>
@@ -21,6 +21,6 @@ export const mapLinks = (dynamicPages: RawLinkType[]) =>
     return {
       link: href,
       label: children,
-      icon: icon ? (icon as (props: TablerIconsProps) => JSX.Element) : undefined,
+      icon: icon ? (icon as (props: DefaultType) => JSX.Element) : undefined,
     };
   });

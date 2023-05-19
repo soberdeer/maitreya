@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
 import { Box } from '@mantine/core';
 import { Asset } from 'contentful';
-import { Tooltip } from '@src/components/Tooltip';
 import { aaVisibility, Animated } from '@arwes/react';
-import { IconCirclePlus } from '@tabler/icons-react';
+import { Tooltip } from '@src/components/Tooltip';
+import { CirclePlusIcon } from '@src/components/icons';
 import getIconSizes from './getIconSizes';
 import useStyles from './House.styles';
 
@@ -43,7 +43,7 @@ export function House({ house, homeless }: { house?: House; homeless?: boolean }
               style={sizes}
             />
           ) : (
-            <IconCirclePlus size={50} color="#ededed" />
+            <CirclePlusIcon size={50} color="#ededed" />
           )}
         </Animated>
       </Tooltip>

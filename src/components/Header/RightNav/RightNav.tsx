@@ -1,10 +1,10 @@
 import React from 'react';
 import { aa, aaVisibility, AnimatedProps, Animator } from '@arwes/react';
-import { IconUser } from '@tabler/icons-react';
 import Link from 'next/link';
 import { Box, Center } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import { LogoutButton } from '@src/components/LogoutButton';
+import { UserIcon } from '@src/components/icons';
 import { Menu } from '../Menu';
 import { MenuItem } from '../MenuItem';
 import { VkIcon } from './VkIcon';
@@ -57,7 +57,7 @@ export function RightNav({ vkUrl, isGuest }: RightNavProps) {
               ) : (
                 <Link href="/user" title="Vkontakte" style={{ height: '100%' }} passHref>
                   <Center sx={{ height: '100%' }}>
-                    <IconUser />
+                    <UserIcon />
                   </Center>
                 </Link>
               )}

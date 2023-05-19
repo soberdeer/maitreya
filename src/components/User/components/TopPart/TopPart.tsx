@@ -35,7 +35,11 @@ export function TopPart({ user }: { user: MappedUser }) {
         </Animator>
       </Center>
       <Box
-        sx={{ minWidth: isMedium ? 'unset' : 350, flexGrow: 1, maxWidth: !isMedium ? 'calc(60% - 1.25rem)' : 'unset' }}
+        sx={{
+          minWidth: isMedium ? 'unset' : 350,
+          flexGrow: 1,
+          maxWidth: !isMedium ? 'calc(60% - 1.25rem)' : 'unset',
+        }}
       >
         <Box sx={{}}>
           <Group position="left" align="center" spacing={20} pt={isSmall ? 0 : 30} pb={30} noWrap>

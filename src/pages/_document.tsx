@@ -1,6 +1,7 @@
 import Document, { DocumentContext, Head, Html, Main, NextScript } from 'next/document';
 import { ServerStyles, createStylesServer } from '@mantine/next';
 import { emotionCache } from '@src/util/emotion-cache';
+import React from 'react';
 
 const stylesServer = createStylesServer(emotionCache);
 
@@ -26,6 +27,7 @@ export default class _Document extends Document {
           <meta charSet="UTF-8" />
           <meta name="viewport" content="width=device-width,initial-scale=1.0" />
           <meta name="theme-color" content="#09201f" />
+          <link rel="canonical" href="https://maitreya-academy.vercel.app/" />
           <meta httpEquiv="Content-Language" content="ru_RU" />
           <meta name="keywords" content="академия майтрея, академия, майтрея" />
         </Head>

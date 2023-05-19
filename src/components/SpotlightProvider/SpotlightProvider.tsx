@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { NextRouter } from 'next/router';
 import { SpotlightProvider as MantineSpotlightProvider, SpotlightAction } from '@mantine/spotlight';
-import { IconSearch } from '@tabler/icons-react';
 import { useDebouncedValue } from '@mantine/hooks';
+import { SearchIcon } from '@src/components/icons';
 import { Loader } from '@src/components/Loader';
 import { Action } from './Action';
 import useStyles from './SpotlightProvider.styles';
@@ -72,7 +72,7 @@ export default function SpotlightProvider({
         setQuery(value);
         setSpotlightActions([]);
       }}
-      searchIcon={<IconSearch size="1.2rem" color={theme.colors.maitreya[3]} />}
+      searchIcon={<SearchIcon size="1.2rem" color={theme.colors.maitreya[3]} />}
       searchPlaceholder="Поиск"
       nothingFoundMessage={spotlightMessage}
       shortcut="mod + shift + C"

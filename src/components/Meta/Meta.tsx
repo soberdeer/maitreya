@@ -14,7 +14,6 @@ export function Meta({ title, description }: { title?: string; description?: str
       <title>{title ? `${defaultTitle} | ${title}` : defaultTitle}</title>
       <meta name="description" content={description || defaultDescription} />
       <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
-      <link rel="canonical" href={baseURL} />
       <meta property="og:title" content={title ? `${defaultTitle} | ${title}` : defaultTitle} />
       <meta property="og:description" content={description || defaultDescription} />
       <meta property="og:image" content={image} />

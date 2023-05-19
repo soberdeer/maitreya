@@ -33,7 +33,7 @@ export function LeftNav({ menu }: LeftNavProps) {
               >
                 <Tooltip label={label} disabled={disabled}>
                   <Link href={link} title={label} passHref>
-                    {Icon && <Icon stroke={1} />}
+                    {Icon && <Icon />}
                     <Text as="span" className={classes.menuText}>
                       {label}
                     </Text>

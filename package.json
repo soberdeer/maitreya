@@ -21,7 +21,7 @@
     "@mantine/next": "^6.0.10",
     "@mantine/spotlight": "^6.0.10",
     "@marshallku/react-postscribe": "^0.1.9",
-    "@tabler/icons-react": "^2.18.0",
+    "@next/bundle-analyzer": "^13.4.3",
     "@types/recharts": "^1.8.24",
     "@vanilla-extract/next-plugin": "^2.1.2",
     "@vercel/postgres": "^0.1.3",
