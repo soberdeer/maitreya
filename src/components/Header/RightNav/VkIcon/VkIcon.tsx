@@ -10,7 +10,7 @@ export function VkIcon({
   href,
   size = 24,
   ...rest
-}: AnimatedProps & { href: string; size: number | string }) {
+}: AnimatedProps & { href: string; size?: number | string }) {
   const { classes, cx } = useStyles();
   return (
     <Animated className={cx(classes.root, className)} {...rest}>
