@@ -22,3 +22,4 @@ export * from './BookIcon';
 export * from './InfoHexagonIcon';
 export * from './HierarchyIcon';
 export * from './AnalyzeIcon';
+export * from './MenuIcon';

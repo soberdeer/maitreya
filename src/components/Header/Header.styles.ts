@@ -26,6 +26,21 @@ export default createStyles((theme) => ({
       gridTemplateColumns: '40px 1fr 1fr 1fr',
     },
   },
+
+  desktop: {
+    [`@media (max-width: ${em(getBreakpointValue(theme.breakpoints.sm))})`]: {
+      display: 'none',
+    },
+  },
+
+  mobile: {
+    gridTemplateColumns: 'auto 40px auto',
+    display: 'none',
+    [`@media (max-width: ${em(getBreakpointValue(theme.breakpoints.sm))})`]: {
+      display: 'grid',
+    },
+  },
+
   frame: {
     zIndex: -1,
     position: 'absolute',
@@ -50,5 +65,10 @@ export default createStyles((theme) => ({
   },
   right: {
     justifyContent: 'flex-end',
+  },
+
+  content: {
+    backgroundColor: 'transparent',
+    position: 'relative',
   },
 }));

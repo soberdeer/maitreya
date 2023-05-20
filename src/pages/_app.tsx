@@ -1,14 +1,17 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import App, { AppContext, AppProps } from 'next/app';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { Box, Container, MantineProvider } from '@mantine/core';
 import {
   type AnimatorGeneralProviderSettings,
   AnimatorGeneralProvider,
   Animator,
 } from '@arwes/react';
+import { ModalsProvider } from '@mantine/modals';
 import { GlobalStyles } from '@src/styles';
 import { NextApiRequest, NextApiResponse, NextPage } from 'next';
+import PostScribe from '@marshallku/react-postscribe';
 import { getEntries, getEntry } from '@src/contentful';
 import getChatScript from '@src/util/getChatScript';
 import { TypeElementsFields, TypeMain, TypeMainSkeleton, TypeUsersSkeleton } from '@src/util/types';
@@ -17,11 +20,9 @@ import { Background } from '@src/components/Background';
 import { Header } from '@src/components/Header';
 import { ElementsProvider } from '@src/hooks/use-elements';
 import { AnimateProvider } from '@src/hooks/use-animate';
-import { useRouter } from 'next/router';
 import { Meta } from '@src/components/Meta';
 import SpotlightProvider from '@src/components/SpotlightProvider/SpotlightProvider';
 import { Loader } from '@src/components/Loader';
-import PostScribe from '@marshallku/react-postscribe';
 import { emotionCache } from '@src/util/emotion-cache';
 
 interface AppInterface extends AppProps {
@@ -109,34 +110,36 @@ export function MaitreyaApp({
                 <Meta />
               </Head>
               <SpotlightProvider router={router}>
-                {/*<Box sx={{ position: 'fixed', right: 30, bottom: 60, zIndex: 1000 }}>*/}
-                {/*  <Button onClick={() => setActive((a) => !a)}>*/}
-                {/*    {active ? 'deactivate' : 'activate'}*/}
-                {/*  </Button>*/}
-                {/*</Box>*/}
-                <Animator active={!active}>
-                  <Box sx={{ position: 'fixed', right: 30, bottom: 80, zIndex: 1000 }}>
-                    <Loader small />
-                  </Box>
-                </Animator>
-                <Header
-                  menu={base?.fields.menu as { href: string; children: string; icon: string }[]}
-                  vkUrl={base?.fields.vk_url}
-                  isGuest={isGuest}
-                />
-                <Animator combine manager="stagger" active={active}>
-                  <Box
-                    component="main"
-                    sx={{ height: '100vh', paddingTop: 100, paddingBottom: 50 }}
-                  >
-                    <Background />
-                    <Container sx={{ zIndex: 1, height: '100%' }}>
-                      {/*@ts-ignore*/}
-                      <Component {...pageProps} />
-                    </Container>
-                  </Box>
-                </Animator>
-                {chatScript && <PostScribe html={chatScript} />}
+                <ModalsProvider>
+                  {/*<Box sx={{ position: 'fixed', right: 30, bottom: 60, zIndex: 1000 }}>*/}
+                  {/*  <Button onClick={() => setActive((a) => !a)}>*/}
+                  {/*    {active ? 'deactivate' : 'activate'}*/}
+                  {/*  </Button>*/}
+                  {/*</Box>*/}
+                  <Animator active={!active}>
+                    <Box sx={{ position: 'fixed', right: 30, bottom: 80, zIndex: 1000 }}>
+                      <Loader small />
+                    </Box>
+                  </Animator>
+                  <Header
+                    menu={base?.fields.menu as { href: string; children: string; icon: string }[]}
+                    vkUrl={base?.fields.vk_url}
+                    isGuest={isGuest}
+                  />
+                  <Animator combine manager="stagger" active={active}>
+                    <Box
+                      component="main"
+                      sx={{ height: '100vh', paddingTop: 100, paddingBottom: 50 }}
+                    >
+                      <Background />
+                      <Container sx={{ zIndex: 1, height: '100%' }}>
+                        {/*@ts-ignore*/}
+                        <Component {...pageProps} />
+                      </Container>
+                    </Box>
+                  </Animator>
+                  {chatScript && <PostScribe html={chatScript} />}
+                </ModalsProvider>
               </SpotlightProvider>
             </AnimatorGeneralProvider>
           </ElementsProvider>

@@ -8,6 +8,7 @@ export default createStyles((theme) => ({
     columnGap: '0.5rem',
     justifyContent: 'center',
     alignItems: 'center',
+    height: '100%',
 
     '& a, & button': {
       display: 'grid',

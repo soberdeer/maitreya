@@ -7,7 +7,7 @@ export default createStyles((theme) => ({
   // },
 
   body: {
-    backgroundColor: theme.colors.maitreya[9],
+    backgroundColor: theme.fn.rgba(theme.colors.maitreya[9], 0.8),
     // border: '1px solid #0ff',
   },
 
@@ -15,11 +15,12 @@ export default createStyles((theme) => ({
     borderRadius: 0,
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
-    backgroundColor: theme.colors.maitreya[9],
+    backgroundColor: theme.fn.rgba(theme.colors.maitreya[9], 0.8),
     border: `1px solid ${theme.colors.maitreya[3]}`,
     color: theme.colors.maitreya[3],
     // borderColor: theme.colors.maitreya[3],
     borderBottom: `0.0625rem solid ${theme.colors.maitreya[3]} !important`,
+    transition: 'color 200ms ease, border-color 200ms ease, background-color 200ms ease',
 
     '&::placeholder': {
       color: theme.colors.maitreya[4],
@@ -50,10 +51,12 @@ export default createStyles((theme) => ({
     color: theme.colors.maitreya[3],
     fontFamily: 'Arounder, sans-serif',
     letterSpacing: 1.3,
+    fontSize: '0.9rem',
     paddingBottom: theme.spacing.md,
   },
 
   action: {
+    transition: 'background-color 200ms ease',
     '&[data-hovered]': {
       backgroundColor: 'rgba(0,255,255,0.2)',
       boxShadow: 'none',
@@ -75,6 +78,7 @@ export default createStyles((theme) => ({
   actionDescription: {
     ref: getStylesRef('actionDescription'),
     color: theme.colors.maitreya[3],
+    transition: 'color 200ms ease',
     // fontFamily: 'Arounder, sans-serif',
   },
 }));

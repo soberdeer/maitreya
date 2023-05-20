@@ -67,8 +67,8 @@ export default createStyles((theme) => ({
 
   menuText: {
     whiteSpace: 'nowrap',
-    [`@media (max-width: ${em(getBreakpointValue(theme.breakpoints.xl) - 1)})`]: {
-      display: 'none',
-    },
+    // [`@media (max-width: ${em(getBreakpointValue(theme.breakpoints.xl) - 1)})`]: {
+    //   display: 'none',
+    // },
   },
 }));

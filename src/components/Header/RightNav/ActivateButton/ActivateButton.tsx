@@ -5,7 +5,12 @@ import { useAnimate } from '@src/hooks/use-animate';
 import { Tooltip } from '@src/components/Tooltip';
 import useStyles from './ActivateButton.styles';
 
-export function ActivateButton({ className, animated, ...rest }: AnimatedProps) {
+export function ActivateButton({
+  className,
+  animated,
+  size = 24,
+  ...rest
+}: AnimatedProps & { size?: number | string }) {
   const { classes, cx } = useStyles();
   const { animate, toggleAnimate } = useAnimate();
 
@@ -14,7 +19,7 @@ export function ActivateButton({ className, animated, ...rest }: AnimatedProps) 
       <Tooltip label={animate ? 'Выключить анимацию' : 'Включить анимацию'}>
         <UnstyledButton style={{ height: '100%' }} onClick={() => toggleAnimate()}>
           <Center sx={{ height: '100%' }}>
-            <svg viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" height={24} width={24}>
+            <svg viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" height={size} width={size}>
               <path
                 d="M23.11,17.57,25.67,7.33,31.17,22H38.5"
                 className={cx(classes.line, classes.iconLine)}
