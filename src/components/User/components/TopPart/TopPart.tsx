@@ -1,6 +1,6 @@
 import React from 'react';
 import { Animator, Text } from '@arwes/react';
-import { Box, Center, Group } from '@mantine/core';
+import { Box, Center, Group, Stack } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import { Anchor } from '@src/components/Anchor';
 import { FileIcon, StarIcon } from '@src/components/icons';
@@ -41,8 +41,8 @@ export function TopPart({ user }: { user: MappedUser }) {
           maxWidth: !isMedium ? 'calc(60% - 1.25rem)' : 'unset',
         }}
       >
-        <Box sx={{}}>
-          <Group position="left" align="center" spacing={20} pt={isSmall ? 0 : 30} pb={30} noWrap>
+        <Stack spacing="lg">
+          <Group position="left" align="center" spacing={20} pt={isSmall ? 0 : 30} pb={10} noWrap>
             {user.order ? (
               <Animator
                 combine
@@ -67,7 +67,7 @@ export function TopPart({ user }: { user: MappedUser }) {
             </Text>
           </Group>
           {user.honor && (
-            <Box className={classes.text} mb={20}>
+            <Box className={classes.text}>
               <Honor honor={user.honor} />
             </Box>
           )}
@@ -76,20 +76,20 @@ export function TopPart({ user }: { user: MappedUser }) {
               <Ranking
                 rankGroup={user.rank_group}
                 rankNumber={user.rank_number}
-                style={{ marginBottom: 20, marginLeft: 0 }}
+                // style={{ marginBottom: 20, marginLeft: 0 }}
               />
             </Box>
           )}
           {user.profession && user.work && (
-            <Box mb={20}>
-              <Text className={cx(classes.text, classes.styled)} style={{ fontSize: 20 }}>
+            <Box>
+              <Text className={cx(classes.text, classes.styled, classes.lg)}>
                 {user.profession} - {user.work}
               </Text>
             </Box>
           )}
           {user.course && user.cadet_number && (
-            <Box mb={20}>
-              <Text className={cx(classes.text, classes.styled)} style={{ fontSize: 20 }}>
+            <Box>
+              <Text className={cx(classes.text, classes.styled, classes.lg)}>
                 {`Номер: ${user.course}-${user.cadet_number}`}
               </Text>
             </Box>
@@ -97,20 +97,20 @@ export function TopPart({ user }: { user: MappedUser }) {
           {typeof user.rating === 'number' && (
             <Group sx={(theme) => ({ color: theme.colors.maitreya[3] })}>
               <StarIcon tooltip="Личный рейтинг" size={20} />
-              <Text className={cx(classes.text, classes.styled)} style={{ fontSize: 24 }}>
-                {user.rating}
-              </Text>
+              <Text className={cx(classes.text, classes.styled, classes.xl)}>{user.rating}</Text>
             </Group>
           )}
           {user.bio && (
-            <Anchor href={user.bio} target="_blank" color="maitreyaSecondary" noShadow>
-              <Group align="center" spacing={10}>
-                <FileIcon size={20} style={{ marginBottom: 3 }} />
-                <Text as="span">Биография</Text>
-              </Group>
-            </Anchor>
+            <Box>
+              <Anchor href={user.bio} target="_blank" color="maitreyaSecondary" noShadow>
+                <Group align="center" spacing={10}>
+                  <FileIcon size={20} style={{ marginBottom: 3 }} />
+                  <Text as="span">Биография</Text>
+                </Group>
+              </Anchor>
+            </Box>
           )}
-        </Box>
+        </Stack>
       </Box>
     </Group>
   );

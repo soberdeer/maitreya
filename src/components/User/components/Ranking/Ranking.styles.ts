@@ -1,6 +1,6 @@
 import { createStyles } from '@mantine/core';
 
-export default createStyles({
+export default createStyles((theme) => ({
   root: {
     display: 'flex',
     justifyContent: 'flex-start',
@@ -27,8 +27,8 @@ export default createStyles({
   },
 
   text: {
-    fontSize: 20,
+    fontSize: theme.fontSizes.lg,
     textAlign: 'left',
     marginLeft: 5,
   },
-});
+}));

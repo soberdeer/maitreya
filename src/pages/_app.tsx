@@ -10,7 +10,7 @@ import {
   Animator,
 } from '@arwes/react';
 import { ModalsProvider } from '@mantine/modals';
-import { GlobalStyles } from '@src/styles';
+import { GlobalStyles } from '@src/util/globals';
 import { NextApiRequest, NextApiResponse, NextPage } from 'next';
 import PostScribe from '@marshallku/react-postscribe';
 import { getEntries, getEntry } from '@src/contentful';

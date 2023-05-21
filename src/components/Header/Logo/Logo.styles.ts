@@ -11,7 +11,7 @@ export const inner = keyframes({
 
 export const border = keyframes({
   from: {
-    strokeDashoffset: 125,
+    strokeDashoffset: 140,
   },
   to: {
     strokeDashoffset: 0,
@@ -48,7 +48,8 @@ export default createStyles(() => ({
     fill: 'none',
     stroke: '#fc0',
     strokeWidth: '2.73',
-    strokeDasharray: 125,
+    strokeDasharray: 140,
+    strokeLinecap: 'round',
     animation: `${border} 500ms ease-in-out`,
   },
   inner: {

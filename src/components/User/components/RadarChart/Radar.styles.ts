@@ -1,5 +1,4 @@
 import { createStyles } from '@mantine/core';
-import colors from '../../../../styles/colors';
 
 export default createStyles((theme) => ({
   root: {
@@ -7,9 +6,9 @@ export default createStyles((theme) => ({
     height: 300,
   },
   radar: {
-    color: colors.primary,
+    color: theme.colors.maitreya[3],
     '& text': {
-      color: colors.primary,
+      color: theme.colors.maitreya[3],
     },
   },
 
@@ -31,7 +30,7 @@ export default createStyles((theme) => ({
     borderRadius: 0,
   },
   tooltip: {
-    backgroundColor: 'rgba(0, 248, 248, 0.1)',
+    backgroundColor: theme.fn.rgba(theme.colors.maitreya[3], 0.1),
     border: `1px solid ${theme.colors.maitreya[8]}`,
   },
 }));

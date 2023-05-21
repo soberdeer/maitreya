@@ -23,10 +23,15 @@ export default class _Document extends Document {
       <Html lang="ru">
         <Head>
           <link rel="manifest" href="/manifest.json" />
-          <link rel="shortcut icon" href="/favicon.svg" />
+          <link
+            rel="shortcut icon"
+            href="/favicon.svg"
+            type="image/svg+xml"
+            sizes="48x48 72x72 96x96 128x128 256x256 512x512"
+          />
           <meta charSet="UTF-8" />
           <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-          <meta name="theme-color" content="#09201f" />
+          <meta name="theme-color" content="#003333" />
           <link rel="canonical" href="https://maitreya-academy.vercel.app/" />
           <meta httpEquiv="Content-Language" content="ru_RU" />
           <meta name="keywords" content="академия майтрея, академия, майтрея" />

@@ -1,28 +1,5 @@
 import { KeysType, SchemeType } from './types';
 
-export const ELEMENTS = [
-  {
-    name: 'огонь',
-    key: 'о',
-  },
-  {
-    name: 'вода',
-    key: 'в',
-  },
-  {
-    name: 'земля',
-    key: 'з',
-  },
-  {
-    name: 'дерево',
-    key: 'ж',
-  },
-  {
-    name: 'металл',
-    key: 'м',
-  },
-];
-
 export const SCHEME_MAP: Record<KeysType, SchemeType> = {
   technics: {
     query: 'combat',

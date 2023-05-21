@@ -40,8 +40,8 @@ export function Technic({
           <LevelIcon level={levelKey} size={30} />
 
           <Text
-            className={classes.text}
-            style={{ fontSize: 22, color: levelMapper[levelKey].color }}
+            className={cx(classes.text, classes.level)}
+            style={{ color: levelMapper[levelKey].color }}
           >
             {data.level}
           </Text>

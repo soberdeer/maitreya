@@ -16,18 +16,9 @@ const roboto = Roboto({
   fallback: ['sans-serif'],
 });
 
-// console.log(roboto)
 export const GlobalStyles = () => (
   <Global
     styles={(theme) => ({
-      // '@font-face': {
-      //   fontFamily: 'Arounder',
-      //   src: `url('${arounder}') format("ttf")`,
-      //   fontWeight: 400,
-      //   sizeAdjust: '120%',
-      //   fontStyle: 'normal',
-      // },
-
       'html,body': {
         WebkitFontSmoothing: 'antialiased',
         fontFamily: roboto.style.fontFamily,
@@ -36,17 +27,19 @@ export const GlobalStyles = () => (
         margin: 0,
       },
 
+      '*, *::before, *::after': {
+        boxSizing: 'border-box',
+      },
+
       html: {
         backgroundColor: 'black',
-        // '@media (prefers-color-scheme: dark)': {
         colorScheme: 'dark',
-        // },
       },
 
       body: {
         ...theme.fn.fontStyles(),
         fontFamily: roboto.style.fontFamily,
-        color: '#00e6e6',
+        color: theme.colors.maitreya[3],
 
         '&::-webkit-scrollbar': {
           display: 'none',
@@ -71,13 +64,14 @@ export const GlobalStyles = () => (
         letterSpacing: '.1em',
         fontWeight: 'bold',
         lineHeight: 1.3,
-        color: '#ffa76c',
-        textAlign: 'center',
+        color: theme.colors.maitreyaSecondary[5],
+        textAlign: 'left',
       },
 
       h1: {
         fontSize: '1.75rem',
-        textShadow: '0 0 2px #ffa76c',
+        textShadow: `0 0 2px ${theme.colors.maitreyaSecondary[5]}`,
+        textAlign: 'center',
         [`@media screen and (min-width: ${theme.breakpoints.xs}px)`]: {
           fontSize: '1.4rem',
         },
@@ -112,10 +106,6 @@ export const GlobalStyles = () => (
         color: 'inherit',
         textDecoration: 'none',
         textAlign: 'left',
-      },
-
-      '*, *::before, *::after': {
-        boxSizing: 'border-box',
       },
 
       chatbro_minimized_chat: {

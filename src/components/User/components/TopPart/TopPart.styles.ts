@@ -46,4 +46,12 @@ export default createStyles((theme, { longName }: Props) => ({
       hyphens: 'auto',
     },
   },
+
+  lg: {
+    fontSize: theme.fontSizes.lg,
+  },
+
+  xl: {
+    fontSize: theme.fontSizes.xl,
+  },
 }));

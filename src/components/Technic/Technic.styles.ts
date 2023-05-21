@@ -1,6 +1,6 @@
 import { createStyles } from '@mantine/core';
 
-export default createStyles(() => ({
+export default createStyles((theme) => ({
   root: {
     position: 'relative',
     display: 'flex',
@@ -22,7 +22,7 @@ export default createStyles(() => ({
   },
 
   key: {
-    fontSize: 22,
+    fontSize: theme.fontSizes.xl,
     fontFamily: 'Arounder, sans-serif',
   },
 
@@ -49,5 +49,9 @@ export default createStyles(() => ({
 
   text: {
     fontFamily: 'Arounder',
+  },
+
+  level: {
+    fontSize: '1.5rem',
   },
 }));
