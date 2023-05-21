@@ -22,7 +22,6 @@ type EntryMapped = {
 };
 type Data = {
   entries: EntryMapped[];
-  // pages: Entry<PageProps>[];
 };
 
 type BlocksType = {
@@ -41,14 +40,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   const [searchEntries, pages, user, technics, rituals] = await Promise.all([
     search(query),
     getEntries<TypePageSkeleton>('page', 3),
-    !userId || userId === 'guest' ? undefined : getEntry<TypeUsersSkeleton>(userId),
+    !userId || !userId ? undefined : getEntry<TypeUsersSkeleton>(userId),
     getEntries<TypeCombatSkeleton>('combat'),
     getEntries<TypeRitualsSkeleton>('rituals'),
   ]);
 
   const availableTechnics = [
-    ...(checkReferences<TypeCombatSkeleton>(technics, user, userId === 'guest') || []),
-    ...(checkReferences<TypeRitualsSkeleton>(rituals, user, userId === 'guest') || []),
+    ...(checkReferences<TypeCombatSkeleton>(technics, user, !userId) || []),
+    ...(checkReferences<TypeRitualsSkeleton>(rituals, user, !userId) || []),
   ];
 
   const availableArticles = (pages as TypePage[])

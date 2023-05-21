@@ -1,5 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
+import { deleteCookie } from 'cookies-next';
 import { Center, UnstyledButton, UnstyledButtonProps } from '@mantine/core';
 import { Tooltip } from '@src/components/Tooltip';
 import { LogoutIcon } from '@src/components/icons';
@@ -17,7 +18,7 @@ export function LogoutButton({
   const logout = () => {
     fetch('/api/logout');
     if (document) {
-      document.cookie = '_maitreya_user=; expires=Thu,` 01 Jan 1970 00:00:00 UTC; path=/;';
+      deleteCookie('_maitreya_user');
       const chatScript = document.getElementById('chatBroEmbedCode');
       const chatElement = document.getElementsByClassName('chatbro_container')?.[0];
       if (chatScript) {
@@ -27,7 +28,7 @@ export function LogoutButton({
         chatElement.remove();
       }
     }
-    router.push('/login');
+    router.push('/');
   };
 
   return (
@@ -39,7 +40,7 @@ export function LogoutButton({
         sx={{ width: iconSize, height: iconSize }}
       >
         <Center sx={{ height: '100%' }}>
-          <LogoutIcon width={iconSize} height={iconSize} color="currentColor" />
+          <LogoutIcon size={iconSize} color="currentColor" />
         </Center>
       </UnstyledButton>
     </Tooltip>

@@ -13,6 +13,7 @@ export function Tooltip({ children, ...rest }: TooltipProps) {
       withinPortal
       classNames={classes}
       events={{ hover: true, touch: true, focus: true }}
+      aria-describedby={typeof children === 'string' ? children : undefined}
     >
       {children}
     </MantineTooltip>

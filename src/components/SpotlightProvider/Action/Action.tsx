@@ -9,10 +9,10 @@ export function Action({
   hovered,
   query,
   onTrigger,
+  highlightQuery,
   ...others
 }: SpotlightActionProps & { query: string }) {
   const { classes } = useStyles();
-
   return (
     <UnstyledButton
       className={classes.action}

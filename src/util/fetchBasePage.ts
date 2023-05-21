@@ -28,8 +28,10 @@ export default function fetchBasePage(forceSlug?: string) {
     }
 
     const base = await getEntries<TypeMainSkeleton>('main');
-    // @ts-ignore
-    const scheme = base?.[0]?.fields?.menu?.find((el: any) => el.href === `/${slug}`);
+
+    const scheme = base?.[0]?.fields?.menu
+      ? (base?.[0].fields.menu as any[]).find((el: any) => el.href === `/${slug}`)
+      : null;
 
     if (!scheme) {
       return {

@@ -49,8 +49,6 @@ export function Login({ className, children, updateUser, error, setError, loadin
     }
   };
 
-  const onGuestLogin = () => updateUser('guest');
-
   useEffect(
     () => () => {
       setErrorTerm('');
@@ -95,6 +93,7 @@ export function Login({ className, children, updateUser, error, setError, loadin
                     <TextInput
                       value={userCode}
                       type="password"
+                      aria-label="Ключ"
                       onChange={(e) => {
                         setError(false);
                         setErrorClassName(false);
@@ -113,9 +112,9 @@ export function Login({ className, children, updateUser, error, setError, loadin
                     <Text className={classes.errorText}>{errorTerm}</Text>
                   </Animator>
                   <Button onClick={onLogin}>Войти</Button>
-                  <Button onClick={onGuestLogin} color="maitreya">
-                    Войти как гость
-                  </Button>
+                  {/*<Button onClick={onGuestLogin} color="maitreya">*/}
+                  {/*  Войти как гость*/}
+                  {/*</Button>*/}
                   {children}
                 </Stack>
               </FrameWrapper>

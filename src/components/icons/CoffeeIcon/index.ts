@@ -1,0 +1,1 @@
+export { CoffeeIcon } from './CoffeeIcon';

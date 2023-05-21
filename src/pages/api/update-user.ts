@@ -12,9 +12,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   const users = await getEntries('users');
 
   let userResult = null;
-  if (userCode === 'guest') {
-    userResult = 'guest';
-  } else {
+
+  if (userCode) {
     const foundUser = users?.find((entry) => entry.fields.code === userCode);
 
     if (foundUser) {

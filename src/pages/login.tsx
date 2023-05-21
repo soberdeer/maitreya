@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import type { GetServerSidePropsContext } from 'next';
 import { useRouter } from 'next/router';
+import { setCookie } from 'cookies-next';
 import { Login } from '@src/components/Login';
 import { Meta } from '@src/components/Meta';
 
@@ -20,7 +20,7 @@ export default function LoginPage() {
 
     setLoading(false);
     if (user) {
-      document.cookie = `_maitreya_user=${user}; max-age=18144000;`;
+      setCookie('_maitreya_user', user, { maxAge: 60 * 60 * 24 * 31 });
       router.push('/');
     } else {
       setLoginError(true);
@@ -38,21 +38,4 @@ export default function LoginPage() {
       />
     </>
   );
-}
-
-export async function getServerSideProps({ req }: GetServerSidePropsContext) {
-  const userId = req?.cookies._maitreya_user || null;
-
-  if (userId) {
-    return {
-      redirect: {
-        destination: '/',
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: {},
-  };
 }

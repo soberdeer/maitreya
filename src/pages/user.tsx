@@ -45,7 +45,7 @@ export async function getServerSideProps({ req, res }: GetServerSidePropsContext
 
   const user = userId === 'guest' ? ({} as TypeUsers) : await getEntry<TypeUsersSkeleton>(userId);
 
-  if (userId !== 'guest' && !user) {
+  if (!user) {
     res.setHeader('Set-Cookie', '_maitreya_user=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT');
     return {
       redirect: {
@@ -57,7 +57,7 @@ export async function getServerSideProps({ req, res }: GetServerSidePropsContext
 
   return {
     props: {
-      user: userId === 'guest' ? null : user || null,
+      user: user || null,
       isMaster: userId === process.env.MASTER_ID,
     },
   };

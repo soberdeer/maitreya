@@ -14,7 +14,7 @@ import groupTechnics from './groupTechnicsList';
 
 export default async function fetchTechnics(
   user?: Entry<TypeUsersSkeleton, 'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'> | null,
-  userId?: string,
+  userId?: string | null,
   context?: GetServerSidePropsContext
 ) {
   const slug = 'technics';
@@ -27,8 +27,7 @@ export default async function fetchTechnics(
       ).then((res) => res.flat())
     : await getEntries<TypeFetchSkeleton>(scheme.query);
 
-  const rituals =
-    user && userId !== 'guest' ? await getEntries<TypeRitualsSkeleton>('rituals') : [];
+  const rituals = user && userId ? await getEntries<TypeRitualsSkeleton>('rituals') : [];
 
   const filtered =
     'filter' in scheme
@@ -68,23 +67,21 @@ export default async function fetchTechnics(
       | null
       | undefined,
     user,
-    userId === 'guest'
+    !userId
   );
-  const availableRituals = checkReferences<TypeRitualsSkeleton>(
-    rituals,
-    user,
-    userId === 'guest'
-  )?.sort((a: Entry<TypeRitualsSkeleton>, b: Entry<TypeRitualsSkeleton>) => {
-    const keyA = a.fields.level as keyof typeof levels;
-    const keyB = b.fields.level as keyof typeof levels;
-    if (levels[keyA] > levels[keyB]) {
-      return 1;
+  const availableRituals = checkReferences<TypeRitualsSkeleton>(rituals, user, !userId)?.sort(
+    (a: Entry<TypeRitualsSkeleton>, b: Entry<TypeRitualsSkeleton>) => {
+      const keyA = a.fields.level as keyof typeof levels;
+      const keyB = b.fields.level as keyof typeof levels;
+      if (levels[keyA] > levels[keyB]) {
+        return 1;
+      }
+      if (levels[keyB] > levels[keyA]) {
+        return -1;
+      }
+      return 0;
     }
-    if (levels[keyB] > levels[keyA]) {
-      return -1;
-    }
-    return 0;
-  });
+  );
 
   if (available?.length === 0) {
     return {
@@ -95,8 +92,7 @@ export default async function fetchTechnics(
     };
   }
 
-  const defaultTab =
-    getCookie('maitreya_default_tab', context) || userId === 'guest' ? 'stand' : 'melee';
+  const defaultTab = getCookie('maitreya_default_tab', context) || (!userId ? 'stand' : 'melee');
 
   return {
     props: {

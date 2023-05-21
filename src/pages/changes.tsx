@@ -51,16 +51,8 @@ export default function ChangesPage({ user, dbUser }: UserPageProps) {
 
 export async function getServerSideProps({ req, res }: GetServerSidePropsContext) {
   const userId = req?.cookies._maitreya_user || null;
-  if (!userId) {
-    return {
-      redirect: {
-        destination: '/login',
-        permanent: false,
-      },
-    };
-  }
 
-  if (userId === 'guest') {
+  if (!userId || userId === 'guest') {
     return {
       redirect: {
         destination: '/restricted',
@@ -75,7 +67,7 @@ export async function getServerSideProps({ req, res }: GetServerSidePropsContext
     res.setHeader('Set-Cookie', '_maitreya_user=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT');
     return {
       redirect: {
-        destination: '/login',
+        destination: '/restricted',
         permanent: false,
       },
     };

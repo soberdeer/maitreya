@@ -4,6 +4,7 @@ import { Animator, Text } from '@arwes/react';
 import { FrameWrapper } from '@src/components/FrameWrapper';
 import { Center, Container } from '@mantine/core';
 import { Button } from '@src/components/Button';
+import { CoffeeIcon } from '@src/components/icons/CoffeeIcon';
 import useStyles from './Error.styles';
 
 const errorTypesMap = {
@@ -19,13 +20,20 @@ const errorTypesMap = {
 };
 
 export function Error({ type }: { type?: keyof typeof errorTypesMap }) {
-  const { classes, cx } = useStyles();
+  const { classes, cx, theme } = useStyles();
   const router = useRouter();
   return (
     <Center sx={{ height: '100%' }} pb={20}>
       <Container size="sm">
         <Animator merge duration={{ enter: 0.4, exit: 0.4 }}>
           <FrameWrapper color={type === 'noChanges' || type === 'changeSuccess' ? 'green' : 'red'}>
+            {type === 'noChanges' && (
+              <Center>
+                <Animator combine>
+                  <CoffeeIcon size={150} color={theme.colors.green[4]} />
+                </Animator>
+              </Center>
+            )}
             <Animator duration={{ delay: 0.4, stagger: 0.1 }}>
               <Text
                 as="h2"

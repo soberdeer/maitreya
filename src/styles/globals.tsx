@@ -4,7 +4,7 @@ import { Global } from '@mantine/core';
 
 const arounder = localFont({
   src: './arounder.ttf',
-  display: 'auto',
+  display: 'swap',
   preload: true,
   fallback: ['Roboto', 'sans-serif'],
 });
@@ -12,6 +12,8 @@ const arounder = localFont({
 const roboto = Roboto({
   weight: ['400', '700'],
   subsets: ['cyrillic', 'latin'],
+  display: 'swap',
+  fallback: ['sans-serif'],
 });
 
 // console.log(roboto)

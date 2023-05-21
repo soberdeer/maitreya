@@ -4,10 +4,15 @@ export default createStyles((theme) => ({
   text: {
     color: '#FF3333',
     textShadow: '0 0 2px #FF3333',
+    textAlign: 'center',
+    '& *': {
+      textAlign: 'center',
+    },
   },
 
   green: {
-    color: theme.colors.green[5],
-    textShadow: `0 0 2px ${theme.colors.green[5]}`,
+    filter: 'saturate(1.5)',
+    color: theme.colors.green[4],
+    textShadow: `0 0 2px ${theme.colors.green[2]}`,
   },
 }));

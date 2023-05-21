@@ -42,7 +42,7 @@ export default function fetchChildPage(forceSlug?: string) {
     const available = checkAvailable(
       data as TypeFetch,
       (checkResult as UserReturn).user,
-      (checkResult as UserReturn).userId === 'guest'
+      !(checkResult as UserReturn).userId
     ) as Entry<TypeArticlesSkeleton> | null;
 
     if (!available) {

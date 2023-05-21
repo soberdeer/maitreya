@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { NextRouter } from 'next/router';
 import { SpotlightProvider as MantineSpotlightProvider, SpotlightAction } from '@mantine/spotlight';
-import { useDebouncedValue } from '@mantine/hooks';
+import { useDebouncedValue, useListState } from '@mantine/hooks';
 import { SearchIcon } from '@src/components/icons';
 import { Loader } from '@src/components/Loader';
 import { Action } from './Action';
@@ -28,6 +28,7 @@ export default function SpotlightProvider({
 }) {
   const { classes, theme } = useStyles();
   const [query, setQuery] = useState('');
+  const [controllers, { append, setState: setControllers }] = useListState<AbortController>([]);
   const [spotlightMessage, setSpotlightMessage] = useState<React.ReactNode | null>(null);
   const [debouncedQuery] = useDebouncedValue(query, 200);
   const [spotlightActions, setSpotlightActions] = useState<SpotlightAction[]>([]);
@@ -44,21 +45,41 @@ export default function SpotlightProvider({
     },
   });
 
-  const toggleSearch = async () => {
-    await fetch('/api/search', { method: 'POST', body: debouncedQuery })
+  const toggleSearch = async (signal: AbortSignal) => {
+    await fetch('/api/search', {
+      method: 'POST',
+      body: debouncedQuery,
+      signal,
+    })
       .then((res) => res.json())
       .then(({ entries }: { entries: EntryMapped[] }) => {
         setSpotlightMessage(entries.length === 0 ? defaultMessage : null);
         setSpotlightActions(entries.map((r) => toAction(r)));
+        setControllers([]);
       })
-      .catch(() => setSpotlightMessage(errorMessage));
+      .catch((err) => {
+        if (err.message !== 'The user aborted a request.') {
+          setSpotlightMessage(errorMessage);
+        }
+      });
   };
 
   useEffect(() => {
+    const abortController = new AbortController();
     if (debouncedQuery.length > 0) {
-      toggleSearch();
+      controllers.map((controller) => controller.abort());
+      append(abortController);
+      toggleSearch(abortController.signal);
     }
   }, [debouncedQuery]);
+
+  useEffect(
+    () => () => {
+      controllers.map((controller) => controller.abort());
+      setControllers([]);
+    },
+    []
+  );
 
   return (
     <MantineSpotlightProvider
@@ -77,6 +98,7 @@ export default function SpotlightProvider({
       nothingFoundMessage={spotlightMessage}
       shortcut="mod + shift + C"
       classNames={{ ...classes }}
+      highlightQuery={false}
     >
       {children}
     </MantineSpotlightProvider>

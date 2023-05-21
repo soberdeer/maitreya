@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 import { aa, aaVisibility, Text, AnimatedProps, Animator } from '@arwes/react';
 import { MenuItem } from '@src/components/Header/MenuItem';
 import { Menu } from '@src/components/Header/Menu';
-import { Tooltip } from '@src/components/Tooltip';
 import { useMediaQuery } from '@mantine/hooks';
 import { mapLinks } from './mapNavLinks';
 import useStyles from './LeftNav.styles';
@@ -30,15 +29,14 @@ export function LeftNav({ menu }: LeftNavProps) {
                 className={classes.menuItem}
                 active={router.asPath.startsWith(link) as boolean}
                 animated={leftItemAnimation}
+                tooltip={!disabled ? undefined : label}
               >
-                <Tooltip label={label} disabled={disabled}>
-                  <Link href={link} title={label} passHref>
-                    {Icon && <Icon />}
-                    <Text as="span" className={classes.menuText}>
-                      {label}
-                    </Text>
-                  </Link>
-                </Tooltip>
+                <Link href={link} title={label} passHref>
+                  {Icon && <Icon />}
+                  <Text as="span" className={classes.menuText}>
+                    {label}
+                  </Text>
+                </Link>
               </MenuItem>
             </Animator>
           ))}

@@ -15,7 +15,7 @@ export const updateBlocks = (
     const entries = checkReferences(
       current.fields.list as TypeFetch[] | null | undefined,
       user,
-      userId === 'guest'
+      !userId
     );
     if (!entries || entries.length === 0) {
       return previous;

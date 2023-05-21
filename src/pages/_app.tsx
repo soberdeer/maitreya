@@ -2,7 +2,8 @@ import React, { useEffect, useMemo, useState } from 'react';
 import App, { AppContext, AppProps } from 'next/app';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { Box, Container, MantineProvider } from '@mantine/core';
+import { setCookie } from 'cookies-next';
+import { Box, Button, Container, MantineProvider } from '@mantine/core';
 import {
   type AnimatorGeneralProviderSettings,
   AnimatorGeneralProvider,
@@ -56,7 +57,7 @@ export function MaitreyaApp({
   const base = useMemo(() => initialBase, []);
   const router = useRouter();
   const toggleAnimate = () => {
-    document.cookie = `_maitreya_animate=${!animate}`;
+    setCookie('_maitreya_animate', animate);
     setAnimate((p) => !p);
   };
 
@@ -111,13 +112,20 @@ export function MaitreyaApp({
               </Head>
               <SpotlightProvider router={router}>
                 <ModalsProvider>
-                  {/*<Box sx={{ position: 'fixed', right: 30, bottom: 60, zIndex: 1000 }}>*/}
-                  {/*  <Button onClick={() => setActive((a) => !a)}>*/}
-                  {/*    {active ? 'deactivate' : 'activate'}*/}
-                  {/*  </Button>*/}
-                  {/*</Box>*/}
+                  <Box sx={{ position: 'fixed', right: 30, bottom: 60, zIndex: 1000 }}>
+                    <Button onClick={() => setActive((a) => !a)}>
+                      {active ? 'deactivate' : 'activate'}
+                    </Button>
+                  </Box>
                   <Animator active={!active}>
-                    <Box sx={{ position: 'fixed', right: 30, bottom: 80, zIndex: 1000 }}>
+                    <Box
+                      sx={{
+                        position: 'fixed',
+                        right: '1rem',
+                        bottom: isGuest ? '1rem' : 80,
+                        zIndex: 1000,
+                      }}
+                    >
                       <Loader small />
                     </Box>
                   </Animator>
@@ -186,7 +194,7 @@ MaitreyaApp.getInitialProps = async (appContext: AppContext) => {
   return {
     ...appProps,
     base: base ? base[0] || null : null,
-    isGuest: userId === 'guest',
+    isGuest: !userId || userId === 'guest',
     chatScript,
     animate: typeof animate === 'string' ? animate === 'true' : true,
   };
