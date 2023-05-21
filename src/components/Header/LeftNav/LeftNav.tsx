@@ -14,7 +14,7 @@ interface LeftNavProps extends AnimatedProps {
 
 export function LeftNav({ menu }: LeftNavProps) {
   const { classes } = useStyles();
-  const disabled = useMediaQuery('(min-width: 1400px)');
+  const disabled = useMediaQuery('(min-width: 720px)');
   const router = useRouter();
   const links = useMemo(() => mapLinks(menu), [menu]);
   const leftItemAnimation = [aaVisibility(), aa('x', -4, 0, 0)];
@@ -29,7 +29,7 @@ export function LeftNav({ menu }: LeftNavProps) {
                 className={classes.menuItem}
                 active={router.asPath.startsWith(link) as boolean}
                 animated={leftItemAnimation}
-                tooltip={!disabled ? undefined : label}
+                tooltip={disabled ? undefined : label}
               >
                 <Link href={link} title={label} passHref>
                   {Icon && <Icon />}
