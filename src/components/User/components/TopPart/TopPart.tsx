@@ -94,7 +94,7 @@ export function TopPart({ user }: { user: MappedUser }) {
               </Text>
             </Box>
           )}
-          {user.rating && (
+          {typeof user.rating === 'number' && (
             <Group sx={(theme) => ({ color: theme.colors.maitreya[3] })}>
               <StarIcon tooltip="Личный рейтинг" size={20} />
               <Text className={cx(classes.text, classes.styled)} style={{ fontSize: 24 }}>

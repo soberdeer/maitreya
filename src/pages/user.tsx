@@ -55,9 +55,17 @@ export async function getServerSideProps({ req, res }: GetServerSidePropsContext
     };
   }
 
+  const mappedUser = {
+    ...user,
+    fields: {
+      ...user.fields,
+      personal_access: [],
+    },
+  };
+
   return {
     props: {
-      user: user || null,
+      user: mappedUser || null,
       isMaster: userId === process.env.MASTER_ID,
     },
   };
