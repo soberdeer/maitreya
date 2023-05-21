@@ -14,7 +14,9 @@ const background = keyframes({
 
 export default createStyles((theme) => ({
   root: {
-    width: '100%',
+    // maxHeight: 400,
+    overflow: 'hidden',
+    // width: '100%',
     transition: 'opacity 400ms ease',
     marginBlockEnd: '2rem',
     marginBlockStart: '2rem',
@@ -41,11 +43,12 @@ export default createStyles((theme) => ({
   },
   img: {
     ref: getStylesRef('img'),
-    maxHeight: 400,
     display: 'block',
     border: 'none',
     margin: 0,
     padding: 0,
+    maxHeight: 400,
+    objectFit: 'contain',
     minHeight: 100,
     minWidth: 200,
     width: '100%',
@@ -55,8 +58,13 @@ export default createStyles((theme) => ({
     boxShadow: 'none',
     // animation: `${image} 400ms ease forwards`,
     // animationDelay: '300ms',
+    // border: `1px solid ${theme.colors.maitreya[5]}`,
     transition:
-      'width 250ms ease-in, height 250ms ease-in, min-width 250ms ease-in, min-height 250ms ease-in',
+      'width 250ms ease-in, height 250ms ease-in, min-width 250ms ease-in, min-height 250ms ease-in, border 250ms ease',
+
+    // '&:hover': {
+    //   border: `1px solid ${theme.colors.maitreya[3]}`,
+    // },
   },
   placeholder: {
     height: 100,

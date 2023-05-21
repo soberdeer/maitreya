@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "analyze": "ANALYZE=true next build",
     "start": "next start",
     "prettier": "prettier --write \"**/*.{ts,tsx}\" && next lint --fix"
   },

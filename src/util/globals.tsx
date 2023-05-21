@@ -110,9 +110,6 @@ export const GlobalStyles = () => (
 
       chatbro_minimized_chat: {
         transition: 'bottom 200ms ease',
-        [`@media screen and (min-width: ${theme.breakpoints.xs}px)`]: {
-          bottom: '20px !important',
-        },
       },
 
       chatbro_messages_wrapper: {
