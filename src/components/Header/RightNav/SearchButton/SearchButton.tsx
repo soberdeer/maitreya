@@ -13,7 +13,7 @@ export const SearchButton = forwardRef<HTMLDivElement, AnimatedProps>(
     return (
       <Animated className={cx(classes.root, className)} ref={ref} {...rest}>
         <Tooltip label="Поиск">
-          <UnstyledButton style={{ height: '100%' }} onClick={() => spotlight.openSpotlight()}>
+          <UnstyledButton style={{ height: '100%' }} onClick={() => spotlight.openSpotlight()} aria-label="Поиск">
             <Center sx={{ height: '100%' }}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

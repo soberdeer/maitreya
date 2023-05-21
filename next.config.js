@@ -10,6 +10,7 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   swcMinify: true,
+  productionBrowserSourceMaps: true,
   images: {
     remotePatterns: [
       {

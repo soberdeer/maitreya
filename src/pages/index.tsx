@@ -6,6 +6,7 @@ import { GetServerSidePropsContext } from 'next';
 import { TypeMain_page, TypeMain_pageSkeleton } from '@src/util/types';
 import { Error } from '@src/components/Error';
 import { MainPage } from '@src/components/MainPage';
+import { Meta } from '@src/components/Meta';
 
 export default function Index({ data }: { data?: TypeMain_page }) {
   if (!data) {
@@ -17,6 +18,7 @@ export default function Index({ data }: { data?: TypeMain_page }) {
   }
   return (
     <Box pb={50}>
+      <Meta />
       <Animator combine manager="stagger">
         <Animator merge duration={{ enter: 0.4, exit: 0.4 }}>
           <MainPage data={data} />

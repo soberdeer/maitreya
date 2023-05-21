@@ -16,7 +16,7 @@ export function MenuButton({ onClick }: MenuItemProps) {
         <Menu>
           <Animator>
             <MenuItem animated={[aaVisibility(), aa('x', -4, 0, 0)]}>
-              <UnstyledButton onClick={onClick}>
+              <UnstyledButton onClick={onClick} aria-label="Меню">
                 <MenuIcon />
               </UnstyledButton>
             </MenuItem>
