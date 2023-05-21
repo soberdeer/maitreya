@@ -66,6 +66,17 @@ export default function fetchBasePage(forceSlug?: string) {
 
     clone.fields = { ...data.fields, blocks: updatedBlocks };
 
+    try {
+      JSON.stringify(clone || {});
+    } catch {
+      return {
+        redirect: {
+          destination: '/500',
+          permanent: false,
+        },
+      };
+    }
+
     return {
       props: {
         type: slug,

@@ -15,6 +15,8 @@ import {
 import { getCache, setCache } from './cache';
 import { Logger } from './logger';
 
+type IncludeType = 0 | 1 | 2 | 3 | 4 | 10 | 5 | 6 | 7 | 8 | 9 | undefined;
+
 const check = () =>
   process.env.CONTENTFUL_DELIVERY_TOKEN &&
   process.env.CONTENTFUL_SPACE_ID &&
@@ -33,7 +35,7 @@ const index =
 
 export async function getEntries<T extends EntrySkeletonType>(
   content_type: string,
-  include?: 0 | 1 | 2 | 3 | 4 | 10 | 5 | 6 | 7 | 8 | 9 | undefined
+  include?: IncludeType
 ): Promise<Entry<T, 'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'>[] | undefined | null> {
   const cached = getCache<Entry<T, 'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'>[] | undefined | null>(
     content_type
@@ -123,7 +125,8 @@ export async function search(query: string): Promise<(TypeFetch | undefined)[]> 
 }
 
 export async function getEntry<T extends EntrySkeletonType>(
-  id?: string
+  id?: string,
+  include: IncludeType = 10
 ): Promise<Entry<T, 'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'> | null | undefined> {
   if (!id) {
     return null;
@@ -137,7 +140,7 @@ export async function getEntry<T extends EntrySkeletonType>(
 
   return index?.withoutUnresolvableLinks
     .getEntry<T>(id, {
-      include: 10,
+      include,
       locale: 'ru-RU',
     })
     .then((entry) => {

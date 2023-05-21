@@ -71,6 +71,17 @@ export default function fetchChildPage(forceSlug?: string) {
         }
       : null;
 
+    try {
+      JSON.stringify(slicedChildren || {});
+    } catch {
+      return {
+        redirect: {
+          destination: '/500',
+          permanent: false,
+        },
+      };
+    }
+
     return {
       props: {
         type: slug,

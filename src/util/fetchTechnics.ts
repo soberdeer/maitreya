@@ -94,6 +94,18 @@ export default async function fetchTechnics(
 
   const defaultTab = getCookie('maitreya_default_tab', context) || (!userId ? 'stand' : 'melee');
 
+  try {
+    JSON.stringify(available || {});
+    JSON.stringify(availableRituals || {});
+  } catch {
+    return {
+      redirect: {
+        destination: '/500',
+        permanent: false,
+      },
+    };
+  }
+
   return {
     props: {
       type: slug,

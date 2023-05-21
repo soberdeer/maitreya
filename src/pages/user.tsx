@@ -63,6 +63,17 @@ export async function getServerSideProps({ req, res }: GetServerSidePropsContext
     },
   };
 
+  try {
+    JSON.stringify(mappedUser);
+  } catch {
+    return {
+      redirect: {
+        destination: '/500',
+        permanent: false,
+      },
+    };
+  }
+
   return {
     props: {
       user: mappedUser || null,
