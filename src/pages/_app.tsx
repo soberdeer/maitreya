@@ -3,7 +3,7 @@ import App, { AppContext, AppProps } from 'next/app';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { setCookie } from 'cookies-next';
-import { Box, Button, Container, MantineProvider } from '@mantine/core';
+import { Box, Container, MantineProvider } from '@mantine/core';
 import {
   type AnimatorGeneralProviderSettings,
   AnimatorGeneralProvider,
@@ -112,11 +112,11 @@ export function MaitreyaApp({
               </Head>
               <SpotlightProvider router={router}>
                 <ModalsProvider>
-                  <Box sx={{ position: 'fixed', right: 30, bottom: 60, zIndex: 1000 }}>
-                    <Button onClick={() => setActive((a) => !a)}>
-                      {active ? 'deactivate' : 'activate'}
-                    </Button>
-                  </Box>
+                  {/*<Box sx={{ position: 'fixed', right: 30, bottom: 60, zIndex: 1000 }}>*/}
+                  {/*  <Button onClick={() => setActive((a) => !a)}>*/}
+                  {/*    {active ? 'deactivate' : 'activate'}*/}
+                  {/*  </Button>*/}
+                  {/*</Box>*/}
                   <Animator active={!active}>
                     <Box
                       sx={{
