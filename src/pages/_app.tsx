@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import App, { AppContext, AppProps } from 'next/app';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { setCookie } from 'cookies-next';
+import { deleteCookie, setCookie } from 'cookies-next';
 import { Box, Container, MantineProvider } from '@mantine/core';
 import {
   type AnimatorGeneralProviderSettings,
@@ -166,7 +166,11 @@ MaitreyaApp.getInitialProps = async (appContext: AppContext) => {
     };
   }
 
+  deleteCookie('_maitreya_animate', appContext.ctx);
   const userId = (req as NextApiRequest)?.cookies._maitreya_user || null;
+  if (userId === 'guest') {
+    deleteCookie('_maitreya_user', appContext.ctx);
+  }
   // const theme = (req as NextApiRequest)?.cookies._maitreya_theme || 'green';
   const animate = (req as NextApiRequest)?.cookies._maitreya_animate || null;
   const base = await getEntries<TypeMainSkeleton>('main');
