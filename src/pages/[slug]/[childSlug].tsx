@@ -14,9 +14,13 @@ interface PageType {
     href: string;
     children: string;
   };
+  toc?: {
+    name: string;
+    id: string;
+  }[];
 }
 
-export default function Page({ data, scheme }: PageType) {
+export default function Page({ data, scheme, toc }: PageType) {
   if (!data) {
     return <Error type="notFound" />;
   }
@@ -31,6 +35,7 @@ export default function Page({ data, scheme }: PageType) {
             { title: scheme?.children, href: scheme?.href },
             { title: data.fields.name || 'Техника', href: `${scheme.href}/${data.sys.id}` },
           ]}
+          toc={toc}
         />
         {data?.fields?.restricted_access?.map((entry, index) => (
           <Article key={index} {...(entry?.fields || {})} />

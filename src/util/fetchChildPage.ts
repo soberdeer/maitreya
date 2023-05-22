@@ -1,7 +1,14 @@
 import type { GetServerSidePropsContext } from 'next';
 import { Entry } from 'contentful';
+import { translit } from '@src/util/translit';
 import { SCHEME_MAP } from './constants';
-import { TypeArticlesSkeleton, TypeFetch, TypeFetchSkeleton, TypeMainSkeleton } from './types';
+import {
+  TypeArticles,
+  TypeArticlesSkeleton,
+  TypeFetch,
+  TypeFetchSkeleton,
+  TypeMainSkeleton,
+} from './types';
 import { getEntries, getEntry } from '../contentful';
 import checkAvailable from './checkAvailable';
 import checkUser, { UserReturn } from './checkUser';
@@ -71,6 +78,19 @@ export default function fetchChildPage(forceSlug?: string) {
         }
       : null;
 
+    const toc =
+      ((slicedChildren?.fields.restricted_access?.length as number) || 0) > 0
+        ? (slicedChildren?.fields.restricted_access as (TypeArticles | undefined)[]).map(
+            (content) =>
+              content
+                ? {
+                    name: content.fields.name,
+                    id: translit(content.fields.name),
+                  }
+                : null
+          )
+        : null;
+
     try {
       JSON.stringify(slicedChildren || {});
     } catch {
@@ -86,6 +106,7 @@ export default function fetchChildPage(forceSlug?: string) {
       props: {
         type: slug,
         data: slicedChildren,
+        toc,
         scheme,
       },
     };
