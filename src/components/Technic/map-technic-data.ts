@@ -61,10 +61,10 @@ export function mapTechnicData(data: TypeStands | TypeCombat | TypeRituals): Tec
     effect: !isTypeStands(data)
       ? ((data as TypeRituals | TypeCombat).fields.effect as string)
       : undefined,
-    description: !isTypeStands(data)
-      ? ((data as TypeRituals | TypeCombat).fields.description as Document)
+    description: data.fields.description as Document,
+    video: !isTypeRituals(data)
+      ? ((data as TypeCombat | TypeStands).fields.video as Asset)
       : undefined,
-    video: isTypeCombat(data) ? ((data as TypeCombat).fields.video as Asset) : undefined,
     manifest: isTypeRituals(data) ? ((data as TypeRituals).fields.manifest as Document) : undefined,
   };
 }
