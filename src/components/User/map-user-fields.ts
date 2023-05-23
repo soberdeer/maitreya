@@ -34,6 +34,7 @@ export type MappedUser = {
   start_will: number;
   honor?: 'Человек Высокой Чести' | 'Человек Чести' | 'Человек без Чести';
   introjects?: string[];
+  penalty?: string[];
   beliefs?: string[];
   creed?: string;
   avatar_profile: Asset;
@@ -68,6 +69,7 @@ export const mapUserFields = ({ fields }: TypeUsers): MappedUser => ({
   start_health: fields.start_health as number,
   start_will: fields.start_will as number,
   honor: fields.honor as 'Человек Высокой Чести' | 'Человек Чести' | 'Человек без Чести',
+  penalty: fields.penalty as string[],
   introjects: fields.introjects as string[],
   beliefs: fields.beliefs as string[],
   creed: fields.creed as string,

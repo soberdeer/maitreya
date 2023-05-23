@@ -19,6 +19,15 @@ const nameMap: CharsType = {
 };
 
 export function calcElements(user: MappedUser) {
+  const penalties = user.penalty
+    ? user.penalty.map((p) => {
+        const arr = p.split('--').map((s) => s.trim().toLowerCase());
+        return {
+          key: arr[0],
+          penalty: parseInt(arr[1], 10),
+        };
+      })
+    : [];
   const elObject = [...(user.introjects || []), ...(user.beliefs || [])]
     .map((idea) => idea.split('--')[1].trim())
     .join('')
@@ -46,11 +55,27 @@ export function calcElements(user: MappedUser) {
     0
   );
 
-  return order.map((shortKey) => ({
-    // @ts-ignore
-    amount: infiniteEl === shortKey ? max + 2 : elObject[shortKey],
-    // @ts-ignore
-    element: nameMap[shortKey],
-    infinity: infiniteEl === shortKey,
-  }));
+  return {
+    values: order.map((shortKey) => {
+      let temp = 0;
+      if (infiniteEl !== shortKey) {
+        const pen = penalties.find((p) => p.key === shortKey)?.penalty || 0;
+        const el = elObject[shortKey as keyof CharsType] as unknown as number;
+        if (pen <= el) {
+          temp = el - pen;
+        }
+      } else {
+        temp = max + 2;
+      }
+      return {
+        amount: temp,
+        element: nameMap[shortKey as keyof CharsType],
+        infinity: infiniteEl === shortKey,
+      };
+    }),
+    penalties: order.map((shortKey) => ({
+      name: nameMap[shortKey as keyof CharsType],
+      penalty: penalties.find((p) => p.key === shortKey)?.penalty || 0,
+    })),
+  };
 }

@@ -39,9 +39,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   const { body: query } = req;
   const userId = req?.cookies._maitreya_user || null;
 
-  const cached = getCache<EntryMapped[]>(
-    `${userId || 'guest'}-${query}`,
-  );
+  const cached = getCache<EntryMapped[]>(`${userId || 'guest'}-${query}`);
 
   if (cached) {
     return res?.json({
@@ -70,84 +68,84 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
           .map((l) =>
             l
               ? ({
-                slug: p.fields.slug,
-                id: l.sys.id,
-                restricted: l.fields.restricted,
-                name: b.fields.name,
-                description: l?.fields.description,
-                restricted_access: [],
-                references: [],
-              } as BlocksType)
-              : ({} as BlocksType),
-          ),
-      ),
+                  slug: p.fields.slug,
+                  id: l.sys.id,
+                  restricted: l.fields.restricted,
+                  name: b.fields.name,
+                  description: l?.fields.description,
+                  restricted_access: [],
+                  references: [],
+                } as BlocksType)
+              : ({} as BlocksType)
+          )
+      )
     )
     .flat(2);
 
   const entries = searchEntries
     ? (searchEntries
-    ?.reduce(
-      (acc, cur) =>
-        cur ? (!acc.find((el) => el.sys.id === cur.sys.id) ? [...acc, cur] : acc) : acc,
-      [] as TypeFetch[],
-    )
-    .map((entry: TypeFetch) => {
-      const pageEl =
-        entry.sys.contentType.sys.id === 'articles'
-          ? (availableArticles.find((l) => l?.id === entry.sys.id) as BlocksType)
-          : availableTechnics.find((t) => t?.sys.id === entry.sys.id);
+        ?.reduce(
+          (acc, cur) =>
+            cur ? (!acc.find((el) => el.sys.id === cur.sys.id) ? [...acc, cur] : acc) : acc,
+          [] as TypeFetch[]
+        )
+        .map((entry: TypeFetch) => {
+          const pageEl =
+            entry.sys.contentType.sys.id === 'articles'
+              ? (availableArticles.find((l) => l?.id === entry.sys.id) as BlocksType)
+              : availableTechnics.find((t) => t?.sys.id === entry.sys.id);
 
-      if (!pageEl) {
-        return null;
-      }
-      let descr = entry.fields.description
-        ? entry.fields.description.content
-          .map((c) => c.content.map((cc) => (cc as Text).value))
-          .flat(3)
-          .filter((v) => v && v?.toLowerCase().includes(query))?.[0]
-        : null;
+          if (!pageEl) {
+            return null;
+          }
+          let descr = entry.fields.description
+            ? entry.fields.description.content
+                .map((c) => c.content.map((cc) => (cc as Text).value))
+                .flat(3)
+                .filter((v) => v && v?.toLowerCase().includes(query))?.[0]
+            : null;
 
-      if (descr) {
-        const i = descr.toLowerCase().indexOf(query.toLowerCase());
-        if (i !== -1) {
-          const x = descr.slice(0, i).split(' ');
-          const item = descr.slice(i, i + query.length);
-          const y = descr.slice(i + query.length).split(' ');
-          const a = x.slice(x.length - 10 < 0 ? 0 : x.length - 10).join(' ');
-          const b = y.slice(0, 10).join(' ');
-          descr = `...${a}${item}${b}...`;
-        }
-      }
+          if (descr) {
+            const i = descr.toLowerCase().indexOf(query.toLowerCase());
+            if (i !== -1) {
+              const x = descr.slice(0, i).split(' ');
+              const item = descr.slice(i, i + query.length);
+              const y = descr.slice(i + query.length).split(' ');
+              const a = x.slice(x.length - 10 < 0 ? 0 : x.length - 10).join(' ');
+              const b = y.slice(0, 10).join(' ');
+              descr = `...${a}${item}${b}...`;
+            }
+          }
 
-      return {
-        name: entry.fields.name,
-        description: (entry as TypeCombat).fields.effect || descr || null,
-        id: entry.sys.id,
-        link:
-          pageEl && entry.sys.contentType.sys.id === 'articles'
-            ? (pageEl as BlocksType).slug
-            : 'technics',
-        group:
-          pageEl && entry.sys.contentType.sys.id === 'articles'
-            ? (pageEl as BlocksType).name
-            : 'Техники и ритуалы',
-      };
-    })
-    .filter((entry) => entry)
-    .sort((a, b) => {
-      const aIncludes = a?.name?.toLowerCase().includes(query.toLowerCase());
-      const bIncludes = b?.name?.toLowerCase().includes(query.toLowerCase());
-      if (aIncludes && !bIncludes) {
-        return -1;
-      }
-      if (!aIncludes && bIncludes) {
-        return 1;
-      }
-      if (aIncludes && bIncludes) {
-        return a?.name && b?.name ? a?.name?.localeCompare(b.name, 'ru-RU') : 0;
-      }
-      return 0;
-    }) as EntryMapped[]) || []
+          return {
+            name: entry.fields.name,
+            description: (entry as TypeCombat).fields.effect || descr || null,
+            id: entry.sys.id,
+            link:
+              pageEl && entry.sys.contentType.sys.id === 'articles'
+                ? (pageEl as BlocksType).slug
+                : 'technics',
+            group:
+              pageEl && entry.sys.contentType.sys.id === 'articles'
+                ? (pageEl as BlocksType).name
+                : 'Техники и ритуалы',
+          };
+        })
+        .filter((entry) => entry)
+        .sort((a, b) => {
+          const aIncludes = a?.name?.toLowerCase().includes(query.toLowerCase());
+          const bIncludes = b?.name?.toLowerCase().includes(query.toLowerCase());
+          if (aIncludes && !bIncludes) {
+            return -1;
+          }
+          if (!aIncludes && bIncludes) {
+            return 1;
+          }
+          if (aIncludes && bIncludes) {
+            return a?.name && b?.name ? a?.name?.localeCompare(b.name, 'ru-RU') : 0;
+          }
+          return 0;
+        }) as EntryMapped[]) || []
     : [];
 
   setCache(`${userId || 'guest'}-${query}`, entries || []);

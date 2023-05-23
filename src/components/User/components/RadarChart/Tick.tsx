@@ -22,11 +22,26 @@ export interface TickProps {
   };
   x: number;
   y: number;
+  penalties: {
+    name: string;
+    penalty: number;
+  }[];
+  textClassName: string;
 }
 
-export default function Tick({ payload, x, y, elements: initialElements }: TickProps) {
+export default function Tick({
+  payload,
+  x,
+  y,
+  elements: initialElements,
+  penalties,
+  textClassName,
+}: TickProps) {
   const elements = useMemo(() => mapElements(initialElements), [initialElements]);
   const el = elements.find((item) => item.name?.toLowerCase() === payload.value.toLowerCase());
+  const penaltyObj = penalties.find(
+    (item) => item.name.toLowerCase() === payload.value.toLowerCase()
+  );
   const isSmall = useMediaQuery('(max-width: 400px)');
 
   const coordinates = {
@@ -59,6 +74,23 @@ export default function Tick({ payload, x, y, elements: initialElements }: TickP
         href={(el?.image?.fields.file?.url as string) || ''}
         color={el.color}
       />
+      {(penaltyObj?.penalty || 0) > 0 && (
+        <>
+          <rect
+            fill="#F03E3E"
+            x={coordinates.x + 20 + 2 * (penaltyObj?.penalty.toString().length || 0)}
+            y={coordinates.y - 12.5}
+            stroke="#05201f"
+            strokeWidth={2}
+            height={24}
+            width={16 + 8 * (penaltyObj?.penalty.toString().length || 0)}
+            rx={12}
+          />
+          <text x={coordinates.x + 26} y={coordinates.y + 5} className={textClassName}>
+            {`-${penaltyObj?.penalty}`}
+          </text>
+        </>
+      )}
     </g>
   ) : (
     <Text>payload.value</Text>

@@ -33,4 +33,9 @@ export default createStyles((theme) => ({
     backgroundColor: theme.fn.rgba(theme.colors.maitreya[3], 0.1),
     border: `1px solid ${theme.colors.maitreya[8]}`,
   },
+  penaltyText: {
+    fontFamily: 'Roboto',
+    fontSize: '1rem',
+    fontWeight: 'bold',
+  },
 }));

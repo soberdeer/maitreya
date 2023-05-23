@@ -24,7 +24,7 @@ export interface RadarProps {
 export function Radar({ user }: RadarProps) {
   const { classes, theme } = useStyles();
   const { elements } = useContext(ElementsContext);
-  const elementValues = useMemo(() => calcElements(user), [user]);
+  const { values, penalties } = useMemo(() => calcElements(user), [user]);
   const isSmall = useMediaQuery('(max-width: 400px)');
 
   return (
@@ -34,14 +34,21 @@ export function Radar({ user }: RadarProps) {
           <RadarChart
             outerRadius={isSmall ? 66 : 100}
             width={isSmall ? 240 : 300}
-            height={isSmall ? 251 : 317}
-            data={elementValues}
+            height={isSmall ? 261 : 340}
+            data={values}
           >
             <PolarGrid />
             <PolarAngleAxis
               dataKey="element"
               className={classes.radar}
-              tick={(props: TickProps) => <Tick {...props} elements={elements} />}
+              tick={(props: TickProps) => (
+                <Tick
+                  {...props}
+                  elements={elements}
+                  penalties={penalties}
+                  textClassName={classes.penaltyText}
+                />
+              )}
             />
             <PolarRadiusAxis angle={90} domain={[0, 4]} fontFamily="Roboto, sans-serif" />
             <ReRadar dataKey="amount" fill={theme.colors.maitreya[3]} fillOpacity={0.6} />

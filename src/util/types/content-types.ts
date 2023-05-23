@@ -165,6 +165,7 @@ export interface TypeUsersFields {
   order?: EntryFieldTypes.EntryLink<TypeHouseSkeleton>;
   start_health?: EntryFieldTypes.Integer;
   start_will?: EntryFieldTypes.Integer;
+  penalty?: EntryFieldTypes.Array<EntryFieldTypes.Symbol>;
   honor?: EntryFieldTypes.Symbol<'Человек Высокой Чести' | 'Человек Чести' | 'Человек без Чести'>;
   introjects?: EntryFieldTypes.Array<EntryFieldTypes.Symbol>;
   beliefs?: EntryFieldTypes.Array<EntryFieldTypes.Symbol>;
