@@ -40,7 +40,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   const [searchEntries, pages, user, technics, rituals] = await Promise.all([
     search(query),
     getEntries<TypePageSkeleton>('page', 3),
-    !userId || !userId ? undefined : getEntry<TypeUsersSkeleton>(userId),
+    !userId ? undefined : getEntry<TypeUsersSkeleton>(userId),
     getEntries<TypeCombatSkeleton>('combat'),
     getEntries<TypeRitualsSkeleton>('rituals'),
   ]);

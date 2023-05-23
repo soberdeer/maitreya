@@ -25,7 +25,10 @@ const PuffsAnimation = ({ interval, ...rest }: PuffsAnimationProps) => (
 export function Background() {
   const { classes, theme, cx } = useStyles();
   const router = useRouter();
-  const red = useMemo(() => router.pathname === '/restricted', [router.pathname]);
+  const red = useMemo(
+    () => ['/restricted', '/400', '/500'].includes(router.pathname),
+    [router.pathname]
+  );
 
   return (
     <Box className={classes.root}>
