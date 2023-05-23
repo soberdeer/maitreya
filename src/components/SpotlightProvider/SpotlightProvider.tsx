@@ -30,14 +30,14 @@ export default function SpotlightProvider({
   const [query, setQuery] = useState('');
   const [controllers, { append, setState: setControllers }] = useListState<AbortController>([]);
   const [spotlightMessage, setSpotlightMessage] = useState<React.ReactNode | null>(null);
-  const [debouncedQuery] = useDebouncedValue(query, 200);
+  const [debouncedQuery] = useDebouncedValue(query, 500);
   const [spotlightActions, setSpotlightActions] = useState<SpotlightAction[]>([]);
 
   const toAction = ({ name, description, id, link, group }: EntryMapped): SpotlightAction => ({
     title: name,
     description,
     group,
-    query,
+    query: query.toLowerCase(),
     onTrigger: () => {
       if (link) {
         router.push(`/${link}/${id}`);
@@ -48,13 +48,13 @@ export default function SpotlightProvider({
   const toggleSearch = async (signal: AbortSignal) => {
     await fetch('/api/search', {
       method: 'POST',
-      body: debouncedQuery,
+      body: debouncedQuery.toLowerCase(),
       signal,
     })
       .then((res) => res.json())
       .then(({ entries }: { entries: EntryMapped[] }) => {
-        setSpotlightMessage(entries.length === 0 ? defaultMessage : null);
         setSpotlightActions(entries.map((r) => toAction(r)));
+        setSpotlightMessage(entries.length === 0 ? defaultMessage : null);
         setControllers([]);
       })
       .catch((err) => {
