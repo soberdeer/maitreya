@@ -18,6 +18,7 @@ export function RichText({
   ...others
 }: RichTextProps) {
   const { classes, cx, theme } = useStyles();
+
   return (
     <div className={cx(classes.root, className)} {...others}>
       <Animator combine manager="stagger">

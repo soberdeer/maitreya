@@ -35,7 +35,7 @@ export const options = (
 
       return middleLink ? (
         <div>
-          <Anchor href={`${middleLink}${entry?.sys?.id}`} color="maitreyaSecondary">
+          <Anchor href={`${middleLink}${entry?.sys?.id}`} color="maitreyaSecondary" noShallow>
             {(entry?.fields.name as string) || ''}
           </Anchor>
         </div>
@@ -52,7 +52,7 @@ export const options = (
       }
 
       return middleLink ? (
-        <Anchor href={`${middleLink}${entry?.sys?.id}`} color="maitreyaSecondary">
+        <Anchor href={`${middleLink}${entry?.sys?.id}`} color="maitreyaSecondary" noShallow>
           {(entry?.fields.name as string) || ''}
         </Anchor>
       ) : null;
@@ -164,7 +164,7 @@ export const options = (
       <Text as="p">{children}</Text>
     ),
     [INLINES.HYPERLINK]: (node: Block | Inline, children: React.ReactNode) => (
-      <Anchor href={node.data.uri} color="maitreyaSecondary">
+      <Anchor href={node.data.uri} color="maitreyaSecondary" target="_blank">
         {children}
       </Anchor>
     ),

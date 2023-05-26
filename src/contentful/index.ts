@@ -26,19 +26,19 @@ const index =
   (check() &&
     createClient({
       space: process.env.CONTENTFUL_SPACE_ID || '',
-      accessToken: process.env.CONTENTFUL_DELIVERY_TOKEN || '',
+      accessToken: process.env.CONTENTFUL_PREVIEW_TOKEN || '',
       environment: process.env.CONTENTFUL_ENV,
-      host: process.env.CONTENTFUL_HOST || 'cdn.contentful.com',
+      host: process.env.CONTENTFUL_HOST || 'preview.contentful.com',
       // resolveLinks: true,
     })) ||
   null;
 
 export async function getEntries<T extends EntrySkeletonType>(
   content_type: string,
-  include?: IncludeType
+  include?: IncludeType,
 ): Promise<Entry<T, 'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'>[] | undefined | null> {
   const cached = getCache<Entry<T, 'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'>[] | undefined | null>(
-    content_type
+    content_type,
   );
 
   if (cached) {
@@ -126,7 +126,7 @@ export async function search(query: string): Promise<(TypeFetch | undefined)[]> 
 
 export async function getEntry<T extends EntrySkeletonType>(
   id?: string,
-  include: IncludeType = 10
+  include: IncludeType = 10,
 ): Promise<Entry<T, 'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'> | null | undefined> {
   if (!id) {
     return null;

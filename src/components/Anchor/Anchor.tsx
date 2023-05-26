@@ -10,6 +10,7 @@ export interface AnchorProps extends AnimatorProps {
   styled?: boolean;
   target?: string;
   noShadow?: boolean;
+  noShallow?: boolean;
 }
 
 export function Anchor({
@@ -19,6 +20,7 @@ export function Anchor({
   children,
   target,
   noShadow,
+  noShallow = false,
 }: AnchorProps) {
   const { classes, cx } = useStyles({ color, noShadow });
 
@@ -27,7 +29,7 @@ export function Anchor({
       <Link
         href={href}
         passHref
-        shallow
+        shallow={!noShallow}
         target={target}
         className={cx(classes.anchor, { [classes.styled]: styled })}
       >
