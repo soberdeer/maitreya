@@ -21,7 +21,12 @@ export function ReferencesBlock({ data, scheme }: ReferencesBlockProps) {
       {data.fields.references?.map((reference, index: number) =>
         reference?.sys.id ? (
           <div key={index} className={classes.link}>
-            <Anchor href={`${scheme.href}/${reference?.sys.id}`} styled color="maitreyaSecondary" noShallow>
+            <Anchor
+              href={`${scheme.href}/${reference?.sys.id}`}
+              styled
+              color="maitreyaSecondary"
+              noShallow
+            >
               {reference.fields.name}
             </Anchor>
           </div>

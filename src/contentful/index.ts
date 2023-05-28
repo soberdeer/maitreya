@@ -35,10 +35,10 @@ const index =
 
 export async function getEntries<T extends EntrySkeletonType>(
   content_type: string,
-  include?: IncludeType,
+  include?: IncludeType
 ): Promise<Entry<T, 'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'>[] | undefined | null> {
   const cached = getCache<Entry<T, 'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'>[] | undefined | null>(
-    content_type,
+    content_type
   );
 
   if (cached) {
@@ -126,7 +126,7 @@ export async function search(query: string): Promise<(TypeFetch | undefined)[]> 
 
 export async function getEntry<T extends EntrySkeletonType>(
   id?: string,
-  include: IncludeType = 10,
+  include: IncludeType = 10
 ): Promise<Entry<T, 'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'> | null | undefined> {
   if (!id) {
     return null;

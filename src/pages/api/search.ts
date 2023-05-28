@@ -9,7 +9,6 @@ import {
   TypeRitualsSkeleton,
   TypeUsersSkeleton,
 } from '@src/util/types';
-import { Text } from '@contentful/rich-text-types';
 import { checkReferences } from '@src/util/checkAvailable';
 import { updateBlocks } from '@src/util/updateBlocks';
 import { getCache, setCache } from '@src/contentful/cache';
@@ -46,7 +45,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       entries: cached || [],
     });
   }
-
+  // console.log(query)
   const [searchEntries, pages, user, technics, rituals] = await Promise.all([
     search(query),
     getEntries<TypePageSkeleton>('page', 3),
@@ -98,12 +97,37 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
           if (!pageEl) {
             return null;
           }
+
           let descr = entry.fields.description
             ? entry.fields.description.content
-                .map((c) => c.content.map((cc) => (cc as Text).value))
+                .map((c) =>
+                  c.content.map((cc) => {
+                    if (cc.nodeType === 'text') {
+                      return cc.value;
+                    }
+                    if (cc.nodeType === 'list-item') {
+                      return cc.content
+                        .map((li) =>
+                          li.nodeType === 'paragraph'
+                            ? li.content.map((p) =>
+                                p.nodeType === 'text'
+                                  ? p.value?.toLowerCase().includes(query.toLowerCase())
+                                    ? p.value
+                                    : null
+                                  : null
+                              )
+                            : null
+                        )
+                        .flat(4)[0];
+                    }
+                    return null;
+                  })
+                )
                 .flat(3)
-                .filter((v) => v && v?.toLowerCase().includes(query))?.[0]
+                .filter((v) => v && v?.toLowerCase().includes(query.toLowerCase()))?.[0]
             : null;
+
+          // console.log(query)
 
           if (descr) {
             const i = descr.toLowerCase().indexOf(query.toLowerCase());

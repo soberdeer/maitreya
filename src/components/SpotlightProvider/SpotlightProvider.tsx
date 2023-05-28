@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { NextRouter } from 'next/router';
-import { SpotlightProvider as MantineSpotlightProvider, SpotlightAction } from '@mantine/spotlight';
-import { useDebouncedValue, useListState } from '@mantine/hooks';
+import {
+  spotlight,
+  SpotlightProvider as MantineSpotlightProvider,
+  SpotlightAction,
+} from '@mantine/spotlight';
+import { useDebouncedValue } from '@mantine/hooks';
 import { SearchIcon } from '@src/components/icons';
 import { Loader } from '@src/components/Loader';
 import { Action } from './Action';
@@ -28,16 +32,17 @@ export default function SpotlightProvider({
 }) {
   const { classes, theme } = useStyles();
   const [query, setQuery] = useState('');
-  const [controllers, { append, setState: setControllers }] = useListState<AbortController>([]);
+  const [controller, setController] = useState<AbortController | null>(null);
   const [spotlightMessage, setSpotlightMessage] = useState<React.ReactNode | null>(null);
   const [debouncedQuery] = useDebouncedValue(query, 500);
   const [spotlightActions, setSpotlightActions] = useState<SpotlightAction[]>([]);
 
   const toAction = ({ name, description, id, link, group }: EntryMapped): SpotlightAction => ({
+    id,
     title: name,
     description,
     group,
-    query: query.toLowerCase(),
+    keywords: query.toLowerCase(),
     onTrigger: () => {
       if (link) {
         router.push(`/${link}/${id}`);
@@ -53,9 +58,11 @@ export default function SpotlightProvider({
     })
       .then((res) => res.json())
       .then(({ entries }: { entries: EntryMapped[] }) => {
-        setSpotlightActions(entries.map((r) => toAction(r)));
+        const mapped = entries.map((r) => toAction(r));
+        spotlight.registerActions(mapped);
+        setSpotlightActions(mapped);
         setSpotlightMessage(entries.length === 0 ? defaultMessage : null);
-        setControllers([]);
+        setController(null);
       })
       .catch((err) => {
         if (err.message !== 'The user aborted a request.') {
@@ -66,17 +73,22 @@ export default function SpotlightProvider({
 
   useEffect(() => {
     const abortController = new AbortController();
-    if (debouncedQuery.length > 0) {
-      controllers.map((controller) => controller.abort());
-      append(abortController);
-      toggleSearch(abortController.signal);
+    if (controller) {
+      controller.abort();
     }
+    spotlight.removeActions(spotlightActions.map((a) => a.id as string));
+    setController(abortController);
+    toggleSearch(abortController.signal);
   }, [debouncedQuery]);
 
   useEffect(
     () => () => {
-      controllers.map((controller) => controller.abort());
-      setControllers([]);
+      if (controller) {
+        controller.abort();
+      }
+      spotlight.removeActions(spotlightActions.map((a) => a.id as string));
+      setSpotlightActions([]);
+      setController(null);
     },
     []
   );
@@ -84,13 +96,15 @@ export default function SpotlightProvider({
   return (
     <MantineSpotlightProvider
       actions={spotlightActions}
-      query={query}
       radius={0}
+      query={query}
       cleanQueryOnClose
       actionComponent={Action}
+      closeOnActionTrigger
       onQueryChange={(value) => {
         setSpotlightMessage(loadingMessage);
         setQuery(value);
+        spotlight.removeActions(spotlightActions.map((a) => a.id as string));
         setSpotlightActions([]);
       }}
       searchIcon={<SearchIcon size="1.2rem" color={theme.colors.maitreya[3]} />}
@@ -99,6 +113,7 @@ export default function SpotlightProvider({
       shortcut="mod + shift + C"
       classNames={{ ...classes }}
       highlightQuery={false}
+      limit={50}
     >
       {children}
     </MantineSpotlightProvider>
