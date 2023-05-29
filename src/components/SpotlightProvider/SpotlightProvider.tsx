@@ -67,6 +67,8 @@ export default function SpotlightProvider({
       .catch((err) => {
         if (err.message !== 'The user aborted a request.') {
           setSpotlightMessage(errorMessage);
+        } else {
+          setSpotlightMessage(loadingMessage);
         }
       });
   };
@@ -76,6 +78,7 @@ export default function SpotlightProvider({
     if (controller) {
       controller.abort();
     }
+    setSpotlightMessage(loadingMessage);
     spotlight.removeActions(spotlightActions.map((a) => a.id as string));
     setController(abortController);
     toggleSearch(abortController.signal);
@@ -90,7 +93,7 @@ export default function SpotlightProvider({
       setSpotlightActions([]);
       setController(null);
     },
-    []
+    [],
   );
 
   return (
