@@ -13,6 +13,7 @@ import { ModalsProvider } from '@mantine/modals';
 import { GlobalStyles } from '@src/util/globals';
 import { NextApiRequest, NextApiResponse, NextPage } from 'next';
 import PostScribe from '@marshallku/react-postscribe';
+import { Analytics } from '@vercel/analytics/react';
 import { getEntries, getEntry } from '@src/contentful';
 import getChatScript from '@src/util/getChatScript';
 import { TypeElementsFields, TypeMain, TypeMainSkeleton, TypeUsersSkeleton } from '@src/util/types';
@@ -100,6 +101,7 @@ export function MaitreyaApp({
     >
       <GlobalStyles />
       <div style={{ height: '100vh' }}>
+        <Analytics />
         <AnimateProvider animate={animate} toggleAnimate={toggleAnimate}>
           <ElementsProvider
             elements={
