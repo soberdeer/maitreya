@@ -67,6 +67,7 @@ export const GlobalStyles = () => (
         color: theme.colors.maitreyaSecondary[5],
         textAlign: 'left',
         hyphens: 'auto',
+        wordBreak: 'break-word',
       },
 
       h1: {
