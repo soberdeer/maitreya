@@ -66,6 +66,7 @@ export const GlobalStyles = () => (
         lineHeight: 1.3,
         color: theme.colors.maitreyaSecondary[5],
         textAlign: 'left',
+        hyphens: 'auto',
       },
 
       h1: {
