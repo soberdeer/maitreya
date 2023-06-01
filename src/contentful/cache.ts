@@ -2,7 +2,7 @@ import NodeCache from 'node-cache';
 import { Logger } from '@src/contentful/logger';
 
 export const cache = new NodeCache({
-  stdTTL: 600,
+  stdTTL: 1800,
 });
 
 export function getCache<T = unknown>(key: string): T | undefined {
