@@ -14,7 +14,7 @@ export function Video({ style, title, src, type, ...others }: VideoProps) {
   return (
     <Center sx={{ width: '100%' }} {...others}>
       <video controls width="100%" title={title}>
-        <source src={src} type={type} />
+        <source src={`${src}?origin=https://maitreya-academy.vercel.app/`} type={type} />
         Браузер не поддерживает видео
       </video>
     </Center>

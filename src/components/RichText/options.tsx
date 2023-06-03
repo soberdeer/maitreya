@@ -20,7 +20,7 @@ import { Blockquote } from '@src/components/Blockquote';
 export const options = (
   classes: Record<string | number | symbol, string>,
   theme: MantineTheme,
-  fullImage?: boolean
+  fullImage?: boolean,
 ) => ({
   renderNode: {
     [BLOCKS.EMBEDDED_ENTRY]: (node: Block | Inline) => {
@@ -141,7 +141,11 @@ export const options = (
     ),
     [BLOCKS.OL_LIST]: (node: Block | Inline, children: React.ReactNode) => (
       <Animated animated={aaVisibility()}>
-        <List type="ordered" withPadding sx={{ marginBlockEnd: '2rem' }}>
+        <List
+          type="ordered"
+          withPadding
+          sx={{ marginBlockEnd: '2rem' }}
+        >
           {children}
         </List>
       </Animated>
@@ -150,12 +154,12 @@ export const options = (
       const newChildren = Array.isArray(children)
         ? children.map((child) => (child.props.as === 'p' ? child.props.children : child))
         : (children as React.ReactElement)?.props?.as === 'p'
-        ? [(children as React.ReactElement)?.props?.children]
-        : [children];
+          ? [(children as React.ReactElement)?.props?.children]
+          : [children];
       return (
-        <List.Item sx={{ color: theme.colors.maitreya[3], marginBottom: '1rem' }}>
+        <List.Item sx={{ color: theme.colors.maitreya[3], marginBottom: '1rem', maxWidth: 'calc(100% - 20px)' }}>
           {newChildren.map((child, index) =>
-            !child.$$typeof ? <MantineText key={index}>{child}</MantineText> : child
+            !child.$$typeof ? <MantineText key={index}>{child}</MantineText> : child,
           )}
         </List.Item>
       );
@@ -212,7 +216,7 @@ export const options = (
         <Table
           headers={headers}
           rows={rows.map((row) =>
-            (row as TableRow).content.map((item) => item.content.map((k) => k.content))
+            (row as TableRow).content.map((item) => item.content.map((k) => k.content)),
           )}
         />
       );
