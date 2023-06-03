@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Animator, Text } from '@arwes/react';
-import { Center, Group, Stack } from '@mantine/core';
+import { Box, Center, Group, Stack } from '@mantine/core';
 import { ICONS_MAP, LevelIcon, levelMapper } from '@src/components/icons';
 import { ElementTags } from '../ElementTags/ElementTags';
 import { RichText } from '../RichText/RichText';
@@ -23,9 +23,10 @@ export function Technic({
   const Icon = useMemo(() => (!ritual && data.type ? ICONS_MAP[data.type] : null), [data]);
   const levelKey = useMemo(
     () => (data.level === 'Ученик' ? 'pupil' : data.level === 'Адепт' ? 'adept' : 'master'),
-    [data]
+    [data],
   );
 
+  // console.log(data.video.fields.file?.url)
   return (
     <Animator combine manager="stagger" duration={{ enter: 0.4, exit: 0.4, delay: 0.1 }}>
       <div className={cx(classes.root, className)} {...others}>
@@ -110,22 +111,32 @@ export function Technic({
         )}
 
         {ritual && data.manifest && (
-          <div className={classes.description}>
+          <Box className={classes.description}>
             <Text as="h3">Пример манифестации</Text>
-            <div>
+            <Box>
               <RichText content={data.manifest} />
-            </div>
-          </div>
+            </Box>
+          </Box>
         )}
 
         {data.video && (
-          <div className={classes.videoContainer}>
-            <Video
-              src={data.video.fields.file?.url as string}
-              title={data.video.fields.title as string}
-              type={data.video.fields.file?.contentType as string}
-            />
-          </div>
+          <Box>
+            <a
+              className={classes.link}
+              href={`https:${data.video.fields.file?.url as string}`}
+              rel="noreferrer"
+              target="_blank"
+            >
+              Открыть в новой вкладке
+            </a>
+            <Box className={classes.videoContainer} pt={20}>
+              <Video
+                src={`https:${data.video.fields.file?.url as string}`}
+                title={data.video.fields.title as string}
+                type={data.video.fields.file?.contentType as string}
+              />
+            </Box>
+          </Box>
         )}
       </div>
     </Animator>

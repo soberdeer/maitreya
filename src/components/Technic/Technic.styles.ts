@@ -51,6 +51,15 @@ export default createStyles((theme) => ({
     fontFamily: 'Arounder',
   },
 
+  link: {
+    fontFamily: 'Arounder',
+    color: theme.colors.maitreyaSecondary[4],
+
+    '&:hover': {
+      color: theme.colors.maitreyaSecondary[2],
+    },
+  },
+
   level: {
     fontSize: '1.5rem',
   },
