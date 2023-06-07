@@ -1,7 +1,7 @@
 import { MappedUser } from './map-user-fields';
 
 export function calcHealth(user: MappedUser) {
-  let health = user.start_health || 1;
+  let health = typeof user.start_health === 'number' ? user.start_health || 0 : 1;
   user.beliefs?.forEach(() => {
     health += 1;
   });
