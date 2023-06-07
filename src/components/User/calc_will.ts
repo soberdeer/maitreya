@@ -7,7 +7,7 @@ const honorModifiers = {
 };
 
 export function calcWill(user: MappedUser) {
-  let will = user.start_will || 3;
+  let will = typeof user.start_will === 'number' ? user.start_will || 0 : 3;
   user.introjects?.forEach(() => {
     will += 3;
   });
