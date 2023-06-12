@@ -46,7 +46,7 @@ export async function getEntries<T extends EntrySkeletonType>(
   }
 
   return index?.withoutUnresolvableLinks
-    .getEntries<T>({ content_type, include: include || 10 })
+    .getEntries<T>({ content_type, include: include || 10, limit: 1000 })
     .then((entries) => {
       if (entries.items.length > 0) {
         setCache(content_type, entries.items);
