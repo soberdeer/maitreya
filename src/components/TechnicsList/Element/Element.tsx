@@ -26,28 +26,28 @@ const standardColors = {
 export function Element({ item, ...others }: Element) {
   const levelKey = useMemo(
     () =>
-      item.fields.level === 'Ученик' ? 'pupil' : item.fields.level === 'Адепт' ? 'adept' : 'master',
+      item?.fields?.level === 'Ученик' ? 'pupil' : item?.fields?.level === 'Адепт' ? 'adept' : 'master',
     [item]
   );
 
   return (
     <Animator merge duration={{ enter: 0.4, exit: 0.4 }}>
       <Group spacing={10} position="left" mb={10} noWrap {...others}>
-        <LevelIcon level={levelKey} size={30} tooltip={item.fields.level} />
+        <LevelIcon level={levelKey} size={30} tooltip={item?.fields?.level} />
 
         <Anchor href={`/technics/${item.sys.id}`}>
           <Animator merge duration={{ delay: 0.2 }}>
-            <Text as="span">{item.fields.name as string}</Text>
+            <Text as="span">{item?.fields?.name as string}</Text>
           </Animator>
         </Anchor>
 
         {!isTypeStands(item) &&
-          (item as TypeCombat | TypeRituals).fields.standard?.map((name, index) => (
+          (item as TypeCombat | TypeRituals).fields?.standard?.map((name, index) => (
             <Animator merge duration={{ delay: 0.2 }} key={index}>
               <StandardIcon
                 tooltip={`Имперский Стандарт - ${name}`}
                 size={20}
-                color={standardColors[name.toLowerCase() as keyof typeof standardColors]}
+                color={standardColors[name?.toLowerCase() as keyof typeof standardColors]}
               />
             </Animator>
           ))}

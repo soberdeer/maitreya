@@ -23,7 +23,7 @@ export function Technic({
   const Icon = useMemo(() => (!ritual && data.type ? ICONS_MAP[data.type] : null), [data]);
   const levelKey = useMemo(
     () => (data.level === 'Ученик' ? 'pupil' : data.level === 'Адепт' ? 'adept' : 'master'),
-    [data],
+    [data]
   );
 
   // console.log(data.video.fields.file?.url)

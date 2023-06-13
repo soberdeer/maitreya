@@ -93,7 +93,7 @@ export default function SpotlightProvider({
       setSpotlightActions([]);
       setController(null);
     },
-    [],
+    []
   );
 
   return (
