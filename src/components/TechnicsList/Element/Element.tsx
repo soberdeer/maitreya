@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { Group, GroupProps } from '@mantine/core';
 import { Animator, Text } from '@arwes/react';
-import { TypeStands, TypeCombat, TypeRituals, isTypeCombat } from '@src/util/types';
+import { TypeStands, TypeCombat, TypeRituals, isTypeStands } from '@src/util/types';
 import { LevelIcon, StandardIcon } from '@src/components/icons';
 import { Anchor } from '../../Anchor/Anchor';
 
@@ -41,8 +41,8 @@ export function Element({ item, ...others }: Element) {
           </Animator>
         </Anchor>
 
-        {isTypeCombat(item) &&
-          (item as TypeCombat).fields.standard?.map((name, index) => (
+        {!isTypeStands(item) &&
+          (item as TypeCombat | TypeRituals).fields.standard?.map((name, index) => (
             <Animator merge duration={{ delay: 0.2 }} key={index}>
               <StandardIcon
                 tooltip={`Имперский Стандарт - ${name}`}
