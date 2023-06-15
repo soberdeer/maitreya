@@ -19,7 +19,14 @@ export function ElementTags({ className, elements, noWrap, ...others }: ElementT
   return (
     <Animator manager="stagger" combine>
       {!noWrap && elements.length > 2 ? (
-        <SimpleGrid cols={2} spacing={10} py={5} className={className} {...others}>
+        <SimpleGrid
+          cols={2}
+          spacing={10}
+          py={5}
+          className={className}
+          sx={{ minWidth: elements.length > 1 ? 26 * 2 + 10 : 26 }}
+          {...others}
+        >
           {elements
             .toLowerCase()
             .split('')
