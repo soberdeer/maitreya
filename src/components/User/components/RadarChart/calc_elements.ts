@@ -1,6 +1,6 @@
 import { MappedUser } from '@src/components/User/map-user-fields';
 
-type CharsType = {
+export type CharsType = {
   в: string;
   м: string;
   о: string;
@@ -10,12 +10,24 @@ type CharsType = {
 
 const order = ['о', 'з', 'м', 'в', 'д'];
 
-const nameMap: CharsType = {
+export const nameMap: CharsType = {
   о: 'Огонь',
   в: 'Вода',
   з: 'Земля',
   м: 'Металл',
   д: 'Дерево',
+};
+
+export type ExportElements = {
+  values: {
+    amount: number;
+    element: string;
+    infinity: boolean;
+  }[];
+  penalties: {
+    name: string;
+    penalty: number;
+  }[];
 };
 
 export function calcElements(user: MappedUser) {
