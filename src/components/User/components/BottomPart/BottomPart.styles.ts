@@ -1,6 +1,6 @@
 import { createStyles } from '@mantine/core';
 
-export default createStyles({
+export default createStyles((theme) => ({
   root: {
     display: 'flex',
     justifyContent: 'flex-start',
@@ -34,6 +34,10 @@ export default createStyles({
     flexDirection: 'column',
   },
 
+  chevron: {
+    color: theme.colors.maitreyaSecondary[4],
+  },
+
   block: {
     maxWidth: 'calc(50% - 100px)',
     display: 'flex',
@@ -43,4 +47,8 @@ export default createStyles({
       maxWidth: '100%',
     },
   },
-});
+
+  single: {
+    maxWidth: '100%',
+  },
+}));

@@ -41,17 +41,13 @@ export function User({
             {isMaster && (
               <Box pt={0.5}>
                 <Link href="/secret">
-                  {/*<Animator merge>*/}
                   <TableIcon tooltip="Список изменений" size={19} />
-                  {/*</Animator>*/}
                 </Link>
               </Box>
             )}
 
             <Link href="/changes">
-              {/*<Animator merge>*/}
               <EditIcon tooltip="Изменить идеи" size={20} />
-              {/*</Animator>*/}
             </Link>
             <Animator merge>
               <LogoutButton />

@@ -4,11 +4,25 @@ import { Animated, Animator } from '@arwes/react';
 import { DefaultType } from '@src/components/icons/default-type';
 import { Box } from '@mantine/core';
 
-export function ChevronDownIcon({ size = 24, color, tooltip, ...others }: DefaultType) {
+export function ChevronDownIcon({
+  size = 24,
+  color,
+  tooltip,
+  rotate,
+  ...others
+}: DefaultType & { rotate?: boolean }) {
   return (
     <Animator merge combine manager="stagger" duration={{ enter: 0.4, exit: 0.4, delay: 0.1 }}>
       <Tooltip label={tooltip} disabled={!tooltip}>
-        <Box sx={{ width: size, height: size, display: 'flex' }}>
+        <Box
+          sx={{
+            width: size,
+            height: size,
+            display: 'flex',
+            transform: rotate ? 'rotate(180deg)' : 'none',
+            transition: 'transform 200ms ease',
+          }}
+        >
           <svg
             fill="none"
             stroke={color || 'currentColor'}
