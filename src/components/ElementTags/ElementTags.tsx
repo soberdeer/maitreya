@@ -33,8 +33,15 @@ export function ElementTags({ className, elements, noWrap, ...others }: ElementT
               return <ElementStamp key={index} element={element.eng_key as unknown as string} />;
             })}
         </SimpleGrid>
-        ) : (
-        <Group spacing={10} position="left" align="center" className={className} noWrap={noWrap} {...others}>
+      ) : (
+        <Group
+          spacing={10}
+          position="left"
+          align="center"
+          className={className}
+          noWrap={noWrap}
+          {...others}
+        >
           {elements
             .toLowerCase()
             .split('')

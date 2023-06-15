@@ -26,7 +26,11 @@ const standardColors = {
 export function Element({ item, ...others }: Element) {
   const levelKey = useMemo(
     () =>
-      item?.fields?.level === 'Ученик' ? 'pupil' : item?.fields?.level === 'Адепт' ? 'adept' : 'master',
+      item?.fields?.level === 'Ученик'
+        ? 'pupil'
+        : item?.fields?.level === 'Адепт'
+        ? 'adept'
+        : 'master',
     [item]
   );
 
