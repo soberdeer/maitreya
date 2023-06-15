@@ -55,7 +55,7 @@ export function Technic({
                 Печати:{' '}
               </Text>
               {data.elements ? (
-                <ElementTags elements={data.elements} />
+                <ElementTags elements={data.elements} noWrap />
               ) : (
                 <Text as="span">{!data.elements ? 'Не требуются' : ''}</Text>
               )}
