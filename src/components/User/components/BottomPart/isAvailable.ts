@@ -19,9 +19,10 @@ export const isAvailable = (elements: ExportElements, techElements?: string) => 
   const a = Object.keys(els).reduce((prev, cur) => {
     const name = nameMap[cur as keyof typeof nameMap];
     const currentValue = elements.values.find((e) => e.element === name);
-    const currentPenalty = elements.penalties.find((e) => e.name === name);
-    const amount = (currentValue?.amount || 0) - (currentPenalty?.penalty || 0);
-    return [...prev, currentValue?.infinity ? true : amount <= els[cur]];
+    const currentPenalty = elements.penalties.find((e) => e.name === name)?.penalty || 0;
+    const amount = (currentValue?.amount || 0) - currentPenalty;
+    return [...prev, currentValue?.infinity ? true : amount >= els[cur]];
   }, [] as boolean[]);
+
   return a.indexOf(false) === -1;
 };
