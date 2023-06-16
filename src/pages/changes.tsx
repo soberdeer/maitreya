@@ -73,7 +73,7 @@ export async function getServerSideProps({ req, res }: GetServerSidePropsContext
     };
   }
 
-  const dbUser = await db
+  let dbUser = await db
     .selectFrom('users')
     .selectAll()
     .where('user_id', '=', userId)
@@ -81,13 +81,34 @@ export async function getServerSideProps({ req, res }: GetServerSidePropsContext
     .then((r: UsersTable[]) => r[0])
     .catch(() => null);
 
-  if (!dbUser) {
-    return {
-      redirect: {
-        destination: '/restricted',
-        permanent: false,
-      },
-    };
+  if (!dbUser && user.sys.id) {
+    await db.insertInto('users')
+      .values({
+        // @ts-ignore
+        name: user.fields.name as string || '',
+        user_id: user.sys.id,
+        added_convictions: '',
+        removed_convictions: '',
+        added_introjects: '',
+        removed_introjects: '',
+      })
+      .executeTakeFirst();
+    dbUser = await db
+      .selectFrom('users')
+      .selectAll()
+      .where('user_id', '=', userId)
+      .execute()
+      .then((r: UsersTable[]) => r[0])
+      .catch(() => null);
+
+    if (!dbUser) {
+      return {
+        redirect: {
+          destination: '/restricted',
+          permanent: false,
+        },
+      };
+    }
   }
 
   return {
