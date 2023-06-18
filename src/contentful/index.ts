@@ -26,9 +26,9 @@ const index =
   (check() &&
     createClient({
       space: process.env.CONTENTFUL_SPACE_ID || '',
-      accessToken: process.env.CONTENTFUL_PREVIEW_TOKEN || '',
+      accessToken: process.env.CONTENTFUL_DELIVERY_TOKEN || '',
       environment: process.env.CONTENTFUL_ENV,
-      host: process.env.CONTENTFUL_HOST || 'preview.contentful.com',
+      host: process.env.CONTENTFUL_HOST || 'cdn.contentful.com',
       // resolveLinks: true,
     })) ||
   null;
