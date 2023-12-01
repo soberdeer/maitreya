@@ -65,8 +65,8 @@ export function User({
                 <Radar user={user} />
               </Box>
               <div className={classes.mainStats}>
-                <Text className={classes.mainStatsText}>{`Жизнь: ${health}`}</Text>
-                <Text className={classes.mainStatsText}>{`Воля: ${will}`}</Text>
+                <Text className={classes.mainStatsText} data-styled>{`Жизнь: ${health}`}</Text>
+                <Text className={classes.mainStatsText} data-styled>{`Воля: ${will}`}</Text>
               </div>
             </Box>
           )}

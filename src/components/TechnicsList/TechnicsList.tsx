@@ -108,7 +108,7 @@ export function TechnicsList({ className, data, defaultTab, ...others }: Technic
                         sx={(theme) => ({ color: theme.colors.maitreya[3] })}
                       >
                         <Icon size={mobile ? 20 : 30} key={key} />
-                        <Text as="span" className={classes.tabText} color={color}>
+                        <Text as="span" className={classes.tabText} color={color} data-styled>
                           {TECHNIC_TYPES[key as keyof typeof TECHNIC_TYPES]}
                         </Text>
                       </Group>

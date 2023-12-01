@@ -23,7 +23,6 @@ export default createStyles((theme) => ({
 
   key: {
     fontSize: theme.fontSizes.xl,
-    fontFamily: 'Arounder, sans-serif',
   },
 
   title: {
@@ -47,12 +46,9 @@ export default createStyles((theme) => ({
     gap: 30,
   },
 
-  text: {
-    fontFamily: 'Arounder',
-  },
+  text: {},
 
   link: {
-    fontFamily: 'Arounder',
     color: theme.colors.maitreyaSecondary[4],
 
     '&:hover': {

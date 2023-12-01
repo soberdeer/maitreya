@@ -5,8 +5,12 @@ export const mantineTheme: MantineThemeOverride = {
   colorScheme: 'dark',
   colors: mantineColors,
   primaryColor: 'maitreya',
-  // headings: {
-  // fontFamily: 'Arounder, sans-serif',
-  // fontWeight: 'bold',
+  headings: {
+    // fontFamily: 'Arounder, sans-serif',
+    fontWeight: 'bold',
+  },
+  // components: {
+  //   Tex,
   // },
+  fontFamily: 'Arounder, Roboto, sans-serif',
 };

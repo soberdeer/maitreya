@@ -22,7 +22,7 @@ export function Anchor({
   noShadow,
   noShallow = false,
 }: AnchorProps) {
-  const { classes, cx } = useStyles({ color, noShadow });
+  const { classes } = useStyles({ color, noShadow });
 
   return (
     <Animator merge duration={{ enter: 0.4, exit: 0.4 }}>
@@ -31,7 +31,8 @@ export function Anchor({
         passHref
         shallow={!noShallow}
         target={target}
-        className={cx(classes.anchor, { [classes.styled]: styled })}
+        className={classes.anchor}
+        {...(styled ? { 'data-styled': '' } : {})}
       >
         {children}
       </Link>

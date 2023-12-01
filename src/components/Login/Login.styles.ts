@@ -34,7 +34,6 @@ export default createStyles((theme) => ({
   title: {
     ref: getStylesRef('title'),
     fontSize: '1.5rem',
-    fontFamily: 'Arounder',
     marginBlockEnd: '2rem',
     textShadow: `0 0 2px ${theme.colors.maitreya[3]}`,
     transition: 'color 200ms ease, text-shadow 200ms ease',
@@ -73,7 +72,6 @@ export default createStyles((theme) => ({
 
   errorText: {
     color: '#FF3333',
-    fontFamily: 'Arounder',
     maxWidth: 300,
     textShadow: '0 0 1px #FF3333',
     '& *': {

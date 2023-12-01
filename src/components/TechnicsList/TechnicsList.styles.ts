@@ -24,7 +24,6 @@ export default createStyles((theme) => ({
   tabText: {
     textAlign: 'center',
     width: '100%',
-    fontFamily: 'Arounder',
     marginBlockEnd: 0,
     fontSize: '1.2rem',
   },

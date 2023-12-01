@@ -12,6 +12,5 @@ export default createStyles(() => ({
     width: '100%',
     marginTop: 40,
     justifyContent: 'flex-end',
-    fontFamily: 'Arounder, sans-serif',
   },
 }));

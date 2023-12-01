@@ -2,7 +2,7 @@ import localFont from 'next/font/local';
 import { Roboto } from 'next/font/google';
 import { Global } from '@mantine/core';
 
-const arounder = localFont({
+export const arounder = localFont({
   src: './arounder.ttf',
   display: 'swap',
   preload: true,
@@ -95,9 +95,14 @@ export const GlobalStyles = () => (
       },
 
       p: {
+        fontFamily: roboto.style.fontFamily,
         marginBlockStart: 0,
         marginBlockEnd: '1rem',
         textAlign: 'left',
+      },
+
+      '*[data-styled]': {
+        fontFamily: `${arounder.style.fontFamily}, sans-serif`,
       },
 
       input: {

@@ -35,7 +35,7 @@ export function MainPage({ data, ...rest }: MainPageProps) {
                 {post.fields.date && (
                   <div className={classes.dateWrapper}>
                     <Animator duration={{ delay: 0.4, stagger: 0.1 }}>
-                      <Text>{post.fields.date.split('-').reverse().join('-')}</Text>
+                      <Text data-styled>{post.fields.date.split('-').reverse().join('-')}</Text>
                     </Animator>
                   </div>
                 )}

@@ -31,9 +31,7 @@ export default createStyles((theme, { longName }: Props) => ({
     // color: 'rgb(0, 255, 255)',
   },
 
-  styled: {
-    fontFamily: 'Arounder',
-  },
+  styled: {},
 
   name: {
     fontSize: longName ? '1.5rem' : '2rem',

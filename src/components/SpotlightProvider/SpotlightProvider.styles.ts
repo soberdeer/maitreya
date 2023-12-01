@@ -44,12 +44,12 @@ export default createStyles((theme) => ({
 
   nothingFound: {
     color: `${theme.colors.maitreya[3]} !important`,
-    fontFamily: 'Arounder, sans-serif',
+    fontFamily: 'sans-serif',
   },
 
   actionsGroup: {
     color: theme.colors.maitreya[3],
-    fontFamily: 'Arounder, sans-serif',
+    fontFamily: 'sans-serif',
     letterSpacing: 1.3,
     fontSize: '0.9rem',
     paddingBottom: theme.spacing.md,
@@ -72,7 +72,7 @@ export default createStyles((theme) => ({
 
   actionHighlight: {
     color: theme.colors.maitreyaSecondary[5],
-    fontFamily: 'Arounder, sans-serif',
+    fontFamily: 'sans-serif',
   },
 
   actionDescription: {

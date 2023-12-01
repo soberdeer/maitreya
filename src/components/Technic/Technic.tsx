@@ -43,6 +43,7 @@ export function Technic({
           <Text
             className={cx(classes.text, classes.level)}
             style={{ color: levelMapper[levelKey].color }}
+            data-styled
           >
             {data.level}
           </Text>
@@ -51,7 +52,7 @@ export function Technic({
         {!stand && (
           <Stack spacing="xs" sx={{ width: '100%' }}>
             <Group spacing="xs">
-              <Text as="span" className={classes.key}>
+              <Text as="span" className={classes.key} data-styled>
                 Печати:{' '}
               </Text>
               {data.elements ? (
@@ -61,7 +62,7 @@ export function Technic({
               )}
             </Group>
             <Group spacing="xs">
-              <Text as="span" className={classes.key}>
+              <Text as="span" className={classes.key} data-styled>
                 Воля:{' '}
               </Text>
               <Text as="span">{data.will || 'Не требуется'}</Text>
@@ -69,19 +70,19 @@ export function Technic({
             {!ritual && (
               <>
                 <Group spacing="xs">
-                  <Text as="span" className={classes.key}>
+                  <Text as="span" className={classes.key} data-styled>
                     Воздействие:{' '}
                   </Text>
                   <Text as="span">{data.target || 'Нет'}</Text>
                 </Group>
                 <Group spacing="xs">
-                  <Text as="span" className={classes.key}>
+                  <Text as="span" className={classes.key} data-styled>
                     Состояние:{' '}
                   </Text>
                   <Text as="span">{data.state || 'Не определено'}</Text>
                 </Group>
                 <Group spacing="xs">
-                  <Text as="span" className={classes.key}>
+                  <Text as="span" className={classes.key} data-styled>
                     Касание:{' '}
                   </Text>
                   <Text as="span">{data.touch ? 'Да' : 'Нет'}</Text>
@@ -126,6 +127,7 @@ export function Technic({
               href={`https:${data.video.fields.file?.url as string}`}
               rel="noreferrer"
               target="_blank"
+              data-styled
             >
               Открыть в новой вкладке
             </a>

@@ -40,7 +40,7 @@ export function Honor({ className, honor, ...others }: { honor: string } & Group
   return (
     <Group className={cx(classes.root, className)} {...others} noWrap>
       {honorItem.children}
-      <Text className={classes.text} style={{ color: honorItem.color }}>
+      <Text className={classes.text} style={{ color: honorItem.color }} data-styled>
         {honor}
       </Text>
     </Group>

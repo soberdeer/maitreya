@@ -3,10 +3,6 @@ import { createStyles, MantineColor } from '@mantine/core';
 type Props = { color: MantineColor; noShadow?: boolean };
 
 export default createStyles((theme, { color, noShadow }: Props) => ({
-  styled: {
-    fontFamily: 'Arounder, sans-serif',
-  },
-
   anchor: {
     color: theme.colors[color][color === 'maitreyaSecondary' ? 4 : 3],
     textShadow: noShadow

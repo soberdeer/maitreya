@@ -72,7 +72,6 @@ export default createStyles((theme) => ({
 
   mainStatsText: {
     fontSize: theme.fontSizes.xl,
-    fontFamily: 'Arounder',
   },
 
   logoutWrapper: {

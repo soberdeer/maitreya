@@ -87,7 +87,9 @@ export function Login({ className, children, updateUser, error, setError, loadin
               >
                 <Stack spacing="xs" align="center" sx={{ width: '100%' }}>
                   <Animator merge>
-                    <Text className={classes.title}>Введите ключ</Text>
+                    <Text className={classes.title} data-styled>
+                      Введите ключ
+                    </Text>
                   </Animator>
                   <Box className={classes.inputWrapper}>
                     <TextInput
@@ -109,7 +111,9 @@ export function Login({ className, children, updateUser, error, setError, loadin
                     />
                   </Box>
                   <Animator combine active={!!errorTerm} duration={{ enter: 0.2, exit: 0.2 }}>
-                    <Text className={classes.errorText}>{errorTerm}</Text>
+                    <Text className={classes.errorText} data-styled>
+                      {errorTerm}
+                    </Text>
                   </Animator>
                   <Button onClick={onLogin}>Войти</Button>
                   {/*<Button onClick={onGuestLogin} color="maitreya">*/}

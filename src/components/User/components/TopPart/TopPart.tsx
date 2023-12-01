@@ -72,7 +72,7 @@ export function TopPart({ user }: { user: MappedUser }) {
             </Box>
           )}
           {user.rank_number && user.rank_group && (
-            <Box className={cx(classes.text, classes.styled)}>
+            <Box className={classes.text} data-styled>
               <Ranking
                 rankGroup={user.rank_group}
                 rankNumber={user.rank_number}
@@ -82,14 +82,14 @@ export function TopPart({ user }: { user: MappedUser }) {
           )}
           {user.profession && user.work && (
             <Box>
-              <Text className={cx(classes.text, classes.styled, classes.lg)}>
+              <Text className={cx(classes.text, classes.lg)} data-styled>
                 {user.profession} - {user.work}
               </Text>
             </Box>
           )}
           {user.course && user.cadet_number && (
             <Box>
-              <Text className={cx(classes.text, classes.styled, classes.lg)}>
+              <Text className={cx(classes.text, classes.lg)} data-styled>
                 {`Номер: ${user.course}-${user.cadet_number}`}
               </Text>
             </Box>
@@ -97,7 +97,9 @@ export function TopPart({ user }: { user: MappedUser }) {
           {typeof user.rating === 'number' && (
             <Group sx={(theme) => ({ color: theme.colors.maitreya[3] })}>
               <StarIcon tooltip="Личный рейтинг" size={20} />
-              <Text className={cx(classes.text, classes.styled, classes.xl)}>{user.rating}</Text>
+              <Text className={cx(classes.text, classes.xl)} data-styled>
+                {user.rating}
+              </Text>
             </Group>
           )}
           {user.bio && (

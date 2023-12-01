@@ -12,6 +12,5 @@ export default createStyles((theme) => ({
     marginBlockEnd: 0,
     fontSize: theme.fontSizes.lg,
     textShadow: 'none',
-    fontFamily: 'Arounder',
   },
 }));
