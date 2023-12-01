@@ -34,4 +34,5 @@ export const CheckIcon = forwardRef<SVGSVGElement, DefaultType>(
     //     </Box>
     //   </Tooltip>
     // </Animator>
-  ));
+  )
+);

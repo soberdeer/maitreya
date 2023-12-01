@@ -82,10 +82,11 @@ export async function getServerSideProps({ req, res }: GetServerSidePropsContext
     .catch(() => null);
 
   if (!dbUser && user.sys.id) {
-    await db.insertInto('users')
+    await db
+      .insertInto('users')
       .values({
         // @ts-ignore
-        name: user.fields.name as string || '',
+        name: (user.fields.name as string) || '',
         user_id: user.sys.id,
         added_convictions: '',
         removed_convictions: '',

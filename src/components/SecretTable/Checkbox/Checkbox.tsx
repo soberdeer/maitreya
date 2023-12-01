@@ -7,11 +7,12 @@ import {
 import { CheckIcon, MinusIcon } from '@src/components/icons';
 import useStyles from './Checkbox.styles';
 
-const CheckboxIcon: CheckboxProps['icon'] = ({ indeterminate, className }) => indeterminate ? (
-  <MinusIcon strokeWidth={2.4} className={className} />
-) : (
-  <CheckIcon strokeWidth={2.4} className={className} />
-);
+const CheckboxIcon: CheckboxProps['icon'] = ({ indeterminate, className }) =>
+  indeterminate ? (
+    <MinusIcon strokeWidth={2.4} className={className} />
+  ) : (
+    <CheckIcon strokeWidth={2.4} className={className} />
+  );
 
 export function Checkbox({ classNames, ...rest }: MantineCheckboxProps) {
   const { classes } = useStyles();

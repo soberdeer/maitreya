@@ -21,7 +21,7 @@ const generateInit = (users: UsersTable[], state?: boolean) =>
       ...prev,
       [current.user_id]: state || false,
     }),
-    {},
+    {}
   );
 
 export function SecretTable({ users: initUsers }: ChangesTableProps) {
@@ -98,9 +98,10 @@ export function SecretTable({ users: initUsers }: ChangesTableProps) {
                     Object.keys(selected)
                       .map((key) => selected[key])
                       .indexOf(false) === -1
-                  ) as boolean,
-                ),
-              )}
+                  ) as boolean
+                )
+              )
+            }
             mb={30}
           />
           {users.map((u) => (
