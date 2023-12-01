@@ -115,6 +115,7 @@ export function SecretTable({ users: initUsers }: ChangesTableProps) {
             />
           ))}
           <Center pt={50}>
+            {/*@ts-ignore*/}
             <Button onClick={deleteSelected} leftIcon={CheckIcon}>
               Убрать выбранные из модерации
             </Button>

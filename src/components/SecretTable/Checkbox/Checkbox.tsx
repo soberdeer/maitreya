@@ -17,6 +17,7 @@ const CheckboxIcon: CheckboxProps['icon'] = ({ indeterminate, className }) =>
 export function Checkbox({ classNames, ...rest }: MantineCheckboxProps) {
   const { classes } = useStyles();
 
+  // console.log(rest)
   return (
     <MantineCheckbox
       classNames={{ ...classes, ...(classNames || {}) }}
