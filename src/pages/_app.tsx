@@ -35,6 +35,7 @@ interface AppInterface extends AppProps {
   isLogin: boolean;
   chatScript?: string;
   animate: boolean;
+  enableChat?: boolean;
 }
 
 const animatorsSettings: AnimatorGeneralProviderSettings = {
@@ -52,6 +53,7 @@ export function MaitreyaApp({
   base: initialBase,
   animate: animateInitial,
   chatScript,
+  enableChat,
 }: AppInterface) {
   const [animate, setAnimate] = useState(animateInitial);
   const [active, setActive] = useState(true);
@@ -148,7 +150,7 @@ export function MaitreyaApp({
                       </Container>
                     </Box>
                   </Animator>
-                  {chatScript && <PostScribe html={chatScript} />}
+                  {enableChat && chatScript && <PostScribe html={chatScript} />}
                 </ModalsProvider>
               </SpotlightProvider>
             </AnimatorGeneralProvider>
@@ -179,7 +181,7 @@ MaitreyaApp.getInitialProps = async (appContext: AppContext) => {
   const user = userId && userId !== 'guest' ? await getEntry<TypeUsersSkeleton>(userId) : null;
 
   const chatScript =
-    userId && userId !== 'guest'
+    userId && userId !== 'guest' && process.env.ENABLE_CHAT === 'true'
       ? await getChatScript({
           req: req as NextApiRequest,
           res: res as NextApiResponse,
@@ -203,6 +205,7 @@ MaitreyaApp.getInitialProps = async (appContext: AppContext) => {
     isGuest: !userId || userId === 'guest',
     chatScript,
     animate: typeof animate === 'string' ? animate === 'true' : true,
+    enableChat: process.env.ENABLE_CHAT === 'true',
   };
 };
 
