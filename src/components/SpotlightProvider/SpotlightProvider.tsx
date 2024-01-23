@@ -21,6 +21,9 @@ type EntryMapped = {
   id: string;
   link?: string;
   group?: string;
+  inside?: boolean;
+
+  query: string;
 };
 
 export default function SpotlightProvider({
@@ -37,7 +40,14 @@ export default function SpotlightProvider({
   const [debouncedQuery] = useDebouncedValue(query, 500);
   const [spotlightActions, setSpotlightActions] = useState<SpotlightAction[]>([]);
 
-  const toAction = ({ name, description, id, link, group }: EntryMapped): SpotlightAction => ({
+  const toAction = ({
+    name,
+    description,
+    id,
+    link,
+    group,
+    inside,
+  }: EntryMapped): SpotlightAction => ({
     id,
     title: name,
     description,
@@ -45,7 +55,7 @@ export default function SpotlightProvider({
     keywords: query.toLowerCase(),
     onTrigger: () => {
       if (link) {
-        router.push(`/${link}/${id}`);
+        router.push(`/${link}/${inside ? '' : id}`);
       }
     },
   });

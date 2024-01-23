@@ -19,6 +19,8 @@ type EntryMapped = {
   id: string;
   link?: string;
   group?: string;
+  inside?: boolean;
+  query: string;
 };
 type Data = {
   entries: EntryMapped[];
@@ -45,7 +47,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       entries: cached || [],
     });
   }
-  // console.log(query)
+
   const [searchEntries, pages, user, technics, rituals] = await Promise.all([
     search(query),
     getEntries<TypePageSkeleton>('page', 3),
@@ -72,7 +74,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
                   restricted: l.fields.restricted,
                   name: b.fields.name,
                   description: l?.fields.description,
-                  restricted_access: [],
+                  restricted_access: l?.fields.restricted_access || [],
                   references: [],
                 } as BlocksType)
               : ({} as BlocksType)
@@ -89,13 +91,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
           [] as TypeFetch[]
         )
         .map((entry: TypeFetch) => {
-          const pageEl =
+          let pageEl =
             entry.sys.contentType.sys.id === 'articles'
               ? (availableArticles.find((l) => l?.id === entry.sys.id) as BlocksType)
               : availableTechnics.find((t) => t?.sys.id === entry.sys.id);
-
+          let parentLink = '';
           if (!pageEl) {
-            return null;
+            const parent = availableArticles.find((a) =>
+              a?.restricted_access.find((r) => r.sys.id === entry.sys.id)
+            );
+            if (!parent) {
+              return null;
+            }
+            parentLink = parent?.id || '';
+            pageEl = parent;
           }
 
           let descr = entry.fields.description
@@ -104,6 +113,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
                   c.content.map((cc) => {
                     if (cc.nodeType === 'text') {
                       return cc.value;
+                    }
+                    if (cc.nodeType === 'paragraph') {
+                      return cc.content.map((p) =>
+                        p.nodeType === 'text'
+                          ? p.value?.toLowerCase().includes(query.toLowerCase())
+                            ? p.value
+                            : null
+                          : null
+                      );
                     }
                     if (cc.nodeType === 'list-item') {
                       return cc.content
@@ -127,8 +145,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
                 .filter((v) => v && v?.toLowerCase().includes(query.toLowerCase()))?.[0]
             : null;
 
-          // console.log(query)
-
           if (descr) {
             const i = descr.toLowerCase().indexOf(query.toLowerCase());
             if (i !== -1) {
@@ -142,12 +158,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
           }
 
           return {
+            query,
             name: entry.fields.name,
             description: (entry as TypeCombat).fields.effect || descr || null,
             id: entry.sys.id,
+            inside: !!parentLink,
             link:
               pageEl && entry.sys.contentType.sys.id === 'articles'
-                ? (pageEl as BlocksType).slug
+                ? `${(pageEl as BlocksType).slug}/${parentLink || ''}`
                 : 'technics',
             group:
               pageEl && entry.sys.contentType.sys.id === 'articles'
