@@ -11,7 +11,7 @@
     "prettier": "prettier --write \"**/*.{ts,tsx}\" && next lint --fix"
   },
   "dependencies": {
-    "@arwes/react": "^1.0.0-next.7",
+    "@arwes/react": "^1.0.0-alpha.23",
     "@contentful/rich-text-react-renderer": "^15.16.4",
     "@contentful/rich-text-types": "^16.1.0",
     "@emotion/react": "^11.11.0",

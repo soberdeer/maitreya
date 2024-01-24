@@ -20,7 +20,7 @@ export default createStyles((theme) => ({
   },
 
   default: {
-    '& path[data-name="decoration"]': {
+    '& path[data-name="line"]': {
       transition: 'color 200ms ease',
       color: theme.colors.maitreya[3],
     },
@@ -28,10 +28,14 @@ export default createStyles((theme) => ({
       transition: 'color 200ms ease',
       color: theme.fn.rgba(theme.colors.maitreya[9], 0.2),
     },
+    '& path[data-name="bg"]': {
+      transition: 'color 200ms ease',
+      color: theme.fn.rgba(theme.colors.maitreya[9], 0.2),
+    },
   },
 
   red: {
-    '& path[data-name="decoration"]': {
+    '& path[data-name="line"]': {
       transition: 'color 200ms ease',
       color: '#FF3333',
     },
@@ -39,14 +43,22 @@ export default createStyles((theme) => ({
       transition: 'color 200ms ease',
       color: theme.fn.rgba('#260D0D', 0.5),
     },
+    '& path[data-name="bg"]': {
+      transition: 'color 200ms ease',
+      color: theme.fn.rgba('#260D0D', 0.5),
+    },
   },
 
   green: {
-    '& path[data-name="decoration"]': {
+    '& path[data-name="line"]': {
       transition: 'color 200ms ease',
       color: theme.colors.green[5],
     },
     '& path[data-name="shape"]': {
+      transition: 'color 200ms ease',
+      color: theme.fn.rgba(theme.fn.darken(theme.colors.green[9], 0.9), 0.5),
+    },
+    '& path[data-name="bg"]': {
       transition: 'color 200ms ease',
       color: theme.fn.rgba(theme.fn.darken(theme.colors.green[9], 0.9), 0.5),
     },

@@ -5,6 +5,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 const withVanillaExtract = createVanillaExtractPlugin();
 
 const nextConfig = {
+  reactStrictMode: false,
   poweredByHeader: false,
   eslint: {
     ignoreDuringBuilds: true,
