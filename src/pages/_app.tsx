@@ -126,7 +126,7 @@ export function MaitreyaApp({
                       sx={{
                         position: 'fixed',
                         right: '1rem',
-                        bottom: isGuest ? '1rem' : 80,
+                        bottom: '1rem',
                         zIndex: 1000,
                       }}
                     >
