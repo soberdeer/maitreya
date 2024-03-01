@@ -24,7 +24,7 @@ export interface TypeCombatFields {
   name: EntryFieldTypes.Text;
   restricted: EntryFieldTypes.Boolean;
   standard?: EntryFieldTypes.Array<
-    EntryFieldTypes.Symbol<'Воин' | 'Навигатор' | 'Телепат' | 'Целитель'>
+    EntryFieldTypes.Symbol<'Воин' | 'Навигатор' | 'Телепат' | 'Целитель' | 'Стрелок'>
   >;
   stand?: EntryFieldTypes.EntryLink<TypeStandsSkeleton>;
   state: EntryFieldTypes.Symbol<'И в фуге, и вне фуги' | 'Только в фуге' | 'Только вне фуги'>;
@@ -111,7 +111,7 @@ export interface TypeRitualsFields {
   name: EntryFieldTypes.Text;
   restricted: EntryFieldTypes.Boolean;
   standard?: EntryFieldTypes.Array<
-    EntryFieldTypes.Symbol<'Воин' | 'Навигатор' | 'Телепат' | 'Целитель'>
+    EntryFieldTypes.Symbol<'Воин' | 'Навигатор' | 'Телепат' | 'Целитель' | 'Стрелок'>
   >;
   will?: EntryFieldTypes.Text;
   elements?: EntryFieldTypes.Text;

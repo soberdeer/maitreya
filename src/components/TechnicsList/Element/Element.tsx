@@ -14,12 +14,14 @@ const keys = {
   telepath: 'телепат',
   healer: 'целитель',
   navigator: 'навигатор',
+  shooter: 'стрелок',
 };
 
 const standardColors = {
-  [keys.warrior]: '#f06595',
-  [keys.telepath]: '#a9e34b',
-  [keys.healer]: '#51cf66',
+  [keys.warrior]: '#DA77F2',
+  [keys.shooter]: '#FF8787',
+  [keys.telepath]: '#FFD43B',
+  [keys.healer]: '#38D9A9',
   [keys.navigator]: '#4dabf7',
 };
 
