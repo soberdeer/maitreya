@@ -12,6 +12,7 @@ export interface Element extends GroupProps {
 const keys = {
   warrior: 'воин',
   telepath: 'телепат',
+  debuffer: 'боевой телепат',
   healer: 'целитель',
   navigator: 'навигатор',
   shooter: 'стрелок',
@@ -21,6 +22,7 @@ const standardColors = {
   [keys.warrior]: '#DA77F2',
   [keys.shooter]: '#FF8787',
   [keys.telepath]: '#FFD43B',
+  [keys.debuffer]: '#3BC9DB',
   [keys.healer]: '#38D9A9',
   [keys.navigator]: '#4dabf7',
 };
