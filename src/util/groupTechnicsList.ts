@@ -20,6 +20,7 @@ export const defaultTechnicsData: Record<
 > = {
   stand: levels<TypeStandsSkeleton>(),
   melee: levels<TypeCombatSkeleton>(),
+  debuff: levels<TypeCombatSkeleton>(),
   navigation: levels<TypeCombatSkeleton>(),
   shooting: levels<TypeCombatSkeleton>(),
   telepathy: levels<TypeCombatSkeleton>(),

@@ -6,11 +6,13 @@ import { Shooting } from './Shooting';
 import { Telepathy } from './Telepathy';
 import { Protection } from './Protection';
 import { Recovery } from './Recovery';
+import { Debuff } from './Debuff';
 
 export const ICONS_MAP = {
   [TECHNIC_TYPES.stand]: Stand,
   [TECHNIC_TYPES.melee]: Melee,
   [TECHNIC_TYPES.navigation]: Navigation,
+  [TECHNIC_TYPES.debuff]: Debuff,
   [TECHNIC_TYPES.shooting]: Shooting,
   [TECHNIC_TYPES.telepathy]: Telepathy,
   [TECHNIC_TYPES.protection]: Protection,

@@ -33,6 +33,7 @@ export const TECHNIC_TYPES = {
   melee: 'Ближний бой',
   navigation: 'Навигация',
   shooting: 'Стрельба',
+  debuff: 'Боевая телепатия',
   telepathy: 'Телепатия',
   protection: 'Защита',
   recovery: 'Восстановление',

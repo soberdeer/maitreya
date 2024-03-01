@@ -20,13 +20,14 @@ export default createStyles((theme) => ({
   },
 
   default: {
+    // '& path[data-name="shape]': {},
     '& path[data-name="line"]': {
       transition: 'color 200ms ease',
       color: theme.colors.maitreya[3],
     },
     '& path[data-name="bg"]': {
       transition: 'color 200ms ease',
-      color: theme.fn.rgba(theme.colors.maitreya[9], 0.2),
+      color: `${theme.fn.rgba(theme.colors.maitreya[9], 0.2)} !important`,
     },
   },
 
@@ -37,7 +38,7 @@ export default createStyles((theme) => ({
     },
     '& path[data-name="bg"]': {
       transition: 'color 200ms ease',
-      color: theme.fn.rgba('#260D0D', 0.5),
+      color: `${theme.fn.rgba('#260D0D', 0.5)} !important`,
     },
   },
 
@@ -48,7 +49,7 @@ export default createStyles((theme) => ({
     },
     '& path[data-name="bg"]': {
       transition: 'color 200ms ease',
-      color: theme.fn.rgba(theme.fn.darken(theme.colors.green[9], 0.9), 0.5),
+      color: `${theme.fn.rgba(theme.fn.darken(theme.colors.green[9], 0.9), 0.5)} !important`,
     },
   },
 
