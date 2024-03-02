@@ -52,7 +52,6 @@ export function Element({
   const _item = useMemo(() => item as TypeCombat | TypeRituals, [item]);
 
   const openModal = (content: TypeCombat) => {
-    console.log(content.fields.video);
     modals.open({
       size: 'xl',
       fullScreen: isMobile,
