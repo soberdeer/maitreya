@@ -8,6 +8,7 @@ interface VideoProps extends Omit<CenterProps, 'children'> {
 }
 
 export function Video({ style, title, src, type, ...others }: VideoProps) {
+  console.log(src);
   if (!src) {
     return null;
   }

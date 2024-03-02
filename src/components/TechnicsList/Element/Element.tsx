@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Asset } from 'contentful';
-import { Group, GroupProps, Stack, UnstyledButton, useMantineTheme } from '@mantine/core';
+import { Center, Group, GroupProps, Stack, UnstyledButton, useMantineTheme } from '@mantine/core';
 import { modals } from '@mantine/modals';
 import { useMediaQuery } from '@mantine/hooks';
 import { Animator, Text } from '@arwes/react';
@@ -52,6 +52,7 @@ export function Element({
   const _item = useMemo(() => item as TypeCombat | TypeRituals, [item]);
 
   const openModal = (content: TypeCombat) => {
+    console.log(content.fields.video);
     modals.open({
       size: 'xl',
       fullScreen: isMobile,
@@ -59,10 +60,17 @@ export function Element({
         content: { backgroundColor: 'transparent' },
         header: { backgroundColor: 'transparent' },
         close: { color: theme.colors.maitreya[3] },
+        body: {
+          height: 'calc(100% - 54px)',
+        },
       },
       closeOnEscape: true,
       closeOnClickOutside: true,
-      children: <Video {...(content.fields.video as Asset)} title={content.fields.name} />,
+      children: (
+        <Center sx={{ height: '100%' }}>
+          <Video src={content.fields.video?.fields.file?.url} title={content.fields.name} pb={54} />
+        </Center>
+      ),
     });
   };
 

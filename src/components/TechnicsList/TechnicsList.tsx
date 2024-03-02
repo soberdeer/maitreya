@@ -96,7 +96,7 @@ export function TechnicsList({
   return (
     <Animator merge duration={{ enter: 0.4, exit: 0.4 }}>
       <Box className={cx(classes.root, className)} {...others}>
-        <Group position="center" sx={{ width: '100%' }} align="center" mt="0.67rem">
+        <Group position="center" sx={{ width: '100%' }} align="center" mt="0.67rem" noWrap>
           <Text as="h1" style={{ marginBottom: 0, marginBlockStart: 0 }}>
             {`Техники и стойки${isUserTechnics && user ? ` - ${user.fields.name}` : ''}`}
           </Text>
