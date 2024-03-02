@@ -41,14 +41,18 @@ export const getDisplay = (
   return 'none';
 };
 
-export function SmallBlock({ data }: SmallBlockProps) {
+export function SmallBlock({
+  data,
+  showDescription,
+}: SmallBlockProps & { showDescription?: boolean }) {
   if (data.length === 0) {
     return null;
   }
+
   return (
     <>
       {data.map((item, index) => (
-        <Element item={item} key={index} />
+        <Element item={item} key={index} showDescription={showDescription} />
       ))}
     </>
   );

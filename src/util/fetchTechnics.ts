@@ -8,6 +8,7 @@ import {
   TypeRitualsSkeleton,
   TypeUsersSkeleton,
   TypeCombatSkeleton,
+  TypeUsers,
 } from './types';
 import { checkReferences } from './checkAvailable';
 import groupTechnics from './groupTechnicsList';
@@ -15,7 +16,8 @@ import groupTechnics from './groupTechnicsList';
 export default async function fetchTechnics(
   user?: Entry<TypeUsersSkeleton, 'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'> | null,
   userId?: string | null,
-  context?: GetServerSidePropsContext
+  context?: GetServerSidePropsContext,
+  userTechnics?: boolean
 ) {
   const slug = 'technics';
   const scheme = SCHEME_MAP[slug];
@@ -61,12 +63,20 @@ export default async function fetchTechnics(
     [levelKeys.master]: 2,
   };
 
+  const slicedTags = {
+    ...user,
+    metadata: {
+      ...user?.metadata,
+      tags: [],
+    },
+  } as TypeUsers;
+
   const available = checkReferences<TypeCombatSkeleton>(
     filtered as
       | Entry<TypeCombatSkeleton, 'WITHOUT_UNRESOLVABLE_LINKS', 'ru-RU'>[]
       | null
       | undefined,
-    user,
+    userTechnics ? slicedTags : user,
     !userId
   );
   const availableRituals = checkReferences<TypeRitualsSkeleton>(rituals, user, !userId)?.sort(
@@ -115,6 +125,7 @@ export default async function fetchTechnics(
       title: scheme.title || '',
       query: [slug],
       defaultTab,
+      user,
     },
   };
 }

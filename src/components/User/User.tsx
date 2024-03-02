@@ -9,11 +9,12 @@ import { EditIcon, TableIcon } from '@src/components/icons';
 import { RadarProps } from '@src/components/User/components/RadarChart';
 import { Ideas } from '@src/components/Ideas';
 import { TopPart } from './components/TopPart';
-import { BottomPart } from './components/BottomPart';
 import { calcHealth } from './calc_health';
 import { calcWill } from './calc_will';
 import { mapUserFields } from './map-user-fields';
 import useStyles from './User.styles';
+import { Anchor } from '@src/components/Anchor';
+import { Button } from '@src/components/Button';
 
 const Radar = dynamic<RadarProps>(
   () => import('./components/RadarChart').then((mod) => mod.Radar),
@@ -72,7 +73,13 @@ export function User({
           )}
         </Group>
 
-        <BottomPart user={user} />
+        <Group pt={30} grow>
+          {/*@ts-ignore*/}
+          <Button component="a" href="/user/technics" onClick={() => {}}>
+            Навыки
+          </Button>
+        </Group>
+        {/*<BottomPart user={user} />*/}
       </Animator>
     </Box>
   );

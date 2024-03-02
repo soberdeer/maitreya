@@ -1,13 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useMediaQuery } from '@mantine/hooks';
-import { Box, Group, Stack, Tabs } from '@mantine/core';
-import { LevelType, TypeStands } from '@src/util/types';
+import { Box, Center, Group, Stack, Tabs, UnstyledButton } from '@mantine/core';
+import { LevelType, TypeStands, TypeUsers } from '@src/util/types';
 import { Animator, Text } from '@arwes/react';
-import { COLORS_MAP_EN, ICONS_MAP } from '@src/components/icons';
+import {
+  ChevronDownIcon,
+  COLORS_MAP_EN,
+  ICONS_MAP,
+  RotateIcon,
+  XIcon,
+} from '@src/components/icons';
 import { TECHNIC_TYPES } from '@src/util/constants';
 import { SmallBlock } from './SmallBlock';
 import useStyles from './TechnicsList.styles';
+import { Tooltip } from '@src/components/Tooltip';
 
 export type TechnicsListDataProps = {
   stand: LevelType<TypeStands>;
@@ -23,20 +30,30 @@ export interface TechnicsListProps {
   className?: string;
   data: TechnicsListDataProps;
   defaultTab?: string;
+  isUserTechnics?: boolean;
+  user?: TypeUsers;
 }
 
-export function TechnicsList({ className, data, defaultTab, ...others }: TechnicsListProps) {
-  const { classes, cx } = useStyles();
+export function TechnicsList({
+  className,
+  data,
+  isUserTechnics,
+  defaultTab,
+  user,
+  ...others
+}: TechnicsListProps) {
+  const { classes, cx, theme } = useStyles();
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<string>(
     (router.query.type as string) || defaultTab || 'melee'
   );
   const mobile = useMediaQuery('(max-width: 720px)');
+  const [showDescription, setShowDescription] = useState(false);
 
   const replaceRouter = async (tab: string) => {
     router.push(
       {
-        pathname: '/technics',
+        pathname: isUserTechnics ? '/user/technics' : '/technics',
         query: {
           type: tab,
         },
@@ -46,6 +63,10 @@ export function TechnicsList({ className, data, defaultTab, ...others }: Technic
         shallow: true,
       }
     );
+    // if (showDescription) {
+    //   setShowDescription(false);
+    //   setTimeout(() => setShowDescription(true), 0);
+    // }
   };
 
   const setTab = (tab: string) => {
@@ -59,7 +80,7 @@ export function TechnicsList({ className, data, defaultTab, ...others }: Technic
     if (!router.query.type) {
       router.push(
         {
-          pathname: '/technics',
+          pathname: isUserTechnics ? '/user/technics' : '/technics',
           query: {
             type: defaultTab || 'melee',
           },
@@ -75,11 +96,23 @@ export function TechnicsList({ className, data, defaultTab, ...others }: Technic
   return (
     <Animator merge duration={{ enter: 0.4, exit: 0.4 }}>
       <Box className={cx(classes.root, className)} {...others}>
-        <Group position="center" sx={{ width: '100%' }}>
-          <Text as="h1" style={{ marginBottom: 0 }}>
-            Техники и стойки
+        <Group position="center" sx={{ width: '100%' }} align="center" mt="0.67rem">
+          <Text as="h1" style={{ marginBottom: 0, marginBlockStart: 0 }}>
+            {`Техники и стойки${isUserTechnics && user ? ` - ${user.fields.name}` : ''}`}
           </Text>
-          {/*<Filter value={filter} onSelect={setFilter} />*/}
+          {isUserTechnics && (
+            <UnstyledButton onClick={() => setShowDescription((s) => !s)}>
+              <Tooltip label={showDescription ? 'Скрыть описание' : 'Показать описание'}>
+                <Center sx={{ height: '100%', width: 30 }}>
+                  <ChevronDownIcon
+                    size={30}
+                    color={theme.colors.maitreyaSecondary[4]}
+                    rotate={showDescription}
+                  />
+                </Center>
+              </Tooltip>
+            </UnstyledButton>
+          )}
         </Group>
 
         <Tabs
@@ -127,9 +160,9 @@ export function TechnicsList({ className, data, defaultTab, ...others }: Technic
                 <Tabs.Panel value={key} pt={mobile ? 'xl' : 0} pl={mobile ? 0 : 'xl'} key={key}>
                   <Animator merge manager="stagger" duration={{ enter: 0.4, exit: 0.4, offset: 1 }}>
                     <Stack align="flex-start">
-                      <SmallBlock data={item.pupil} />
-                      <SmallBlock data={item.adept} />
-                      <SmallBlock data={item.master} />
+                      <SmallBlock data={item.pupil} showDescription={showDescription} />
+                      <SmallBlock data={item.adept} showDescription={showDescription} />
+                      <SmallBlock data={item.master} showDescription={showDescription} />
                     </Stack>
                   </Animator>
                 </Tabs.Panel>

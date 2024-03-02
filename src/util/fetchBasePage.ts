@@ -5,7 +5,7 @@ import fetchTechnics from './fetchTechnics';
 import checkUser, { UserReturn } from './checkUser';
 import { updateBlocks } from './updateBlocks';
 
-export default function fetchBasePage(forceSlug?: string) {
+export default function fetchBasePage(forceSlug?: string, userTechnics?: boolean) {
   return async (context: GetServerSidePropsContext) => {
     const slug = forceSlug || context.query.slug;
 
@@ -24,7 +24,7 @@ export default function fetchBasePage(forceSlug?: string) {
     const { user, userId } = result as UserReturn;
 
     if (slug === 'technics') {
-      return fetchTechnics(user, userId, context);
+      return fetchTechnics(user, userId, context, userTechnics);
     }
 
     const base = await getEntries<TypeMainSkeleton>('main');
