@@ -103,8 +103,14 @@ export function Element({
                 {item.fields.elements && <ElementTags elements={item.fields.elements} noWrap />}
               </Group>
             )}
-            {isTypeCombat(item) && item.fields.touch && (
-              <Text style={{ marginInlineEnd: 0, marginBlockEnd: 0 }}>Касание</Text>
+            {isTypeCombat(item) && (
+              <Text style={{ marginInlineEnd: 0, marginBlockEnd: 0 }}>
+                {item.fields.target === 'На себя'
+                  ? item.fields.target
+                  : item.fields.touch
+                  ? `Касание, ${item.fields.target}`
+                  : item.fields.target}
+              </Text>
             )}
             {item.fields.effect && (
               <Text style={{ marginInlineEnd: 0, marginBlockEnd: 0 }}>{item.fields.effect}</Text>
