@@ -4,17 +4,11 @@ import { useMediaQuery } from '@mantine/hooks';
 import { Box, Center, Group, Stack, Tabs, UnstyledButton } from '@mantine/core';
 import { LevelType, TypeStands, TypeUsers } from '@src/util/types';
 import { Animator, Text } from '@arwes/react';
-import {
-  ChevronDownIcon,
-  COLORS_MAP_EN,
-  ICONS_MAP,
-  RotateIcon,
-  XIcon,
-} from '@src/components/icons';
+import { ChevronDownIcon, COLORS_MAP_EN, ICONS_MAP } from '@src/components/icons';
 import { TECHNIC_TYPES } from '@src/util/constants';
+import { Tooltip } from '@src/components/Tooltip';
 import { SmallBlock } from './SmallBlock';
 import useStyles from './TechnicsList.styles';
-import { Tooltip } from '@src/components/Tooltip';
 
 export type TechnicsListDataProps = {
   stand: LevelType<TypeStands>;
@@ -138,7 +132,7 @@ export function TechnicsList({
                         spacing={5}
                         align="center"
                         noWrap
-                        sx={(theme) => ({ color: theme.colors.maitreya[3] })}
+                        sx={(th) => ({ color: th.colors.maitreya[3] })}
                       >
                         <Icon size={mobile ? 20 : 30} key={key} />
                         <Text as="span" className={classes.tabText} color={color} data-styled>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Group, GroupProps, SimpleGrid } from '@mantine/core';
+import { Center, Grid, Group, GroupProps } from '@mantine/core';
 import { useElements } from '@src/hooks/use-elements';
 import { ElementStamp } from '@src/components/ElementStamp';
 import { Animator } from '@arwes/react';
@@ -19,12 +19,12 @@ export function ElementTags({ className, elements, noWrap, ...others }: ElementT
   return (
     <Animator manager="stagger" combine>
       {!noWrap && elements.length > 2 ? (
-        <SimpleGrid
-          cols={2}
-          spacing={10}
+        <Grid
           py={5}
+          spacing={10}
+          gutter={10}
           className={className}
-          sx={{ minWidth: elements.length > 1 ? 26 * 2 + 10 : 26 }}
+          sx={{ minWidth: elements.length > 1 ? 26 * 2 + 10 : 26, maxWidth: 70 }}
           {...others}
         >
           {elements
@@ -37,9 +37,15 @@ export function ElementTags({ className, elements, noWrap, ...others }: ElementT
               if (!element) {
                 return null;
               }
-              return <ElementStamp key={index} element={element.eng_key as unknown as string} />;
+              return (
+                <Grid.Col key={index} span={6} offset={index === 2 ? 3 : 0} p={0}>
+                  <Center pt={index === 2 ? 10 : 0}>
+                    <ElementStamp p={0} element={element.eng_key as unknown as string} />
+                  </Center>
+                </Grid.Col>
+              );
             })}
-        </SimpleGrid>
+        </Grid>
       ) : (
         <Group
           spacing={10}

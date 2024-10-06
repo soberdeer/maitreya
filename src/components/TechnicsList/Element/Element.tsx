@@ -1,5 +1,12 @@
 import React, { useMemo } from 'react';
-import { Group, GroupProps, Stack, UnstyledButton, useMantineTheme } from '@mantine/core';
+import {
+  Group,
+  GroupProps,
+  SimpleGrid,
+  Stack,
+  UnstyledButton,
+  useMantineTheme,
+} from '@mantine/core';
 import { modals } from '@mantine/modals';
 // import { useMediaQuery } from '@mantine/hooks';
 import { Animator, Text } from '@arwes/react';
@@ -78,18 +85,21 @@ export function Element({
           </Animator>
         </Anchor>
 
-        {!isTypeStands(item) &&
-          _item.fields?.standard
-            ?.sort((a, b) => a.localeCompare(b))
-            .map((name, index) => (
-              <Animator merge duration={{ delay: 0.2 }} key={index}>
-                <StandardIcon
-                  tooltip={`Имперский Стандарт - ${name}`}
-                  size={20}
-                  color={standardColors[name?.toLowerCase() as keyof typeof standardColors]}
-                />
-              </Animator>
-            ))}
+        {!isTypeStands(item) && (
+          <SimpleGrid cols={3}>
+            {_item.fields?.standard
+              ?.sort((a, b) => a.localeCompare(b))
+              .map((name, index) => (
+                <Animator merge duration={{ delay: 0.2 }} key={index}>
+                  <StandardIcon
+                    tooltip={`Имперский Стандарт - ${name}`}
+                    size={20}
+                    color={standardColors[name?.toLowerCase() as keyof typeof standardColors]}
+                  />
+                </Animator>
+              ))}
+          </SimpleGrid>
+        )}
       </Group>
       {!isTypeStands(item) && showDescription && (
         <Animator merge duration={{ delay: 0 }}>
