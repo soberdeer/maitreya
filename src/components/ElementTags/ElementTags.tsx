@@ -19,14 +19,7 @@ export function ElementTags({ className, elements, noWrap, ...others }: ElementT
   return (
     <Animator manager="stagger" combine>
       {!noWrap && elements.length > 2 ? (
-        <Grid
-          py={5}
-          grow
-          gutter="0.625rem"
-          className={className}
-          // sx={{ minWidth: elements.length > 1 ? 26 * 2 + 10 : 26, maxWidth: 70 }}
-          {...others}
-        >
+        <Grid py={5} grow gutter="0.625rem" className={className} sx={{ minWidth: 68 }} {...others}>
           {elements
             .toLowerCase()
             .split('')
