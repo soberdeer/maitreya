@@ -21,10 +21,10 @@ export function ElementTags({ className, elements, noWrap, ...others }: ElementT
       {!noWrap && elements.length > 2 ? (
         <Grid
           py={5}
-          spacing={10}
-          gutter={10}
+          grow
+          gutter="0.625rem"
           className={className}
-          sx={{ minWidth: elements.length > 1 ? 26 * 2 + 10 : 26, maxWidth: 70 }}
+          // sx={{ minWidth: elements.length > 1 ? 26 * 2 + 10 : 26, maxWidth: 70 }}
           {...others}
         >
           {elements
@@ -38,8 +38,8 @@ export function ElementTags({ className, elements, noWrap, ...others }: ElementT
                 return null;
               }
               return (
-                <Grid.Col key={index} span={6} offset={index === 2 ? 3 : 0} p={0}>
-                  <Center pt={index === 2 ? 10 : 0}>
+                <Grid.Col key={index} span={6} p={0}>
+                  <Center pt={index === 2 ? '0.625rem' : 0}>
                     <ElementStamp p={0} element={element.eng_key as unknown as string} />
                   </Center>
                 </Grid.Col>

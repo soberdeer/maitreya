@@ -86,7 +86,7 @@ export function Element({
         </Anchor>
 
         {!isTypeStands(item) && (
-          <SimpleGrid cols={3}>
+          <SimpleGrid cols={6} breakpoints={[{ maxWidth: '62rem', cols: 3 }]}>
             {_item.fields?.standard
               ?.sort((a, b) => a.localeCompare(b))
               .map((name, index) => (
