@@ -3,7 +3,7 @@
 A knowledge base for the role-playing game.
 
 ## Demo
-[Go to Maitreya](http://maitreya-academy.vercel.app/])
+[Go to Maitreya](http://maitreya-academy.vercel.app/)
 
 ## Getting Started
 
